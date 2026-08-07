@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export function Hero() {
+function Hero() {
   return (
     <section className="relative isolate w-full overflow-hidden bg-white px-6 py-12 lg:py-16">
       <div className="mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-10">
@@ -13,13 +13,25 @@ export function Hero() {
             width={603}
             height={449}
             aria-hidden="true"
-            className="pointer-events-none absolute -bottom-36 -left-24 z-0 hidden w-96 opacity-70 sm:block lg:-bottom-40 lg:-left-28 lg:w-120"
+            className="pointer-events-none absolute -bottom-36 -left-24 z-0 hidden w-96 opacity-90 sm:block lg:-bottom-40 lg:-left-28 lg:w-120"
           />
 
-          <div className="relative z-10">
-            <h1 className="max-w-2xl text-5xl font-bold leading-none tracking-[-0.04em] text-black sm:text-6xl lg:text-[60px]">
+          <div className="z-10">
+            <h1 className="max-w-2xl text-4xl font-bold leading-none tracking-[-0.03em] text-black sm:text-6xl lg:text-[60px]">
               Find the Perfect <br />
-              Talent for Your Next <br />
+              Talent for Your {""}
+              <span className="relative inline-block">
+                Next
+                <Image
+                  src="/home/hero/hero-scribble.svg"
+                  alt=""
+                  width={92}
+                  height={85}
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -right-12 -top-6 h-auto w-12 rotate-30 sm:-right-16 sm:-top-9 sm:w-16 lg:-right-18 lg:-top-14 lg:w-20"
+                />
+              </span>
+              <br />
               <span className="relative inline-block text-[#022b3a]">
                 Big Idea
                 <Image
@@ -32,15 +44,6 @@ export function Hero() {
                 />
               </span>
             </h1>
-
-            <Image
-              src="/home/hero/hero-scribble.svg"
-              alt=""
-              width={92}
-              height={85}
-              aria-hidden="true"
-              className="absolute right-[-8%] top-[5%] hidden h-auto w-20 rotate-28 lg:block lg:right-[-14%] lg:top-[-6%] lg:w-24"
-            />
           </div>
 
           <p className="relative z-10 max-w-lg text-base leading-6 text-[#45464d] sm:text-lg sm:leading-7">

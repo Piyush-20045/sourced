@@ -28,7 +28,7 @@ const footerSections = [
   },
 ];
 
-export function Footer() {
+function Footer() {
   return (
     <footer className="w-full bg-[#e3e3e3] text-[#44464d]">
       <div className="mx-auto flex w-full max-w-348 flex-col gap-10 px-6 pb-9 pt-11 sm:px-10 lg:px-6">

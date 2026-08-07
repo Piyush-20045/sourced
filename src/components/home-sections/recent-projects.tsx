@@ -28,7 +28,7 @@ const projects = [
   },
 ];
 
-export default function RecentProjects() {
+function RecentProjects() {
   return (
     <section id="projects" className="relative overflow-hidden bg-muted z-0">
       <div className="mx-auto max-w-7xl px-6 pb-20">
@@ -108,3 +108,5 @@ export default function RecentProjects() {
     </section>
   );
 }
+
+export default RecentProjects;
