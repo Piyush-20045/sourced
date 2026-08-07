@@ -1,7 +1,13 @@
+import Hero from "@/components/home-sections/hero";
+import RecentProjects from "@/components/home-sections/recent-projects";
+import { CTA } from "@/components/home-sections/cta";
+
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      Hi
-    </div>
+    <main className="flex-1 bg-white">
+      <Hero />
+      <RecentProjects />
+      <CTA />
+    </main>
   );
 }
