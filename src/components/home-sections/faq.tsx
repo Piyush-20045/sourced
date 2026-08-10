@@ -44,7 +44,7 @@ function Faq() {
     <section className="border-t border-border bg-background">
       <div className="mx-auto grid max-w-6xl gap-12 px-6 py-16 md:grid-cols-[0.8fr_1.2fr] md:gap-20">
         <div>
-          <p className="text-xs font-bold tracking-[0.18em] text-[#022B3A]">
+          <p className="text-xs font-bold tracking-[0.18em] text-accent">
             GOOD TO KNOW
           </p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight">FAQs</h2>
