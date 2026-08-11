@@ -1,4 +1,5 @@
 import LoginHero from "@/app/login/_components/login-hero";
+import SignupForm from "@/app/signup/_components/signup-form";
 import LoginFooter from "@/app/login/_components/login-footer";
 
 export const metadata = {
@@ -13,6 +14,7 @@ export default function SignupPage() {
       {/* Main layout grid: Hero visual on the left, Form on the right */}
       <main className="grid flex-1 lg:grid-cols-2">
         <LoginHero />
+        <SignupForm />
       </main>
 
       {/* Shared Auth Footer */}
