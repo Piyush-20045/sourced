@@ -20,6 +20,22 @@ export interface Stat {
   value: string;
 }
 
+export interface Bid {
+  id: string;
+  title: string;
+  client: string;
+  amount: string;
+  status: "PENDING" | "WON" | "LOST";
+}
+
+export interface Recommendation {
+  id: string;
+  title: string;
+  client: string;
+  budget: string;
+  bids: number;
+}
+
 export interface NavItem {
   label: string;
   icon: string; // lucide icon name handled by the component
@@ -56,6 +72,47 @@ export const sideNav: NavItem[] = [
   { label: "Contracts", icon: "FileText", section: "OPERATIONS" },
   { label: "Payments", icon: "CreditCard", section: "OPERATIONS" },
   { label: "Analytics", icon: "BarChart3", section: "OPERATIONS" },
+];
+
+export const activeBids: Bid[] = [
+  {
+    id: "b1",
+    title: "Rebuild analytics dashboard",
+    client: "Nimbus Labs",
+    amount: "₹42,000",
+    status: "PENDING",
+  },
+  {
+    id: "b2",
+    title: "Design system audit",
+    client: "Pixelworks Agency",
+    amount: "₹34,000",
+    status: "PENDING",
+  },
+  {
+    id: "b3",
+    title: "Brand refresh - Loop Studio",
+    client: "Loop Studio",
+    amount: "₹48,000",
+    status: "WON",
+  },
+];
+
+export const recommendations: Recommendation[] = [
+  {
+    id: "r1",
+    title: "Pitch deck + brand story for Series A",
+    client: "Pixelworks Agency",
+    budget: "₹1,20,000",
+    bids: 6,
+  },
+  {
+    id: "r2",
+    title: "Mobile app UI for wellness platform",
+    client: "Nimbus Labs",
+    budget: "₹5L-₹7L",
+    bids: 9,
+  },
 ];
 
 export const topNav = ["Browse projects", "Post a project", "Messages"];

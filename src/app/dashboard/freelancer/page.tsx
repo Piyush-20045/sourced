@@ -1,7 +1,9 @@
 import { DashboardNav } from "../_components/dashboard-nav";
 import { ProfileHeader } from "../_components/profile-header";
-import { SideNav } from "../_components/side-nav";
 import { StatsGrid } from "../_components/stats-grid";
+import { SideNav } from "../_components/side-nav";
+import { ActiveBids } from "../_components/active-bids";
+import { Recommended } from "../_components/recommended";
 
 export const metadata = {
   title: "Freelancer Dashboard — Sourced",
@@ -20,10 +22,10 @@ function FreelancerPage() {
       <div className="mx-auto grid max-w-6xl gap-8 px-6 pb-12 lg:grid-cols-[220px_1fr]">
         <SideNav />
         <div className="space-y-10">
-          Bids + Recommendations here
+          <ActiveBids />
+          <Recommended />
         </div>
       </div>
-
     </div>
   );
 }
