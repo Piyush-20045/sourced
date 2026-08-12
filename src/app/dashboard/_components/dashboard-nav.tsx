@@ -6,7 +6,7 @@ import { topNav, user } from "../data/dashboard";
 export function DashboardNav() {
   return (
     <header className="sticky top-0 z-30 border-b border-black/5 bg-[#e3e3e3] text-[#063242] backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center gap-6 px-6 py-4.5">
+      <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-4.5 sm:px-6 md:gap-6">
         {/* logo */}
         <Link
           href="/"
@@ -19,7 +19,7 @@ export function DashboardNav() {
         </Link>
 
         {/* primary links */}
-        <nav className="hidden items-center gap-6 text-sm md:flex">
+        <nav className="hidden min-w-0 items-center gap-6 text-sm md:flex">
           {topNav.map((item) => (
             <a
               key={item}
@@ -32,7 +32,7 @@ export function DashboardNav() {
         </nav>
 
         {/* search */}
-        <div className="ml-auto hidden items-center gap-2 rounded-md border border-neutral-400 px-3 py-1.5 text-sm text-muted-foreground lg:flex">
+        <div className="ml-auto hidden items-center gap-2 rounded-md border border-neutral-300 bg-neutral-100 px-3 py-1.5 text-sm text-muted-foreground lg:flex">
           <Search className="h-3.5 w-3.5" />
           <input
             placeholder="Search..."
@@ -41,7 +41,7 @@ export function DashboardNav() {
         </div>
 
         {/* icons + user */}
-        <div className="ml-auto flex items-center gap-4 lg:ml-0">
+        <div className="ml-auto flex shrink-0 items-center gap-3 sm:gap-4 lg:ml-0">
           <button className="relative" aria-label="Notifications">
             <Bell className="h-4 w-4" />
             <span className="absolute -right-2 -top-2 grid h-4 w-4 place-items-center rounded-full bg-destructive text-[10px] text-destructive-foreground">
@@ -61,7 +61,7 @@ export function DashboardNav() {
             <img
               src={user.avatar}
               alt={user.name}
-              className="h-8 w-8 rounded-full object-cover"
+              className="h-8 w-8 shrink-0 rounded-full object-cover"
             />
           </div>
         </div>

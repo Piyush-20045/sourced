@@ -13,15 +13,17 @@ export const metadata = {
 
 function FreelancerPage() {
   return (
-    <div className="min-h-screen bg-background font-sans text-foreground">
+    <div className="min-h-screen overflow-x-hidden bg-background font-sans text-foreground">
       <DashboardNav />
       <ProfileHeader />
       <StatsGrid />
 
       {/* overview: left nav + bids/recommendations */}
-      <div className="mx-auto grid max-w-6xl gap-8 px-6 pb-12 lg:grid-cols-[220px_1fr]">
-        <SideNav />
-        <div className="space-y-10">
+      <div className="mx-auto grid max-w-6xl gap-8 px-4 pb-12 sm:px-6 lg:grid-cols-[220px_1fr]">
+        <div className="min-w-0">
+          <SideNav />
+        </div>
+        <div className="min-w-0 space-y-10">
           <ActiveBids />
           <Recommended />
         </div>
