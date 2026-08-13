@@ -10,7 +10,7 @@ export function ProfileHeader() {
   return (
     <section>
       {/* cover image */}
-      <div className="h-28 w-full overflow-hidden sm:h-40 md:h-44">
+      <div className="h-28 w-full overflow-hidden sm:h-40 md:h-48">
         <img
           src={user.cover}
           alt="Cover"

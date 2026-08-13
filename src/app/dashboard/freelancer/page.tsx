@@ -8,6 +8,9 @@ import { AboutSection } from "../_components/about-section";
 import { Portfolio } from "../_components/portfolio";
 import { WorkHistory } from "../_components/work-history";
 import { SidebarInfo } from "../_components/sidebar-info";
+import { SkillsSection } from "../_components/skills-section";
+import { TestimonialCta } from "../_components/testimonial-cta";
+import Footer from "@/components/layout/footer";
 
 export const metadata = {
   title: "Freelancer Dashboard — Sourced",
@@ -44,6 +47,13 @@ function FreelancerPage() {
           <SidebarInfo />
         </div>
       </div>
+
+      <div className="mx-auto max-w-6xl px-4 pb-8 sm:px-6">
+        <SkillsSection />
+      </div>
+
+      <TestimonialCta />
+      <Footer />
     </div>
   );
 }

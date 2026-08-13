@@ -52,6 +52,10 @@ export interface Language {
   level: string;
 }
 
+export interface Skill {
+  name: string;
+}
+
 export interface Education {
   school: string;
   degree: string;
@@ -66,11 +70,10 @@ export interface NavItem {
 }
 
 export const user: UserProfile = {
-  name: "Samiya A.",
-  avatar: "/dashboard/samiya.png",
-  cover:
-    "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80",
-  location: "Lucknow, India",
+  name: "Salman K.",
+  avatar: "/dashboard/salman.jpeg",
+  cover: "/dashboard/header.jpg",
+  location: "Mumbai, India",
   title: "UI/UX Designer",
   verified: true,
   modes: ["Freelancer", "Client", "Agency"],
@@ -78,7 +81,7 @@ export const user: UserProfile = {
   profileStrength: 92,
   hourlyRate: "₹90.00/hr",
   tagline: "ui/ux designer , product designer , interaction designer",
-  bio: "I'm Samiya Singh, a UI/UX and Interaction Designer based in Lucknow, India, currently completing my BCA at Amity University (graduating May 2026). I'm reaching out for freelancing — I specialise in end-to-end product design from user research, personas, and journey mapping to high-fidelity Figma prototyping and motion design.",
+  bio: "I'm Salman Khan, a UI/UX and Interaction Designer based in Mumbai, India, currently completing my BCA at St. Xavier's College (graduating May 2026). I'm reaching out for freelancing — I specialise in end-to-end product design from user research, personas, and journey mapping to high-fidelity Figma prototyping and motion design.",
 };
 
 export const stats: Stat[] = [
@@ -159,12 +162,28 @@ export const languages: Language[] = [
 
 export const education: Education[] = [
   {
-    school: "Kendriya Vidyalayas",
+    school: "St. Xavier's College",
     degree: "Bachelor of Computer Applications",
     years: "2015-2022",
   },
 ];
 
 export const workHistory: { id: string; title: string }[] = [];
+
+export const skills: Skill[] = [
+  "Design & Usability Research",
+  "UI/UX Prototyping",
+  "Figma",
+  "Storytelling",
+  "Typography",
+  "Color Theory",
+  "Color Palette",
+  "Journey Mapping",
+  "User Interface Design",
+  "User Stories",
+  "User Experience Design",
+  "Wireframing",
+  "Sketch",
+].map((name) => ({ name }));
 
 export const topNav = ["Browse projects", "Post a project", "Messages"];
