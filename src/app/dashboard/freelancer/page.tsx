@@ -4,6 +4,8 @@ import { StatsGrid } from "../_components/stats-grid";
 import { SideNav } from "../_components/side-nav";
 import { ActiveBids } from "../_components/active-bids";
 import { Recommended } from "../_components/recommended";
+import { AboutSection } from "../_components/about-section";
+import { Portfolio } from "../_components/portfolio";
 
 export const metadata = {
   title: "Freelancer Dashboard — Sourced",
@@ -26,6 +28,14 @@ function FreelancerPage() {
         <div className="min-w-0 space-y-10">
           <ActiveBids />
           <Recommended />
+        </div>
+      </div>
+
+      {/* profile detail: main column + info sidebar */}
+      <div className="mx-auto grid max-w-6xl gap-12 px-6 py-8 lg:grid-cols-[1.4fr_1fr]">
+        <div className="space-y-10">
+          <AboutSection />
+          <Portfolio />
         </div>
       </div>
     </div>

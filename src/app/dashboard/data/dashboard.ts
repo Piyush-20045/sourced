@@ -36,6 +36,13 @@ export interface Recommendation {
   bids: number;
 }
 
+export interface PortfolioItem {
+  id: string;
+  title: string;
+  image: string;
+  state: "published" | "draft";
+}
+
 export interface NavItem {
   label: string;
   icon: string; // lucide icon name handled by the component
@@ -112,6 +119,16 @@ export const recommendations: Recommendation[] = [
     client: "Nimbus Labs",
     budget: "₹5L-₹7L",
     bids: 9,
+  },
+];
+
+export const portfolio: PortfolioItem[] = [
+  {
+    id: "p1",
+    title: "PORTFOLIO",
+    image:
+      "https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=800&q=80",
+    state: "published",
   },
 ];
 
