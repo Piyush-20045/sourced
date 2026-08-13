@@ -43,6 +43,21 @@ export interface PortfolioItem {
   state: "published" | "draft";
 }
 
+export interface Skill {
+  name: string;
+}
+
+export interface Language {
+  name: string;
+  level: string;
+}
+
+export interface Education {
+  school: string;
+  degree: string;
+  years: string;
+}
+
 export interface NavItem {
   label: string;
   icon: string; // lucide icon name handled by the component
@@ -131,5 +146,25 @@ export const portfolio: PortfolioItem[] = [
     state: "published",
   },
 ];
+
+export const weekStats = [
+  { label: "Profile views", value: "312" },
+  { label: "New messages", value: "6" },
+];
+
+export const languages: Language[] = [
+  { name: "English", level: "Fluent" },
+  { name: "Hindi", level: "Native or Bilingual" },
+];
+
+export const education: Education[] = [
+  {
+    school: "Kendriya Vidyalayas",
+    degree: "Bachelor of Computer Applications",
+    years: "2015-2022",
+  },
+];
+
+export const workHistory: { id: string; title: string }[] = [];
 
 export const topNav = ["Browse projects", "Post a project", "Messages"];

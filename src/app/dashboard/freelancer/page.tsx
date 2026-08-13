@@ -6,6 +6,8 @@ import { ActiveBids } from "../_components/active-bids";
 import { Recommended } from "../_components/recommended";
 import { AboutSection } from "../_components/about-section";
 import { Portfolio } from "../_components/portfolio";
+import { WorkHistory } from "../_components/work-history";
+import { SidebarInfo } from "../_components/sidebar-info";
 
 export const metadata = {
   title: "Freelancer Dashboard — Sourced",
@@ -32,10 +34,14 @@ function FreelancerPage() {
       </div>
 
       {/* profile detail: main column + info sidebar */}
-      <div className="mx-auto grid max-w-6xl gap-12 px-6 py-8 lg:grid-cols-[1.4fr_1fr]">
-        <div className="space-y-10">
-          <AboutSection />
-          <Portfolio />
+      <div className="mx-auto grid max-w-6xl gap-12 px-6 py-8">
+        <AboutSection />
+        <div className="grid lg:grid-cols-[1.4fr_1fr] gap-4">
+          <div className="space-y-10">
+            <Portfolio />
+            <WorkHistory />
+          </div>
+          <SidebarInfo />
         </div>
       </div>
     </div>
