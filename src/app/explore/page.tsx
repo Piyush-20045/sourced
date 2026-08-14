@@ -1,6 +1,7 @@
 import { DashboardNav } from "../dashboard/_components/dashboard-nav";
 import { ExploreSidebar } from "./_components/explore-navbar";
 import Footer from "@/components/layout/footer";
+import { JobFeed } from "./_components/job-feed";
 
 export const metadata = {
   title: "Explore Projects — Sourced",
@@ -15,6 +16,7 @@ function ExplorePage() {
 
       <main className="mx-auto grid max-w-6xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[220px_1fr]">
         <ExploreSidebar />
+        <JobFeed />
       </main>
 
       <Footer />
