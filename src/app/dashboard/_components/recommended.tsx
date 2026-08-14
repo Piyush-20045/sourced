@@ -1,5 +1,5 @@
 import { LayoutGrid, Send } from "lucide-react";
-import { recommendations } from "../data/dashboard";
+import { recommendations } from "../../../data/dashboard";
 
 const rowIcons = [Send, LayoutGrid];
 

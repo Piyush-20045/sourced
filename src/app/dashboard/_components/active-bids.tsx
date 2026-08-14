@@ -1,5 +1,5 @@
 import { CheckCircle2, Tag, Calendar } from "lucide-react";
-import { activeBids } from "../data/dashboard";
+import { activeBids } from "../../../data/dashboard";
 
 // small helper so each bid row gets a different leading icon
 const rowIcons = [Calendar, Tag, CheckCircle2];

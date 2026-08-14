@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
 import { BadgeCheck, MapPin, Search } from "lucide-react";
-import { user, Mode } from "../data/dashboard";
+import { user, Mode } from "../../../data/dashboard";
+import Link from "next/link";
 
 /** Cover photo, avatar, mode switcher and profile-strength meter. */
 export function ProfileHeader() {
@@ -47,10 +48,13 @@ export function ProfileHeader() {
             <button className="flex-1 rounded-md border border-border px-4 py-2 text-sm font-medium hover:bg-muted sm:flex-none">
               Edit Profile
             </button>
-            <button className="flex flex-1 items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 sm:flex-none">
+            <Link
+              href="/explore"
+              className="flex flex-1 items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 sm:flex-none"
+            >
               <Search className="h-3.5 w-3.5 shrink-0" />
               Find Projects
-            </button>
+            </Link>
           </div>
         </div>
 

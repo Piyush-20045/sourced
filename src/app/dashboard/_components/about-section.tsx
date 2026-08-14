@@ -1,5 +1,5 @@
 import { Pencil } from "lucide-react";
-import { user } from "../data/dashboard";
+import { user } from "../../../data/dashboard";
 
 /** Headline, hourly rate and long-form bio. */
 export function AboutSection() {

@@ -1,4 +1,4 @@
-import { stats } from "../data/dashboard";
+import { stats } from "../../../data/dashboard";
 
 /** Four KPI cards shown under the profile header. */
 export function StatsGrid() {

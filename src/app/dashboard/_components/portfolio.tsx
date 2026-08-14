@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Plus } from "lucide-react";
-import { portfolio } from "../data/dashboard";
+import { portfolio } from "../../../data/dashboard";
 
 /** Published / draft portfolio pieces. */
 export function Portfolio() {

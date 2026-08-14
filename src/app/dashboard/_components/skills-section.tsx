@@ -1,5 +1,5 @@
 import { Pencil } from "lucide-react";
-import { skills } from "../data/dashboard";
+import { skills } from "../../../data/dashboard";
 
 /** Self-reported skill chips. */
 export function SkillsSection() {

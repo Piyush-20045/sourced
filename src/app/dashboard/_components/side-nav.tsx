@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { BarChart3, CalendarDays, CreditCard, FileText, LayoutGrid } from "lucide-react";
-import { sideNav } from "../data/dashboard";
+import { sideNav } from "../../../data/dashboard";
 
 // map of icon names used in the mock data to real lucide components
 const icons = { LayoutGrid, CalendarDays, FileText, CreditCard, BarChart3 } as const;

@@ -1,5 +1,5 @@
 import { Plus } from "lucide-react";
-import { workHistory } from "../data/dashboard";
+import { workHistory } from "../../../data/dashboard";
 
 /** Past contracts / jobs. Empty in the mock data. */
 export function WorkHistory() {

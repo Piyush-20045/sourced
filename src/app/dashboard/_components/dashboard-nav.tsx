@@ -1,6 +1,6 @@
 import { Bell, Search, Settings } from "lucide-react";
 import Link from "next/link";
-import { topNav, user } from "../data/dashboard";
+import { topNav, user } from "../../../data/dashboard";
 
 /** Sticky top navigation bar of the dashboard. */
 export function DashboardNav() {
