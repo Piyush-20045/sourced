@@ -1,10 +1,11 @@
 import { MapPin, Star } from "lucide-react";
 import type { JobPost } from "@/data/explore";
+import Link from "next/link";
 
 /** A single project/job listing card in the explore feed. */
 export function JobCard({ job }: { job: JobPost }) {
   return (
-    <article className="rounded-xl border border-border p-5">
+    <article className="rounded-xl border border-border p-5 transition-shadow hover:shadow-sm">
       {/* header: meta + rate */}
       <div className="flex flex-wrap items-start gap-3">
         <div className="min-w-0">
@@ -18,9 +19,12 @@ export function JobCard({ job }: { job: JobPost }) {
               {job.postedAgo}
             </span>
           </div>
-          <h3 className="mt-2 text-lg font-semibold text-primary">
+          <Link
+            href={`/jobs/${job.id}`}
+            className="mt-2 block text-lg font-semibold text-primary hover:underline"
+          >
             {job.title}
-          </h3>
+          </Link>
         </div>
 
         <div className="ml-auto text-right">
@@ -61,9 +65,12 @@ export function JobCard({ job }: { job: JobPost }) {
             {job.company.location}
           </p>
         </div>
-        <button className="ml-auto shrink-0 rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90">
+        <Link
+          href={`/jobs/${job.id}`}
+          className="ml-auto shrink-0 rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90"
+        >
           Submit Proposal
-        </button>
+        </Link>
       </div>
     </article>
   );
