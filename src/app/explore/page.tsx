@@ -14,7 +14,7 @@ function ExplorePage() {
     <div className="min-h-screen overflow-x-hidden bg-background font-sans text-foreground">
       <DashboardNav />
 
-      <main className="mx-auto grid max-w-6xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[220px_1fr]">
+      <main className="mx-auto grid max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[220px_1fr]">
         <ExploreSidebar />
         <JobFeed />
       </main>

@@ -20,7 +20,7 @@ export function JobCard({ job }: { job: JobPost }) {
             </span>
           </div>
           <Link
-            href={`/jobs/${job.id}`}
+            href={`/explore/${job.id}`}
             className="mt-2 block text-lg font-semibold text-primary hover:underline"
           >
             {job.title}
@@ -66,7 +66,7 @@ export function JobCard({ job }: { job: JobPost }) {
           </p>
         </div>
         <Link
-          href={`/jobs/${job.id}`}
+          href={`/explore/${job.id}`}
           className="ml-auto shrink-0 rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90"
         >
           Submit Proposal
