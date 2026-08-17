@@ -93,9 +93,13 @@ export const stats: Stat[] = [
 
 export const sideNav: NavItem[] = [
   { label: "Overview", icon: "LayoutGrid" },
+  { label: "Find Projects", icon: "SearchCheck", badge: 32 },
+  { label: "My Proposals", icon: "MailCheck" },
+  { label: "Search Clients", icon: "UserSearch" },
   { label: "Interviews", icon: "CalendarDays", badge: 5 },
   { label: "Contracts", icon: "FileText", section: "OPERATIONS" },
   { label: "Payments", icon: "CreditCard", section: "OPERATIONS" },
+  { label: "Portfolio", icon: "BriefcaseBusiness", section: "OPERATIONS" },
   { label: "Analytics", icon: "BarChart3", section: "OPERATIONS" },
 ];
 
