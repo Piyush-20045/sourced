@@ -115,6 +115,63 @@ function JobDetailsPage() {
           </div>
         </div>
 
+        {/* Company card */}
+        <div className="mt-8 rounded-2xl border border-dashed border-border bg-muted/30 p-6">
+          <div className="flex flex-wrap items-center gap-4">
+            <img
+              src={jobData.company.logo}
+              alt={jobData.company.name}
+              className="h-14 w-14 rounded-xl object-cover"
+            />
+            <div className="min-w-0 flex-1">
+              <p className="text-lg font-semibold">{jobData.company.name}</p>
+              <div className="mt-1 flex items-center gap-2 text-sm">
+                <div className="flex text-yellow-500">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`h-4 w-4 fill-current ${
+                        i < Math.round(jobData.company.rating)
+                          ? "text-yellow-500"
+                          : "text-muted-foreground/30"
+                      }`}
+                    />
+                  ))}
+                </div>
+                <span className="font-semibold text-foreground">
+                  {jobData.company.rating} / 5.0
+                </span>
+                <span className="text-muted-foreground">
+                  ({jobData.company.reviews} reviews)
+                </span>
+              </div>
+            </div>
+            <button className="rounded-lg border border-foreground px-4 py-2 text-sm font-medium hover:bg-foreground hover:text-background">
+              View Profile
+            </button>
+          </div>
+
+          <hr className="my-5 border-border" />
+
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+            {jobData.company.stats.map((stat) => (
+              <div key={stat.label} className="text-center sm:text-left">
+                <p className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                  {stat.label}
+                </p>
+                <p className="mt-1 text-xl font-semibold">{stat.value}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Submit CTA */}
+        <div className="mt-8 flex justify-end">
+          <button className="flex items-center gap-2 rounded-xl bg-primary px-8 py-3.5 font-semibold text-primary-foreground hover:opacity-90">
+            Submit Proposal
+            <span>▶</span>
+          </button>
+        </div>
       </main>
 
       <Footer />
