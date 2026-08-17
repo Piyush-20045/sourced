@@ -73,6 +73,48 @@ function JobDetailsPage() {
           ))}
         </section>
 
+        {/* Responsibilities + Technical Requirements */}
+        <div className="mt-8 grid gap-5 sm:grid-cols-2">
+          <div className="rounded-xl border border-border bg-card p-5">
+            <h3 className="flex items-center gap-2 text-lg font-semibold">
+              <span className="grid h-6 w-6 place-items-center rounded border border-border text-sm">
+                ☑
+              </span>
+              Responsibilities
+            </h3>
+            <ul className="mt-4 space-y-3">
+              {jobData.responsibilities.map((item, i) => (
+                <li
+                  key={i}
+                  className="flex gap-3 text-sm text-muted-foreground"
+                >
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="rounded-xl border border-border bg-card p-5">
+            <h3 className="flex items-center gap-2 text-lg font-semibold">
+              <span className="grid h-6 w-6 place-items-center rounded border border-border text-sm">
+                ⊞
+              </span>
+              Technical Requirements
+            </h3>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {jobData.technicalRequirements.map((skill) => (
+                <span
+                  key={skill}
+                  className="rounded border border-border px-3 py-1.5 text-sm text-foreground/80"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
       </main>
 
       <Footer />
