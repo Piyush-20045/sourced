@@ -29,7 +29,7 @@ function JobDetailsPage() {
   if (!jobData) return <JobNotFound />;
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-background font-sans text-foreground">
+    <div className="min-h-screen overflow-x-clip bg-background font-sans text-foreground">
       <DashboardNav />
 
       <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:py-12">

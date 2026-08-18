@@ -5,8 +5,8 @@ import { topNav, user } from "../../../data/dashboard";
 /** Sticky top navigation bar of the dashboard. */
 export function DashboardNav() {
   return (
-    <header className="sticky top-0 z-30 border-b border-black/5 bg-[#e3e3e3] text-[#063242] backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-4.5 sm:px-6 md:gap-6">
+    <header className="sticky top-0 z-50 w-full backdrop-blur-md border-b border-white/20 bg-[#e3e3e3]/50 text-[#063242] shadow-md">
+      <div className="mx-auto flex min-h-16 w-full max-w-333 items-center gap-4 px-4 py-4.5 sm:px-6 md:gap-6">
         {/* logo */}
         <Link
           href="/"

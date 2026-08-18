@@ -12,10 +12,10 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-black/5 bg-[#e3e3e3] text-[#063242] shadow-sm">
+    <header className="sticky top-0 z-50 w-full backdrop-blur-md border-b border-white/20 bg-[#e3e3e3]/50 text-[#063242] shadow-sm">
       <nav
         aria-label="Primary navigation"
-        className="mx-auto flex min-h-16 w-full max-w-7xl items-center justify-between px-5 py-4 sm:px-8 lg:px-4"
+        className="mx-auto flex min-h-16 w-full max-w-333 items-center justify-between px-5 py-4 sm:px-8 lg:px-4"
       >
         <Link
           href="/"

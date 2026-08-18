@@ -20,7 +20,7 @@ export const metadata = {
 
 function FreelancerPage() {
   return (
-    <div className="min-h-screen overflow-x-hidden bg-background font-sans text-foreground">
+    <div className="min-h-screen overflow-x-clip bg-background font-sans text-foreground">
       <DashboardNav />
       <ProfileHeader />
       <StatsGrid />
