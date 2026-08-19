@@ -66,7 +66,7 @@ export function JobCard({ job }: { job: JobPost }) {
           </p>
         </div>
         <Link
-          href={`/explore/${job.id}`}
+          href={`/explore/${job.id}/proposal`}
           className="ml-auto shrink-0 rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90"
         >
           Submit Proposal

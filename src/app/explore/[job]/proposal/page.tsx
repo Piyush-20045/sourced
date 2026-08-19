@@ -7,6 +7,9 @@ import { getJobById } from "@/data/explore";
 import { DashboardNav } from "@/app/dashboard/_components/dashboard-nav";
 import Footer from "@/components/layout/footer";
 
+// Route Private Components
+import { ProposalFormTerms } from "./_components/proposal-form-terms";
+
 export default function SubmitProposalPage() {
   const { job } = useParams();
   const router = useRouter();
@@ -14,6 +17,7 @@ export default function SubmitProposalPage() {
 
   // Form state
   const [bidAmount, setBidAmount] = useState<number>(20500);
+  const [duration, setDuration] = useState<string>("1 to 3 months");
   const [submitted, setSubmitted] = useState<boolean>(false);
 
   // Dynamic fee calculation (10% fee)
@@ -24,7 +28,7 @@ export default function SubmitProposalPage() {
     e.preventDefault();
     setSubmitted(true);
     setTimeout(() => {
-      router.push(`/explore/${jobData.id}`);
+      router.push(`/explore/${jobData!.id}`);
     }, 2000);
   };
 
@@ -42,8 +46,8 @@ export default function SubmitProposalPage() {
               Proposal Submitted!
             </h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Your proposal for &quot;{jobData.title}&quot; has been sent to the
-              client.
+              Your proposal for &quot;{jobData!.title}&quot; has been sent to
+              the client.
             </p>
             <p className="mt-4 text-xs font-semibold text-primary">
               Redirecting back to project details...
@@ -65,6 +69,16 @@ export default function SubmitProposalPage() {
               </p>
 
               <hr className="my-6 border-[#e2e4e9]" />
+
+              {/* Terms & Fee Calculation */}
+              <ProposalFormTerms
+                bidAmount={bidAmount}
+                setBidAmount={setBidAmount}
+                duration={duration}
+                setDuration={setDuration}
+                serviceFee={serviceFee}
+                youReceive={youReceive}
+              />
             </div>
           </form>
         )}
