@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { Check, Clock, Globe, ShieldCheck, Star } from "lucide-react";
 import { getJobById } from "@/data/explore";
 import { DashboardNav } from "@/app/dashboard/_components/dashboard-nav";
@@ -167,10 +168,13 @@ function JobDetailsPage() {
 
         {/* Submit CTA */}
         <div className="mt-8 flex justify-end">
-          <button className="flex items-center gap-2 rounded-xl bg-primary px-8 py-3.5 font-semibold text-primary-foreground hover:opacity-90">
+          <Link
+            href={`/explore/${jobData.id}/proposal`}
+            className="flex items-center gap-2 rounded-xl bg-primary px-8 py-3.5 font-semibold text-primary-foreground hover:opacity-90"
+          >
             Submit Proposal
             <span>▶</span>
-          </button>
+          </Link>
         </div>
       </main>
 

@@ -1,0 +1,76 @@
+"use client";
+import { useState } from "react";
+import Link from "next/link";
+import { useParams, useRouter } from "next/navigation";
+import { BadgeCheck } from "lucide-react";
+import { getJobById } from "@/data/explore";
+import { DashboardNav } from "@/app/dashboard/_components/dashboard-nav";
+import Footer from "@/components/layout/footer";
+
+export default function SubmitProposalPage() {
+  const { job } = useParams();
+  const router = useRouter();
+  const jobData = getJobById(job as string) || getJobById("j1");
+
+  // Form state
+  const [bidAmount, setBidAmount] = useState<number>(20500);
+  const [submitted, setSubmitted] = useState<boolean>(false);
+
+  // Dynamic fee calculation (10% fee)
+  const serviceFee = Math.round(bidAmount * 0.1);
+  const youReceive = Math.max(0, bidAmount - serviceFee);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+    setTimeout(() => {
+      router.push(`/explore/${jobData.id}`);
+    }, 2000);
+  };
+
+  return (
+    <div className="min-h-screen overflow-x-clip bg-[#f8f9fa] font-sans text-foreground">
+      <DashboardNav />
+
+      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:py-10">
+        {submitted ? (
+          <div className="mx-auto max-w-lg rounded-2xl border border-border bg-white p-8 text-center shadow-sm">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+              <BadgeCheck className="h-8 w-8" />
+            </div>
+            <h2 className="mt-4 text-2xl font-bold text-[#022b3a]">
+              Proposal Submitted!
+            </h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Your proposal for &quot;{jobData.title}&quot; has been sent to the
+              client.
+            </p>
+            <p className="mt-4 text-xs font-semibold text-primary">
+              Redirecting back to project details...
+            </p>
+          </div>
+        ) : (
+          <form
+            onSubmit={handleSubmit}
+            className="grid gap-8 lg:grid-cols-[1fr_360px]"
+          >
+            {/* LEFT COLUMN: Proposal Terms & Form */}
+            <div className="rounded-2xl border border-[#e2e4e9] bg-white p-6 shadow-xs sm:p-8">
+              <h1 className="text-2xl font-bold text-[#022b3a]">
+                Proposal Terms
+              </h1>
+              <p className="mt-1 text-sm text-[#525866]">
+                Establish your pricing and estimated delivery timeline for this
+                project.
+              </p>
+
+              <hr className="my-6 border-[#e2e4e9]" />
+            </div>
+          </form>
+        )}
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
