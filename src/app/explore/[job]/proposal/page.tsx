@@ -9,6 +9,7 @@ import Footer from "@/components/layout/footer";
 
 // Route Private Components
 import { ProposalFormTerms } from "./_components/proposal-form-terms";
+import { CoverLetterEditor } from "./_components/cover-letter-editor";
 
 function ProposalNotFound() {
   return (
@@ -44,6 +45,7 @@ export default function SubmitProposalPage() {
   // Form state
   const [bidAmount, setBidAmount] = useState<number>(20500);
   const [duration, setDuration] = useState<string>("1 to 3 months");
+  const [coverLetter, setCoverLetter] = useState<string>("");
   const [submitted, setSubmitted] = useState<boolean>(false);
 
   // Dynamic fee calculation (10% fee)
@@ -106,6 +108,12 @@ export default function SubmitProposalPage() {
                 setDuration={setDuration}
                 serviceFee={serviceFee}
                 youReceive={youReceive}
+              />
+
+              {/* Cover Letter */}
+              <CoverLetterEditor
+                coverLetter={coverLetter}
+                setCoverLetter={setCoverLetter}
               />
             </div>
           </form>
