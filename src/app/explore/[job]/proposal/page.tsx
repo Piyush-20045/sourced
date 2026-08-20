@@ -10,6 +10,32 @@ import Footer from "@/components/layout/footer";
 // Route Private Components
 import { ProposalFormTerms } from "./_components/proposal-form-terms";
 
+function ProposalNotFound() {
+  return (
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
+      <DashboardNav />
+      <main className="flex flex-1 items-center justify-center px-4 py-16">
+        <div className="text-center">
+          <h1 className="text-2xl font-semibold text-[#022b3a]">
+            Project not found
+          </h1>
+          <p className="mt-2 text-muted-foreground">
+            The project you are attempting to submit a proposal for does not
+            exist.
+          </p>
+          <Link
+            href="/explore"
+            className="mt-6 inline-block rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground"
+          >
+            Back to Explore
+          </Link>
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
 export default function SubmitProposalPage() {
   const { job } = useParams();
   const router = useRouter();
@@ -24,11 +50,13 @@ export default function SubmitProposalPage() {
   const serviceFee = Math.round(bidAmount * 0.1);
   const youReceive = Math.max(0, bidAmount - serviceFee);
 
+  if (!jobData) return <ProposalNotFound />;
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
     setTimeout(() => {
-      router.push(`/explore/${jobData!.id}`);
+      router.push(`/explore/${jobData.id}`);
     }, 2000);
   };
 
@@ -46,8 +74,8 @@ export default function SubmitProposalPage() {
               Proposal Submitted!
             </h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Your proposal for &quot;{jobData!.title}&quot; has been sent to
-              the client.
+              Your proposal for &quot;{jobData.title}&quot; has been sent to the
+              client.
             </p>
             <p className="mt-4 text-xs font-semibold text-primary">
               Redirecting back to project details...
