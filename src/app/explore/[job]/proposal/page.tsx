@@ -10,6 +10,7 @@ import Footer from "@/components/layout/footer";
 // Route Private Components
 import { ProposalFormTerms } from "./_components/proposal-form-terms";
 import { CoverLetterEditor } from "./_components/cover-letter-editor";
+import { AttachmentDropzone } from "./_components/attachment-dropzone";
 
 function ProposalNotFound() {
   return (
@@ -46,6 +47,7 @@ export default function SubmitProposalPage() {
   const [bidAmount, setBidAmount] = useState<number>(20500);
   const [duration, setDuration] = useState<string>("1 to 3 months");
   const [coverLetter, setCoverLetter] = useState<string>("");
+  const [file, setFile] = useState<File | null>(null);
   const [submitted, setSubmitted] = useState<boolean>(false);
 
   // Dynamic fee calculation (10% fee)
@@ -115,6 +117,9 @@ export default function SubmitProposalPage() {
                 coverLetter={coverLetter}
                 setCoverLetter={setCoverLetter}
               />
+
+              {/* Attachments Dropzone */}
+              <AttachmentDropzone file={file} setFile={setFile} />
             </div>
           </form>
         )}
