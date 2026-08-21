@@ -11,6 +11,7 @@ import Footer from "@/components/layout/footer";
 import { ProposalFormTerms } from "./_components/proposal-form-terms";
 import { CoverLetterEditor } from "./_components/cover-letter-editor";
 import { AttachmentDropzone } from "./_components/attachment-dropzone";
+import { ProjectBriefCard } from "./_components/project-brief-card";
 
 function ProposalNotFound() {
   return (
@@ -149,7 +150,7 @@ export default function SubmitProposalPage() {
 
             {/* RIGHT COLUMN: Project Brief & Pro Tip */}
             <aside>
-              <h1>This is the right side section</h1>
+              <ProjectBriefCard jobData={jobData} />
             </aside>
           </form>
         )}
