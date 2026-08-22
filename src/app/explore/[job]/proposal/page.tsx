@@ -12,6 +12,7 @@ import { ProposalFormTerms } from "./_components/proposal-form-terms";
 import { CoverLetterEditor } from "./_components/cover-letter-editor";
 import { AttachmentDropzone } from "./_components/attachment-dropzone";
 import { ProjectBriefCard } from "./_components/project-brief-card";
+import { ProTipCard } from "./_components/pro-tip-card";
 
 function ProposalNotFound() {
   return (
@@ -149,8 +150,9 @@ export default function SubmitProposalPage() {
             </div>
 
             {/* RIGHT COLUMN: Project Brief & Pro Tip */}
-            <aside>
+            <aside className="space-y-5">
               <ProjectBriefCard jobData={jobData} />
+              <ProTipCard />
             </aside>
           </form>
         )}
