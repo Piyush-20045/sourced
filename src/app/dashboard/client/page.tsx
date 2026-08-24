@@ -1,5 +1,6 @@
 import { DashboardNav } from "../_components/dashboard-nav";
 import { ProfileHeader } from "../_components/profile-header";
+import { ClientStatsGrid } from "../_components/client-stats-grid";
 import Footer from "@/components/layout/footer";
 
 export const metadata = {
@@ -14,6 +15,9 @@ export default function ClientDashboardPage() {
       {/* Sticky top navbar & Profile header */}
       <DashboardNav />
       <ProfileHeader />
+
+      {/* 4 KPI stats grid */}
+      <ClientStatsGrid />
 
       <Footer />
     </div>
