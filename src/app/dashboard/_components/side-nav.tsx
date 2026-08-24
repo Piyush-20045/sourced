@@ -11,7 +11,7 @@ import {
   FileText,
   LayoutGrid,
 } from "lucide-react";
-import { sideNav } from "../../../data/dashboard";
+import { sideNav } from "@/data/dashboard/freelancer-dashboard";
 
 // map of icon names used in the mock data to real lucide components
 const icons = {

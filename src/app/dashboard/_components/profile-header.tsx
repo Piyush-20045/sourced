@@ -1,8 +1,7 @@
 "use client";
-
 import { usePathname, useRouter } from "next/navigation";
 import { BadgeCheck, MapPin, Search } from "lucide-react";
-import { user, Mode } from "../../../data/dashboard";
+import { user, Mode } from "@/data/dashboard/freelancer-dashboard";
 import Link from "next/link";
 
 /** Cover photo, avatar, mode switcher and profile-strength meter. */

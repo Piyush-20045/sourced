@@ -1,5 +1,9 @@
 import { Pencil, Plus, Trash2 } from "lucide-react";
-import { education, languages, weekStats } from "../../../data/dashboard";
+import {
+  education,
+  languages,
+  weekStats,
+} from "@/data/dashboard/freelancer-dashboard";
 
 /** Right column: weekly activity, languages and education. */
 export function SidebarInfo() {
