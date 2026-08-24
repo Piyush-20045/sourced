@@ -1,6 +1,6 @@
 import { DashboardNav } from "../_components/dashboard-nav";
 import { ProfileHeader } from "../_components/profile-header";
-import { ClientStatsGrid } from "../_components/client-stats-grid";
+import { ClientStatsGrid } from "../_components/client/client-stats-grid";
 import Footer from "@/components/layout/footer";
 
 export const metadata = {
