@@ -1,12 +1,31 @@
 "use client";
-import { useState } from "react";
+
+import { usePathname, useRouter } from "next/navigation";
 import { BadgeCheck, MapPin, Search } from "lucide-react";
 import { user, Mode } from "../../../data/dashboard";
 import Link from "next/link";
 
 /** Cover photo, avatar, mode switcher and profile-strength meter. */
 export function ProfileHeader() {
-  const [mode, setMode] = useState<Mode>(user.activeMode);
+  const pathname = usePathname();
+  const router = useRouter();
+
+  // Determine current active mode from URL route
+  const currentMode: Mode = pathname.includes("/dashboard/client")
+    ? "Client"
+    : pathname.includes("/dashboard/agency")
+      ? "Agency"
+      : "Freelancer";
+
+  const handleModeChange = (m: Mode) => {
+    if (m === "Freelancer") {
+      router.push("/dashboard/freelancer");
+    } else if (m === "Client") {
+      router.push("/dashboard/client");
+    } else {
+      router.push("/dashboard/client");
+    }
+  };
 
   return (
     <section>
@@ -64,9 +83,9 @@ export function ProfileHeader() {
             {user.modes.map((m) => (
               <button
                 key={m}
-                onClick={() => setMode(m)}
+                onClick={() => handleModeChange(m)}
                 className={`flex-1 rounded px-3 py-1.5 font-medium transition-colors sm:flex-none sm:px-4 ${
-                  mode === m
+                  currentMode === m
                     ? "bg-primary text-primary-foreground"
                     : "text-muted-foreground"
                 }`}
