@@ -18,6 +18,14 @@ export interface ActiveProject {
   status: "IN PROGRESS" | "IN REVIEW" | "COMPLETED";
 }
 
+export interface ClientRecommendation {
+  id: string;
+  title: string;
+  status: string;
+  budget: string;
+  bids: number;
+}
+
 export const clientStats: ClientStat[] = [
   { label: "Total spent", value: "₹3,24,000" },
   { label: "Active projects", value: "3" },
@@ -60,3 +68,29 @@ export const activeProjects: ActiveProject[] = [
     status: "COMPLETED",
   },
 ];
+
+export const clientRecommendations: ClientRecommendation[] = [
+  {
+    id: "cr1",
+    title: "Full-stack web app — SaaS dashboard",
+    status: "Open",
+    budget: "₹2,30,000",
+    bids: 12,
+  },
+  {
+    id: "cr2",
+    title: "iOS & Android app redesign",
+    status: "Open",
+    budget: "₹1,50,000",
+    bids: 8,
+  },
+];
+
+export const clientAbout = {
+  tagline: "Product company building tools for modern teams.",
+  bio: "Nimbus Labs is a fast-growing product company based in Bengaluru, India. We build cloud-native tools for engineering and product teams. We regularly hire top-tier freelancers to scale design, development, and content work. We believe in transparent collaboration, fair compensation, and long-term partnerships.",
+  typicalBudget: "₹30k – ₹2L",
+  industry: "SaaS / B2B",
+  companySize: "51–200 employees",
+  location: "Bengaluru, IN",
+};
