@@ -1,7 +1,7 @@
 import { DashboardNav } from "../_components/dashboard-nav";
 import { ProfileHeader } from "../_components/profile-header";
 import { StatsGrid } from "../_components/stats-grid";
-import { SideNav } from "../_components/side-nav";
+import { FreelancerSideNav } from "../_components/freelancer-side-nav";
 import { ActiveBids } from "../_components/active-bids";
 import { Recommended } from "../_components/recommended";
 import { AboutSection } from "../_components/about-section";
@@ -28,7 +28,7 @@ function FreelancerPage() {
       {/* overview: left nav + bids/recommendations */}
       <div className="mx-auto grid max-w-6xl gap-8 px-4 pb-12 sm:px-6 lg:grid-cols-[220px_1fr]">
         <div className="min-w-0">
-          <SideNav />
+          <FreelancerSideNav />
         </div>
         <div className="min-w-0 space-y-10">
           <ActiveBids />

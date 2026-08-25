@@ -11,7 +11,7 @@ import {
   FileText,
   LayoutGrid,
 } from "lucide-react";
-import { sideNav } from "@/data/dashboard/freelancer-dashboard";
+import { freelancerSideNav } from "@/data/dashboard/freelancer-dashboard";
 
 // map of icon names used in the mock data to real lucide components
 const icons = {
@@ -27,15 +27,15 @@ const icons = {
 } as const;
 
 /** Left-hand section navigation for the dashboard overview area. */
-export function SideNav() {
-  const [active, setActive] = useState(sideNav[0]!.label);
+export function FreelancerSideNav() {
+  const [active, setActive] = useState(freelancerSideNav[0]!.label);
 
   return (
     <nav className="space-y-1 text-sm">
-      {sideNav.map((item, i) => {
+      {freelancerSideNav.map((item, i) => {
         const Icon = icons[item.icon as keyof typeof icons];
         const isNewSection =
-          item.section && item.section !== sideNav[i - 1]?.section;
+          item.section && item.section !== freelancerSideNav[i - 1]?.section;
 
         return (
           <div key={item.label}>

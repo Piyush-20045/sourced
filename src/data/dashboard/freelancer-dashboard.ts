@@ -91,7 +91,7 @@ export const stats: Stat[] = [
   { label: "Projects completed", value: "128" },
 ];
 
-export const sideNav: NavItem[] = [
+export const freelancerSideNav: NavItem[] = [
   { label: "Overview", icon: "LayoutGrid" },
   { label: "Find Projects", icon: "SearchCheck", badge: 32 },
   { label: "My Proposals", icon: "MailCheck" },
