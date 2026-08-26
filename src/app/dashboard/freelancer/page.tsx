@@ -1,15 +1,15 @@
 import { DashboardNav } from "../_components/dashboard-nav";
 import { ProfileHeader } from "../_components/profile-header";
-import { StatsGrid } from "../_components/stats-grid";
-import { FreelancerSideNav } from "../_components/freelancer-side-nav";
-import { ActiveBids } from "../_components/active-bids";
-import { Recommended } from "../_components/recommended";
-import { AboutSection } from "../_components/about-section";
-import { Portfolio } from "../_components/portfolio";
-import { WorkHistory } from "../_components/work-history";
-import { SidebarInfo } from "../_components/sidebar-info";
-import { SkillsSection } from "../_components/skills-section";
-import { TestimonialCta } from "../_components/testimonial-cta";
+import { StatsGrid } from "../_components/freelancer/stats-grid";
+import { FreelancerSideNav } from "../_components/freelancer/freelancer-side-nav";
+import { ActiveBids } from "../_components/freelancer/active-bids";
+import { Recommended } from "../_components/freelancer/recommended";
+import { AboutSection } from "../_components/freelancer/about-section";
+import { Portfolio } from "../_components/freelancer/portfolio";
+import { WorkHistory } from "../_components/freelancer/work-history";
+import { SidebarInfo } from "../_components/freelancer/sidebar-info";
+import { SkillsSection } from "../_components/freelancer/skills-section";
+import { TestimonialCta } from "../_components/freelancer/testimonial-cta";
 import Footer from "@/components/layout/footer";
 
 export const metadata = {
