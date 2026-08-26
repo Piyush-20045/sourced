@@ -26,6 +26,15 @@ export interface ClientRecommendation {
   bids: number;
 }
 
+export interface PostedProject {
+  id: string;
+  title: string;
+  budgetRange: string;
+  bidsCount: number;
+  postedAgo: string;
+  status: "ACTIVE" | "CLOSED";
+}
+
 export const clientStats: ClientStat[] = [
   { label: "Total spent", value: "₹3,24,000" },
   { label: "Active projects", value: "3" },
@@ -94,3 +103,30 @@ export const clientAbout = {
   companySize: "51–200 employees",
   location: "Bengaluru, IN",
 };
+
+export const postedProjects: PostedProject[] = [
+  {
+    id: "pp1",
+    title: "Rebuild analytics dashboard",
+    budgetRange: "₹5L–₹7L",
+    bidsCount: 9,
+    postedAgo: "1 week ago",
+    status: "ACTIVE",
+  },
+  {
+    id: "pp2",
+    title: "Mobile app UI — wellness platform",
+    budgetRange: "₹5L–₹7L",
+    bidsCount: 9,
+    postedAgo: "1 week ago",
+    status: "ACTIVE",
+  },
+  {
+    id: "pp3",
+    title: "Brand identity & logo refresh",
+    budgetRange: "₹28,000",
+    bidsCount: 14,
+    postedAgo: "2 weeks ago",
+    status: "CLOSED",
+  },
+];
