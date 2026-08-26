@@ -6,6 +6,7 @@ import { ActiveProjects } from "../_components/client/active-projects";
 import { RecommendedFreelancers } from "../_components/client/recommended-freelancers";
 import { ClientAboutSection } from "../_components/client/client-about-section";
 import { PostedProjects } from "../_components/client/posted-projects";
+import { ClientTestimonialCta } from "../_components/client/client-testimonial-cta";
 import Footer from "@/components/layout/footer";
 
 export const metadata = {
@@ -39,6 +40,7 @@ export default function ClientDashboardPage() {
       <div className="mx-auto max-w-6xl space-y-10 px-4 pb-12 sm:px-6">
         <ClientAboutSection />
         <PostedProjects />
+        <ClientTestimonialCta />
       </div>
 
       <Footer />
