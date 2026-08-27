@@ -1,21 +1,25 @@
+"use client";
+
+import { useState } from "react";
 import { DashboardNav } from "../_components/dashboard-nav";
 import { ProfileHeader } from "../_components/profile-header";
 import { ClientStatsGrid } from "../_components/client/shared/client-stats-grid";
 import { ClientSideNav } from "../_components/client/shared/client-side-nav";
+import Footer from "@/components/layout/footer";
+
+// Overview components
 import { ActiveProjects } from "../_components/client/overview/active-projects";
 import { RecommendedFreelancers } from "../_components/client/overview/recommended-freelancers";
 import { ClientAboutSection } from "../_components/client/overview/client-about-section";
 import { PostedProjects } from "../_components/client/overview/posted-projects";
 import { ClientTestimonialCta } from "../_components/client/overview/client-testimonial-cta";
-import Footer from "@/components/layout/footer";
 
-export const metadata = {
-  title: "Client Dashboard — Sourced",
-  description:
-    "Manage your active projects, browse freelancers, and view posted jobs from your Sourced client dashboard.",
-};
+// Post Project components
+import { PostProjectCard } from "../_components/client/post-project/post-project-card";
 
 export default function ClientDashboardPage() {
+  const [activeTab, setActiveTab] = useState("Overview");
+
   return (
     <div className="min-h-screen overflow-x-clip bg-background font-sans text-foreground">
       {/* Sticky top navbar & Profile header */}
@@ -25,23 +29,37 @@ export default function ClientDashboardPage() {
       {/* 4 KPI stats grid */}
       <ClientStatsGrid />
 
-      {/* Overview section: left operational nav + active projects & recommendations */}
+      {/* Main dashboard body: left nav + right content */}
       <div className="mx-auto grid max-w-6xl gap-8 px-4 pb-12 sm:px-6 lg:grid-cols-[220px_1fr]">
         <div className="min-w-0">
-          <ClientSideNav />
+          <ClientSideNav activeTab={activeTab} onSelectTab={setActiveTab} />
         </div>
+
         <div className="min-w-0 space-y-10">
-          <ActiveProjects />
-          <RecommendedFreelancers />
+          {activeTab === "Post a Project" ? (
+            <>
+              <PostProjectCard />
+              <PostedProjects />
+              <ActiveProjects />
+              <RecommendedFreelancers />
+            </>
+          ) : (
+            <>
+              <ActiveProjects />
+              <RecommendedFreelancers />
+            </>
+          )}
         </div>
       </div>
 
-      {/* Client profile details: about, posted projects, testimonial CTA */}
-      <div className="mx-auto max-w-6xl space-y-10 px-4 pb-12 sm:px-6">
-        <ClientAboutSection />
-        <PostedProjects />
-        <ClientTestimonialCta />
-      </div>
+      {/* Client profile details section (Overview tab only) */}
+      {activeTab !== "Post a Project" && (
+        <div className="mx-auto max-w-6xl space-y-10 px-4 pb-12 sm:px-6">
+          <ClientAboutSection />
+          <PostedProjects />
+          <ClientTestimonialCta />
+        </div>
+      )}
 
       <Footer />
     </div>

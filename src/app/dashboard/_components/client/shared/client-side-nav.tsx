@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import {
   BarChart3,
@@ -26,9 +27,20 @@ const icons = {
   BarChart3,
 } as const;
 
+interface ClientSideNavProps {
+  activeTab?: string;
+  onSelectTab?: (tab: string) => void;
+}
+
 /** Left-hand section navigation for the client dashboard area. */
-export function ClientSideNav() {
-  const [active, setActive] = useState(clientSideNav[0]!.label);
+export function ClientSideNav({ activeTab, onSelectTab }: ClientSideNavProps) {
+  const [internalActive, setInternalActive] = useState(clientSideNav[0]!.label);
+  const active = activeTab ?? internalActive;
+
+  const handleSelect = (label: string) => {
+    setInternalActive(label);
+    onSelectTab?.(label);
+  };
 
   return (
     <nav className="space-y-1 text-sm">
@@ -45,7 +57,7 @@ export function ClientSideNav() {
               </p>
             )}
             <button
-              onClick={() => setActive(item.label)}
+              onClick={() => handleSelect(item.label)}
               className={`flex w-full items-center gap-2 rounded-md px-3 py-2 transition-colors ${
                 active === item.label
                   ? "bg-primary font-semibold text-primary-foreground"
