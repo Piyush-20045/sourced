@@ -1,12 +1,12 @@
 import { DashboardNav } from "../_components/dashboard-nav";
 import { ProfileHeader } from "../_components/profile-header";
-import { ClientStatsGrid } from "../_components/client/client-stats-grid";
-import { ClientSideNav } from "../_components/client/client-side-nav";
-import { ActiveProjects } from "../_components/client/active-projects";
-import { RecommendedFreelancers } from "../_components/client/recommended-freelancers";
-import { ClientAboutSection } from "../_components/client/client-about-section";
-import { PostedProjects } from "../_components/client/posted-projects";
-import { ClientTestimonialCta } from "../_components/client/client-testimonial-cta";
+import { ClientStatsGrid } from "../_components/client/shared/client-stats-grid";
+import { ClientSideNav } from "../_components/client/shared/client-side-nav";
+import { ActiveProjects } from "../_components/client/overview/active-projects";
+import { RecommendedFreelancers } from "../_components/client/overview/recommended-freelancers";
+import { ClientAboutSection } from "../_components/client/overview/client-about-section";
+import { PostedProjects } from "../_components/client/overview/posted-projects";
+import { ClientTestimonialCta } from "../_components/client/overview/client-testimonial-cta";
 import Footer from "@/components/layout/footer";
 
 export const metadata = {
