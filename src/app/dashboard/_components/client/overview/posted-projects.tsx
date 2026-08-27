@@ -5,7 +5,7 @@ import { postedProjects } from "@/data/dashboard/client-dashboard";
 export function PostedProjects() {
   return (
     <section>
-      <h2 className="text-xl font-bold text-[#022b3a]">Posted projects</h2>
+      <h2 className="text-xl font-bold">Posted projects</h2>
 
       <div className="mt-4 space-y-3">
         {postedProjects.map((p) => (
