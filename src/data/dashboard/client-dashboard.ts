@@ -1,3 +1,4 @@
+// Overview Page Data
 export interface NavItem {
   label: string;
   icon: string; // lucide icon name handled by the component
@@ -128,5 +129,93 @@ export const postedProjects: PostedProject[] = [
     bidsCount: 14,
     postedAgo: "2 weeks ago",
     status: "CLOSED",
+  },
+];
+
+// Browse Freelancers Data
+export interface FreelancerItem {
+  id: string;
+  name: string;
+  avatar: string;
+  badge?: "TOP RATED" | "RISING";
+  role: string;
+  location: string;
+  hourlyRate: string;
+  rating: number;
+  jobsCount: number;
+  skills: string[];
+}
+
+export const browseFreelancers: FreelancerItem[] = [
+  {
+    id: "f1",
+    name: "Samiya A.",
+    avatar: "/dashboard/freelancer/samiya.jpg",
+    badge: "TOP RATED",
+    role: "UI/UX Designer",
+    location: "Lucknow, IN",
+    hourlyRate: "₹90/hr",
+    rating: 4.9,
+    jobsCount: 128,
+    skills: ["Figma", "Prototyping", "Branding"],
+  },
+  {
+    id: "f2",
+    name: "Rahul K.",
+    avatar: "/dashboard/freelancer/samiya.jpg",
+    badge: "RISING",
+    role: "Full-stack Developer",
+    location: "Pune, IN",
+    hourlyRate: "₹120/hr",
+    rating: 4.8,
+    jobsCount: 94,
+    skills: ["React", "Node.js", "PostgreSQL"],
+  },
+  {
+    id: "f3",
+    name: "Aisha M.",
+    avatar: "/dashboard/freelancer/samiya.jpg",
+    badge: "TOP RATED",
+    role: "Brand Strategist",
+    location: "Delhi, IN",
+    hourlyRate: "₹75/hr",
+    rating: 4.9,
+    jobsCount: 61,
+    skills: ["Branding", "Typography", "Copywriting"],
+  },
+  {
+    id: "f4",
+    name: "Vikram S.",
+    avatar: "/dashboard/freelancer/samiya.jpg",
+    badge: "RISING",
+    role: "Motion Designer",
+    location: "Mumbai, IN",
+    hourlyRate: "₹95/hr",
+    rating: 4.7,
+    jobsCount: 47,
+    skills: ["After Effects", "Figma", "Lottie"],
+  },
+  {
+    id: "f5",
+    name: "Priya R.",
+    avatar: "/dashboard/freelancer/samiya.jpg",
+    role: "UX Researcher",
+    location: "Bengaluru, IN",
+    hourlyRate: "₹80/hr",
+    rating: 4.8,
+    jobsCount: 38,
+    skills: ["User Research", "Personas", "Usability Testing"],
+  },
+  {
+    id: "f6",
+    name: "Dev K.",
+    avatar: "/dashboard/freelancer/samiya.jpg",
+    badge: "RISING",
+    role: "iOS Developer",
+    location: "Chennai, IN",
+    hourlyRate: "₹110/hr",
+    rating: 4.6,
+    jobsCount: 55,
+    skills: ["Swift", "SwiftUI", "Xcode"],
   },
 ];

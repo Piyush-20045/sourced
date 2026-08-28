@@ -17,6 +17,9 @@ import { ClientTestimonialCta } from "../_components/client/overview/client-test
 // Post Project components
 import { PostProjectCard } from "../_components/client/post-project/post-project-card";
 
+// Browse Freelancers components
+import { BrowseFreelancers } from "../_components/client/browse-freelancers/browse-freelancers";
+
 export default function ClientDashboardPage() {
   const [activeTab, setActiveTab] = useState("Overview");
 
@@ -36,14 +39,18 @@ export default function ClientDashboardPage() {
         </div>
 
         <div className="min-w-0 space-y-10">
-          {activeTab === "Post a Project" ? (
+          {activeTab === "Post a Project" && (
             <>
               <PostProjectCard />
               <PostedProjects />
               <ActiveProjects />
               <RecommendedFreelancers />
             </>
-          ) : (
+          )}
+
+          {activeTab === "Browse Freelancers" && <BrowseFreelancers />}
+
+          {activeTab === "Overview" && (
             <>
               <ActiveProjects />
               <RecommendedFreelancers />
@@ -53,7 +60,7 @@ export default function ClientDashboardPage() {
       </div>
 
       {/* Client profile details section (Overview tab only) */}
-      {activeTab !== "Post a Project" && (
+      {activeTab === "Overview" && (
         <div className="mx-auto max-w-6xl space-y-10 px-4 pb-12 sm:px-6">
           <ClientAboutSection />
           <PostedProjects />
