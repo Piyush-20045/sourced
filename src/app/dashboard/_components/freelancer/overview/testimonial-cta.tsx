@@ -15,7 +15,7 @@ export function TestimonialCta() {
       </div>
 
       <img
-        src="/dashboard/officeDave.png"
+        src="/dashboard/freelancer/officeDave.png"
         alt="Illustration of a happy freelancer with five star rating"
         className="ml-auto w-96 max-w-full"
         loading="lazy"
