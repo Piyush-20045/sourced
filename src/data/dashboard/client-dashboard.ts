@@ -219,3 +219,10 @@ export const browseFreelancers: FreelancerItem[] = [
     skills: ["Swift", "SwiftUI", "Xcode"],
   },
 ];
+
+export const contractsSummary = {
+  totalContractsCount: 4,
+  totalValue: "₹1,83,000",
+  amountPaid: "₹1,10,000",
+  remaining: "₹73,000",
+};
