@@ -220,9 +220,74 @@ export const browseFreelancers: FreelancerItem[] = [
   },
 ];
 
+// Active Contracts Data
+export interface ContractItem {
+  id: string;
+  title: string;
+  freelancer: string;
+  avatar: string;
+  startDate: string;
+  endDate: string;
+  status: "IN PROGRESS" | "IN REVIEW" | "COMPLETED" | "PENDING";
+  contractValue: string;
+  paidSoFar: string;
+  progress: number;
+}
+
 export const contractsSummary = {
   totalContractsCount: 4,
   totalValue: "₹1,83,000",
   amountPaid: "₹1,10,000",
   remaining: "₹73,000",
 };
+
+export const activeContracts: ContractItem[] = [
+  {
+    id: "c1",
+    title: "Rebuild analytics dashboard",
+    freelancer: "Samiya A.",
+    avatar: "/dashboard/freelancer/samiya.jpg",
+    startDate: "Aug 1, 2024",
+    endDate: "Aug 28, 2024",
+    status: "IN PROGRESS",
+    contractValue: "₹42,000",
+    paidSoFar: "₹21,000",
+    progress: 60,
+  },
+  {
+    id: "c2",
+    title: "Mobile app UI for wellness platform",
+    freelancer: "Rahul K.",
+    avatar: "/dashboard/freelancer/samiya.jpg",
+    startDate: "Jul 20, 2024",
+    endDate: "Sep 5, 2024",
+    status: "IN REVIEW",
+    contractValue: "₹68,000",
+    paidSoFar: "₹34,000",
+    progress: 45,
+  },
+  {
+    id: "c3",
+    title: "Brand identity & guidelines",
+    freelancer: "Aisha M.",
+    avatar: "/dashboard/freelancer/samiya.jpg",
+    startDate: "Jun 10, 2024",
+    endDate: "Jul 30, 2024",
+    status: "COMPLETED",
+    contractValue: "₹55,000",
+    paidSoFar: "₹55,000",
+    progress: 100,
+  },
+  {
+    id: "c4",
+    title: "Landing page copywriting",
+    freelancer: "Dev K.",
+    avatar: "/dashboard/freelancer/samiya.jpg",
+    startDate: "Aug 10, 2024",
+    endDate: "Aug 20, 2024",
+    status: "PENDING",
+    contractValue: "₹18,000",
+    paidSoFar: "₹0",
+    progress: 10,
+  },
+];
