@@ -293,6 +293,23 @@ export const activeContracts: ContractItem[] = [
 ];
 
 // Reviews Data
+export interface ReviewGiven {
+  id: string;
+  freelancer: string;
+  avatar: string;
+  project: string;
+  date: string;
+  rating: number;
+  comment: string;
+}
+
+export interface ReviewReceived {
+  id: string;
+  freelancer: string;
+  avatar: string;
+  rating: number;
+  comment: string;
+}
 
 export const reviewsSummary = {
   avgRatingGiven: 4.9,
@@ -306,3 +323,55 @@ export const pendingReviewNotice = {
   project: "Mobile app UI for wellness platform",
   milestone: "After milestone 2 delivery",
 };
+
+export const reviewsGiven: ReviewGiven[] = [
+  {
+    id: "rg1",
+    freelancer: "Samiya A.",
+    avatar: "/dashboard/freelancer/samiya.jpg",
+    project: "Brand identity & guidelines",
+    date: "Jul 30, 2024",
+    rating: 5,
+    comment:
+      "Samiya exceeded expectations. Her attention to detail and design sensibility are exceptional. Delivered ahead of schedule with clean handoffs.",
+  },
+  {
+    id: "rg2",
+    freelancer: "Aisha M.",
+    avatar: "/dashboard/freelancer/samiya.jpg",
+    project: "Content strategy — Q2 2024",
+    date: "May 15, 2024",
+    rating: 5,
+    comment:
+      "Brilliant strategic thinker. Aisha understood our brand voice instantly and produced content that felt entirely on-brand.",
+  },
+  {
+    id: "rg3",
+    freelancer: "Rahul K.",
+    avatar: "/dashboard/freelancer/samiya.jpg",
+    project: "Backend API — user auth",
+    date: "Mar 22, 2024",
+    rating: 4,
+    comment:
+      "Solid work, well-structured code. Communication could be slightly faster during the review cycle.",
+  },
+];
+
+export const reviewsReceived: ReviewReceived[] = [
+  {
+    id: "rr1",
+    freelancer: "Samiya A.",
+    avatar: "/dashboard/freelancer/samiya.jpg",
+    rating: 5,
+    comment:
+      "Nimbus Labs was a joy to work with — clear brief, timely feedback, and respectful of my process. Would love to collaborate again.",
+  },
+  {
+    id: "rr2",
+    freelancer: "Aisha M.",
+    avatar: "/dashboard/freelancer/samiya.jpg",
+    rating: 5,
+    comment:
+      "Professional, communicative, and paid promptly. The scope was well-defined from day one.",
+  },
+];
