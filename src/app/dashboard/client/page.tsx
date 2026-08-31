@@ -23,6 +23,9 @@ import { BrowseFreelancers } from "../_components/client/browse-freelancers/brow
 // Active Contracts components
 import { ActiveContracts } from "../_components/client/active-contracts/active-contracts";
 
+// Reviews components
+import { ClientReviews } from "../_components/client/reviews/client-reviews";
+
 export default function ClientDashboardPage() {
   const [activeTab, setActiveTab] = useState("Overview");
 
@@ -54,6 +57,8 @@ export default function ClientDashboardPage() {
           {activeTab === "Browse Freelancers" && <BrowseFreelancers />}
 
           {activeTab === "Active Contracts" && <ActiveContracts />}
+
+          {activeTab === "Reviews" && <ClientReviews />}
 
           {activeTab === "Overview" && (
             <>

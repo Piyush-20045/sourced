@@ -291,3 +291,18 @@ export const activeContracts: ContractItem[] = [
     progress: 10,
   },
 ];
+
+// Reviews Data
+
+export const reviewsSummary = {
+  avgRatingGiven: 4.9,
+  reviewsWritten: 3,
+  pendingReviewsCount: 1,
+};
+
+export const pendingReviewNotice = {
+  id: "pr1",
+  freelancer: "Rahul K.",
+  project: "Mobile app UI for wellness platform",
+  milestone: "After milestone 2 delivery",
+};
