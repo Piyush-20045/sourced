@@ -375,3 +375,8 @@ export const reviewsReceived: ReviewReceived[] = [
       "Professional, communicative, and paid promptly. The scope was well-defined from day one.",
   },
 ];
+
+// Team Access Data
+export const teamMembersSummary = {
+  activeMembersCount: 4,
+};
