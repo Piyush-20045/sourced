@@ -444,3 +444,35 @@ export const teamMembers: TeamMember[] = [
     projectsCount: 3,
   },
 ];
+
+// Billing & Invoices Data
+export interface PaymentMethodItem {
+  id: string;
+  cardBrand: string;
+  last4: string;
+  expiryDate: string;
+  isPrimary?: boolean;
+}
+
+export const billingSummary = {
+  totalSpent: "₹2,74,000",
+  overdue: "₹18,000",
+  savedCardsCount: 3,
+};
+
+export const paymentMethods: PaymentMethodItem[] = [
+  {
+    id: "pm1",
+    cardBrand: "Visa",
+    last4: "4242",
+    expiryDate: "09/26",
+    isPrimary: true,
+  },
+  {
+    id: "pm2",
+    cardBrand: "Mastercard",
+    last4: "8801",
+    expiryDate: "03/25",
+    isPrimary: false,
+  },
+];

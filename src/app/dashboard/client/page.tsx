@@ -29,6 +29,9 @@ import { ClientReviews } from "../_components/client/reviews/client-reviews";
 // Team Access components
 import { TeamAccess } from "../_components/client/team-access/team-access";
 
+// Billing components
+import { ClientBilling } from "../_components/client/billing/client-billing";
+
 export default function ClientDashboardPage() {
   const [activeTab, setActiveTab] = useState("Overview");
 
@@ -64,6 +67,8 @@ export default function ClientDashboardPage() {
           {activeTab === "Reviews" && <ClientReviews />}
 
           {activeTab === "Team Access" && <TeamAccess />}
+
+          {activeTab === "Billing" && <ClientBilling />}
 
           {activeTab === "Overview" && (
             <>
