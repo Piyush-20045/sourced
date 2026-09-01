@@ -377,6 +377,70 @@ export const reviewsReceived: ReviewReceived[] = [
 ];
 
 // Team Access Data
+export interface TeamMember {
+  id: string;
+  name: string;
+  roleTitle: string;
+  initials: string;
+  email: string;
+  joinedDate: string;
+  accessRole: "ADMIN" | "MEMBER" | "VIEWER";
+  projectsCount: number;
+}
+
 export const teamMembersSummary = {
   activeMembersCount: 4,
 };
+
+export const teamMembers: TeamMember[] = [
+  {
+    id: "tm1",
+    name: "Rohan Gupta",
+    roleTitle: "Project Manager",
+    initials: "RG",
+    email: "rohan@pixelworks.in",
+    joinedDate: "Joined Jan 2023",
+    accessRole: "ADMIN",
+    projectsCount: 8,
+  },
+  {
+    id: "tm2",
+    name: "Meera Nair",
+    roleTitle: "Creative Director",
+    initials: "MN",
+    email: "meera@pixelworks.in",
+    joinedDate: "Joined Mar 2023",
+    accessRole: "ADMIN",
+    projectsCount: 12,
+  },
+  {
+    id: "tm3",
+    name: "Siddharth Rao",
+    roleTitle: "Developer",
+    initials: "SR",
+    email: "sid@pixelworks.in",
+    joinedDate: "Joined Jul 2023",
+    accessRole: "MEMBER",
+    projectsCount: 5,
+  },
+  {
+    id: "tm4",
+    name: "Tanvi Kapoor",
+    roleTitle: "Account Manager",
+    initials: "TK",
+    email: "tanvi@pixelworks.in",
+    joinedDate: "Joined Sep 2023",
+    accessRole: "MEMBER",
+    projectsCount: 7,
+  },
+  {
+    id: "tm5",
+    name: "Ayush Patel",
+    roleTitle: "Designer",
+    initials: "AP",
+    email: "ayush@pixelworks.in",
+    joinedDate: "Joined Nov 2023",
+    accessRole: "VIEWER",
+    projectsCount: 3,
+  },
+];
