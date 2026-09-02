@@ -515,3 +515,10 @@ export const invoiceHistory: InvoiceItem[] = [
     status: "OVERDUE",
   },
 ];
+
+// Payments & Transactions Data
+export const paymentsSummary = {
+  totalSpent: "₹3,24,000",
+  inEscrow: "₹43,000",
+  releasedToFreelancers: "₹2,81,000",
+};

@@ -32,6 +32,9 @@ import { TeamAccess } from "../_components/client/team-access/team-access";
 // Billing components
 import { ClientBilling } from "../_components/client/billing/client-billing";
 
+// Payments components
+import { ClientPayments } from "../_components/client/payments/client-payments";
+
 export default function ClientDashboardPage() {
   const [activeTab, setActiveTab] = useState("Overview");
 
@@ -69,6 +72,8 @@ export default function ClientDashboardPage() {
           {activeTab === "Team Access" && <TeamAccess />}
 
           {activeTab === "Billing" && <ClientBilling />}
+
+          {activeTab === "Payments" && <ClientPayments />}
 
           {activeTab === "Overview" && (
             <>
