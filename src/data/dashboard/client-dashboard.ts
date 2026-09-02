@@ -517,8 +517,79 @@ export const invoiceHistory: InvoiceItem[] = [
 ];
 
 // Payments & Transactions Data
+export interface PaymentAccountItem {
+  id: string;
+  name: string;
+  mask: string;
+  tag: "DEFAULT" | "BACKUP";
+  type: "card" | "bank";
+}
+
+export interface TransactionItem {
+  id: string;
+  title: string;
+  subtitle: string;
+  amount: string;
+  status: "COMPLETED" | "IN ESCROW";
+}
+
 export const paymentsSummary = {
   totalSpent: "₹3,24,000",
   inEscrow: "₹43,000",
   releasedToFreelancers: "₹2,81,000",
 };
+
+export const paymentAccountMethods: PaymentAccountItem[] = [
+  {
+    id: "pa1",
+    name: "HDFC Visa",
+    mask: "4242",
+    tag: "DEFAULT",
+    type: "card",
+  },
+  {
+    id: "pa2",
+    name: "SBI Bank",
+    mask: "7890",
+    tag: "BACKUP",
+    type: "bank",
+  },
+];
+
+export const transactionHistory: TransactionItem[] = [
+  {
+    id: "tx1",
+    title: "Rebuild analytics dashboard — Milestone 1",
+    subtitle: "Samiya A. · Aug 12, 2024 · Milestone release",
+    amount: "₹21,000",
+    status: "COMPLETED",
+  },
+  {
+    id: "tx2",
+    title: "Brand identity & guidelines — Final payment",
+    subtitle: "Aisha M. · Jul 30, 2024 · Final release",
+    amount: "₹27,500",
+    status: "COMPLETED",
+  },
+  {
+    id: "tx3",
+    title: "Brand identity & guidelines — Milestone 1",
+    subtitle: "Aisha M. · Jun 25, 2024 · Milestone release",
+    amount: "₹27,500",
+    status: "COMPLETED",
+  },
+  {
+    id: "tx4",
+    title: "Mobile app UI — Advance",
+    subtitle: "Rahul K. · Jul 22, 2024 · Initial deposit",
+    amount: "₹34,000",
+    status: "IN ESCROW",
+  },
+  {
+    id: "tx5",
+    title: "Landing page copy — Deposit",
+    subtitle: "Dev K. · Aug 11, 2024 · Initial deposit",
+    amount: "₹9,000",
+    status: "IN ESCROW",
+  },
+];
