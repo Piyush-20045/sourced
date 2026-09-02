@@ -1,8 +1,9 @@
 "use client";
 
-import { CreditCard } from "lucide-react";
+import { CreditCard, FileText } from "lucide-react";
 import {
   billingSummary,
+  invoiceHistory,
   paymentMethods,
 } from "@/data/dashboard/client-dashboard";
 
@@ -87,6 +88,55 @@ export function ClientBilling() {
                   className="rounded-xl border border-border bg-background px-4 py-1.5 text-xs font-semibold text-[#022b3a] transition-colors hover:bg-muted"
                 >
                   Remove
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Invoice History Card */}
+      <div className="rounded-2xl border border-border bg-card p-6 shadow-xs space-y-6">
+        <h2 className="text-base font-bold text-[#022b3a]">Invoice history</h2>
+
+        <div className="divide-y divide-border">
+          {invoiceHistory.map((inv) => (
+            <div
+              key={inv.id}
+              className="flex flex-col justify-between gap-4 py-4 first:pt-0 last:pb-0 sm:flex-row sm:items-center"
+            >
+              <div className="flex items-center gap-3.5 min-w-0">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-muted/50 text-muted-foreground shrink-0">
+                  <FileText className="h-5 w-5" />
+                </div>
+                <div className="min-w-0">
+                  <h3 className="truncate font-bold text-sm text-[#022b3a]">
+                    {inv.description}
+                  </h3>
+                  <p className="text-xs text-muted-foreground">{inv.date}</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 self-end sm:self-auto">
+                <span className="font-bold text-sm text-[#022b3a]">
+                  {inv.amount}
+                </span>
+
+                <span
+                  className={`rounded-md px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase ${
+                    inv.status === "PAID"
+                      ? "bg-[#e6f4ea] text-[#137333]"
+                      : "bg-amber-100 text-amber-800"
+                  }`}
+                >
+                  {inv.status}
+                </span>
+
+                <button
+                  type="button"
+                  className="rounded-xl border border-border bg-background px-4 py-1.5 text-xs font-semibold text-[#022b3a] transition-colors hover:bg-muted"
+                >
+                  Download
                 </button>
               </div>
             </div>

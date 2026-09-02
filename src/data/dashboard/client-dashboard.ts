@@ -454,6 +454,14 @@ export interface PaymentMethodItem {
   isPrimary?: boolean;
 }
 
+export interface InvoiceItem {
+  id: string;
+  description: string;
+  date: string;
+  amount: string;
+  status: "PAID" | "OVERDUE";
+}
+
 export const billingSummary = {
   totalSpent: "₹2,74,000",
   overdue: "₹18,000",
@@ -474,5 +482,36 @@ export const paymentMethods: PaymentMethodItem[] = [
     last4: "8801",
     expiryDate: "03/25",
     isPrimary: false,
+  },
+];
+
+export const invoiceHistory: InvoiceItem[] = [
+  {
+    id: "inv1",
+    description: "Samiya A. — Analytics dashboard milestone 2",
+    date: "Aug 10",
+    amount: "₹21,000",
+    status: "PAID",
+  },
+  {
+    id: "inv2",
+    description: "Rahul K. — Mobile UI kit delivery",
+    date: "Aug 4",
+    amount: "₹34,000",
+    status: "PAID",
+  },
+  {
+    id: "inv3",
+    description: "Aisha M. — Brand guidelines final",
+    date: "Jul 28",
+    amount: "₹27,500",
+    status: "PAID",
+  },
+  {
+    id: "inv4",
+    description: "Dev K. — Pitch deck",
+    date: "Jul 15",
+    amount: "₹18,000",
+    status: "OVERDUE",
   },
 ];
