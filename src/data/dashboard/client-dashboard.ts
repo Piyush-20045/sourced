@@ -595,6 +595,18 @@ export const transactionHistory: TransactionItem[] = [
 ];
 
 // Analytics Data
+export interface MonthlySpendItem {
+  month: string;
+  amount: number;
+  label: string;
+}
+
+export interface TopCategoryItem {
+  id: string;
+  category: string;
+  amount: string;
+  percentage: number;
+}
 
 export const analyticsSummary = {
   totalSpend: "₹2,74,000",
@@ -602,4 +614,40 @@ export const analyticsSummary = {
   projectsCompleted: 14,
   avgRatingGiven: 4.7,
 };
+
+export const monthlySpendData: MonthlySpendItem[] = [
+  { month: "MAR", amount: 28, label: "28k" },
+  { month: "APR", amount: 45, label: "45k" },
+  { month: "MAY", amount: 38, label: "38k" },
+  { month: "JUN", amount: 62, label: "62k" },
+  { month: "JUL", amount: 55, label: "55k" },
+  { month: "AUG", amount: 74, label: "74k" },
+];
+
+export const topCategoriesData: TopCategoryItem[] = [
+  {
+    id: "cat1",
+    category: "UI/UX Design",
+    amount: "₹1,15,000",
+    percentage: 70,
+  },
+  {
+    id: "cat2",
+    category: "Frontend Development",
+    amount: "₹76,000",
+    percentage: 46,
+  },
+  {
+    id: "cat3",
+    category: "Brand & Identity",
+    amount: "₹49,000",
+    percentage: 30,
+  },
+  {
+    id: "cat4",
+    category: "Copywriting",
+    amount: "₹34,000",
+    percentage: 20,
+  },
+];
 
