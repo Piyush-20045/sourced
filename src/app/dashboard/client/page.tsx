@@ -35,6 +35,9 @@ import { ClientBilling } from "../_components/client/billing/client-billing";
 // Payments components
 import { ClientPayments } from "../_components/client/payments/client-payments";
 
+// Analytics components
+import { ClientAnalytics } from "../_components/client/analytics/client-analytics";
+
 export default function ClientDashboardPage() {
   const [activeTab, setActiveTab] = useState("Overview");
 
@@ -74,6 +77,8 @@ export default function ClientDashboardPage() {
           {activeTab === "Billing" && <ClientBilling />}
 
           {activeTab === "Payments" && <ClientPayments />}
+
+          {activeTab === "Analytics" && <ClientAnalytics />}
 
           {activeTab === "Overview" && (
             <>

@@ -593,3 +593,13 @@ export const transactionHistory: TransactionItem[] = [
     status: "IN ESCROW",
   },
 ];
+
+// Analytics Data
+
+export const analyticsSummary = {
+  totalSpend: "₹2,74,000",
+  freelancersHired: 9,
+  projectsCompleted: 14,
+  avgRatingGiven: 4.7,
+};
+
