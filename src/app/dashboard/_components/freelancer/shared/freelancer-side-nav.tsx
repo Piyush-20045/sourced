@@ -26,14 +26,30 @@ const icons = {
   BarChart3,
 } as const;
 
+interface FreelancerSideNavProps {
+  activeTab?: string;
+  onSelectTab?: (tab: string) => void;
+}
+
 /** Left-hand section navigation for the dashboard overview area. */
-export function FreelancerSideNav() {
-  const [active, setActive] = useState(freelancerSideNav[0]!.label);
+export function FreelancerSideNav({
+  activeTab,
+  onSelectTab,
+}: FreelancerSideNavProps) {
+  const [internalActive, setInternalActive] = useState(
+    freelancerSideNav[0]!.label,
+  );
+  const active = activeTab ?? internalActive;
+
+  const handleSelect = (label: string) => {
+    setInternalActive(label);
+    onSelectTab?.(label);
+  };
 
   return (
     <nav className="space-y-1 text-sm">
       {freelancerSideNav.map((item, i) => {
-        const Icon = icons[item.icon as keyof typeof icons];
+        const Icon = icons[item.icon as keyof typeof icons] || LayoutGrid;
         const isNewSection =
           item.section && item.section !== freelancerSideNav[i - 1]?.section;
 
@@ -45,7 +61,7 @@ export function FreelancerSideNav() {
               </p>
             )}
             <button
-              onClick={() => setActive(item.label)}
+              onClick={() => handleSelect(item.label)}
               className={`flex w-full items-center gap-2 rounded-md px-3 py-2 transition-colors ${
                 active === item.label
                   ? "bg-primary font-semibold text-primary-foreground"
@@ -54,7 +70,7 @@ export function FreelancerSideNav() {
             >
               <Icon className="h-4 w-4" />
               {item.label}
-              {item.badge && (
+              {item.badge !== undefined && (
                 <span className="ml-auto grid h-5 w-5 place-items-center rounded-full bg-[#EDEDF5] text-xs text-foreground">
                   {item.badge}
                 </span>

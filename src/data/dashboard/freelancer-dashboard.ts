@@ -191,3 +191,40 @@ export const skills: Skill[] = [
 ].map((name) => ({ name }));
 
 export const topNav = ["Browse projects", "Post a project", "Messages"];
+
+/* ============ FIND PROJECTS DATA ============== */
+
+export const projectCategories = [
+  "All",
+  "UI/UX Design",
+  "Frontend Dev",
+  "Branding",
+  "Mobile",
+  "Data Science",
+  "Copywriting",
+];
+
+export const budgetFilters = ["Any budget", "Under ₹50k", "₹50k–₹1L", "₹1L+"];
+export const durationFilters = [
+  "Any duration",
+  "Under 2 weeks",
+  "2–4 weeks",
+  "1 month+",
+];
+
+/* ========================== END FIND PROJECTS DATA ========================= */
+
+export const footerLinks = [
+  {
+    title: "PRODUCT",
+    links: ["Categories", "Pricing", "Case Studies"],
+  },
+  {
+    title: "SUPPORT",
+    links: ["Help Center", "Contact Us", "Trust & Safety"],
+  },
+  {
+    title: "LEGAL",
+    links: ["Terms of Service", "Privacy Policy", "Cookie Policy"],
+  },
+];
