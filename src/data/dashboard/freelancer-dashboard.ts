@@ -194,6 +194,18 @@ export const topNav = ["Browse projects", "Post a project", "Messages"];
 
 /* ============ FIND PROJECTS DATA ============== */
 
+export interface FindProject {
+  id: string;
+  title: string;
+  client: string;
+  posted: string;
+  proposals: number;
+  tags: string[];
+  type: "FIXED" | "HOURLY";
+  budget: string;
+  duration: string;
+}
+
 export const projectCategories = [
   "All",
   "UI/UX Design",
@@ -210,6 +222,75 @@ export const durationFilters = [
   "Under 2 weeks",
   "2–4 weeks",
   "1 month+",
+];
+
+export const findProjects: FindProject[] = [
+  {
+    id: "fp1",
+    title: "SaaS Dashboard UI Redesign",
+    client: "Nimbus Labs",
+    posted: "Posted 2h ago",
+    proposals: 8,
+    tags: ["Figma", "UI Design", "Design Systems"],
+    type: "FIXED",
+    budget: "₹60,000–₹90,000",
+    duration: "4 weeks",
+  },
+  {
+    id: "fp2",
+    title: "Fintech Mobile App — Onboarding Flow",
+    client: "WealthBase",
+    posted: "Posted 5h ago",
+    proposals: 4,
+    tags: ["UX Research", "Figma", "Prototyping"],
+    type: "FIXED",
+    budget: "₹45,000–₹75,000",
+    duration: "3 weeks",
+  },
+  {
+    id: "fp3",
+    title: "Brand Identity & Logo System",
+    client: "GreenRoot Co.",
+    posted: "Posted 1d ago",
+    proposals: 12,
+    tags: ["Branding", "Illustrator", "Typography"],
+    type: "FIXED",
+    budget: "₹80,000–₹1,40,000",
+    duration: "6 weeks",
+  },
+  {
+    id: "fp4",
+    title: "Admin Panel — React Component Library",
+    client: "DevCloud",
+    posted: "Posted 1d ago",
+    proposals: 6,
+    tags: ["React", "TypeScript", "Tailwind"],
+    type: "HOURLY",
+    budget: "₹800/hr",
+    duration: "Ongoing",
+  },
+  {
+    id: "fp5",
+    title: "E-commerce Product Page Redesign",
+    client: "Shoplink India",
+    posted: "Posted 2d ago",
+    proposals: 15,
+    tags: ["Figma", "Conversion Optimisation"],
+    type: "FIXED",
+    budget: "₹35,000–₹55,000",
+    duration: "2 weeks",
+  },
+  {
+    id: "fp6",
+    title: "UX Audit — B2B Checkout Flow",
+    client: "Paylo Finance",
+    posted: "Posted 3d ago",
+    proposals: 9,
+    tags: ["UX Research", "Heuristic Evaluation"],
+    type: "FIXED",
+    budget: "₹25,000–₹40,000",
+    duration: "2 weeks",
+  },
 ];
 
 /* ========================== END FIND PROJECTS DATA ========================= */
