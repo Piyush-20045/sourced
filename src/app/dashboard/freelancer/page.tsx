@@ -20,6 +20,9 @@ import { TestimonialCta } from "../_components/freelancer/overview/testimonial-c
 // Find Projects Components
 import { FindProjects } from "../_components/freelancer/find-projects/find-projects";
 
+// My Proposals Components
+import { MyProposals } from "../_components/freelancer/my-proposal/my-proposal";
+
 export default function FreelancerPage() {
   const [activeTab, setActiveTab] = useState("Overview");
 
@@ -44,6 +47,8 @@ export default function FreelancerPage() {
           )}
 
           {activeTab === "Find Projects" && <FindProjects />}
+
+          {activeTab === "My Proposals" && <MyProposals />}
         </div>
       </div>
 

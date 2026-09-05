@@ -293,19 +293,117 @@ export const findProjects: FindProject[] = [
   },
 ];
 
-/* ========================== END FIND PROJECTS DATA ========================= */
+/* ================== MY PROPOSALS DATA ================== */
 
-export const footerLinks = [
+export type ProposalStatus = "PENDING" | "SHORTLISTED" | "WON" | "DECLINED";
+
+export interface Proposal {
+  id: string;
+  projectId: string;
+  title: string;
+  client: string;
+  submitted: string;
+  bid: string;
+  coverLetterExcerpt: string;
+  status: ProposalStatus;
+}
+
+export interface ProposalSummary {
+  label: string;
+  value: string;
+}
+
+export const proposalFilters = [
+  "All",
+  "Pending",
+  "Shortlisted",
+  "Won",
+  "Declined",
+] as const;
+
+export const proposalSummary: ProposalSummary[] = [
+  { label: "Total Submitted", value: "7" },
+  { label: "Shortlisted", value: "2" },
+  { label: "Won", value: "1" },
+  { label: "Win Rate", value: "14%" },
+];
+
+export const proposals: Proposal[] = [
   {
-    title: "PRODUCT",
-    links: ["Categories", "Pricing", "Case Studies"],
+    id: "pr1",
+    projectId: "j1",
+    title: "SaaS Dashboard UI Redesign",
+    client: "Nimbus Labs",
+    submitted: "Submitted Dec 10",
+    bid: "₹72,000",
+    coverLetterExcerpt:
+      "Hi team! I have 5+ years of SaaS dashboard experience and would love to bring clarity to your product.",
+    status: "SHORTLISTED",
   },
   {
-    title: "SUPPORT",
-    links: ["Help Center", "Contact Us", "Trust & Safety"],
+    id: "pr2",
+    projectId: "j1",
+    title: "Fintech Mobile App Onboarding",
+    client: "WealthBase",
+    submitted: "Submitted Dec 9",
+    bid: "₹58,000",
+    coverLetterExcerpt:
+      "Onboarding is my favourite design challenge. I've helped 3 fintech products reduce drop-off by 40%.",
+    status: "PENDING",
   },
   {
-    title: "LEGAL",
-    links: ["Terms of Service", "Privacy Policy", "Cookie Policy"],
+    id: "pr3",
+    projectId: "j3",
+    title: "Brand Identity System",
+    client: "GreenRoot Co.",
+    submitted: "Submitted Dec 8",
+    bid: "₹1,10,000",
+    coverLetterExcerpt:
+      "Your brand values deeply resonate with my design philosophy. I've attached 3 relevant case studies.",
+    status: "WON",
+  },
+  {
+    id: "pr4",
+    projectId: "j2",
+    title: "Admin Panel Component Library",
+    client: "DevCloud",
+    submitted: "Submitted Dec 7",
+    bid: "₹850/hr",
+    coverLetterExcerpt:
+      "I can start immediately. I've built 2 full component systems in Figma + Storybook for SaaS teams.",
+    status: "PENDING",
+  },
+  {
+    id: "pr5",
+    projectId: "j1",
+    title: "E-commerce Product Page Redesign",
+    client: "Shoplink India",
+    submitted: "Submitted Dec 5",
+    bid: "₹42,000",
+    coverLetterExcerpt:
+      "Conversion-focused design is my bread and butter. Happy to share an approach document.",
+    status: "DECLINED",
+  },
+  {
+    id: "pr6",
+    projectId: "j1",
+    title: "B2B Checkout UX Audit",
+    client: "Paylo Finance",
+    submitted: "Submitted Dec 3",
+    bid: "₹32,000",
+    coverLetterExcerpt:
+      "I specialize in fintech UX audits. I recently conducted a full audit and increased conversion by 28%.",
+    status: "SHORTLISTED",
+  },
+  {
+    id: "pr7",
+    projectId: "j1",
+    title: "Loyalty App UI Kit",
+    client: "RewardBox",
+    submitted: "Submitted Dec 1",
+    bid: "₹65,000",
+    coverLetterExcerpt:
+      "Excited about this brief! I've designed UI kits for 6 reward platforms.",
+    status: "PENDING",
   },
 ];
