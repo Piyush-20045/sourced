@@ -91,17 +91,17 @@ export function FindProjects() {
             </div>
 
             {/* right: type + actions */}
-            <div className="flex shrink-0 flex-row items-center gap-2 sm:flex-col sm:items-end">
+            <div className="flex shrink-0 flex-row gap-2">
               <span
-                className={`rounded px-2 py-0.5 text-[10px] font-semibold tracking-wide ${
+                className={`rounded px-2 py-0.5 h-fit text-[10px] font-semibold tracking-wide ${
                   p.type === "FIXED"
-                    ? "bg-accent-soft text-foreground"
-                    : "bg-muted text-muted-foreground"
+                    ? "bg-green-400/20 text-neutral-700"
+                    : "bg-neutral-400/20 text-neutral-600"
                 }`}
               >
                 {p.type}
               </span>
-              <div className="flex flex-col gap-2 sm:items-end">
+              <div className="flex md:flex-col gap-2 h-fit md:items-end">
                 <Link
                   href={`/jobs/${p.id}`}
                   className="rounded-md bg-primary px-4 py-2 text-center text-xs font-semibold text-primary-foreground hover:opacity-90"
