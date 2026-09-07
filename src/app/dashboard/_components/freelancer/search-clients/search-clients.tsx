@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search } from "lucide-react";
+import { BadgeCheck, Search, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   clientIndustries,
@@ -54,6 +54,72 @@ export function SearchClients() {
           >
             {item}
           </Button>
+        ))}
+      </div>
+
+      {/* Client cards */}
+      <div className="mt-5 grid gap-4 lg:grid-cols-2">
+        {visibleClients.map((client) => (
+          <article
+            key={client.id}
+            className="rounded-lg border border-border bg-card p-4 sm:p-5"
+          >
+            {/* Logo, name, rating */}
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-primary text-sm font-bold text-primary-foreground">
+                  {client.initials}
+                </span>
+                <div>
+                  <h3 className="flex items-center gap-1 font-bold">
+                    {client.name}
+                    {client.verified && (
+                      <BadgeCheck className="h-4 w-4 text-primary" />
+                    )}
+                  </h3>
+                  <p className="text-xs text-muted-foreground">
+                    {client.location} · {client.industry}
+                  </p>
+                </div>
+              </div>
+              <p className="flex shrink-0 items-center gap-1 text-sm font-semibold">
+                <Star className="h-4 w-4 fill-foreground" />
+                {client.rating}
+              </p>
+            </div>
+
+            {/* Description */}
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              {client.description}
+            </p>
+
+            {/* Stats + action */}
+            <div className="mt-4 flex flex-wrap items-end justify-between gap-3 border-t border-border pt-4">
+              <dl className="flex gap-6">
+                <div>
+                  <dt className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+                    Avg. Budget
+                  </dt>
+                  <dd className="text-sm font-bold">{client.avgBudget}</dd>
+                </div>
+                <div>
+                  <dt className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+                    Total Hires
+                  </dt>
+                  <dd className="text-sm font-bold">{client.totalHires}</dd>
+                </div>
+                <div>
+                  <dt className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+                    Open Projects
+                  </dt>
+                  <dd className="text-sm font-bold">{client.openProjects}</dd>
+                </div>
+              </dl>
+              <Button type="button" size="sm">
+                View Projects
+              </Button>
+            </div>
+          </article>
         ))}
       </div>
 
