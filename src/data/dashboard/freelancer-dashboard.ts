@@ -407,3 +407,115 @@ export const proposals: Proposal[] = [
     status: "PENDING",
   },
 ];
+
+/* ================= SEARCH CLIENTS DATA ================= */
+
+export interface Client {
+  id: string;
+  name: string;
+  initials: string;
+  verified: boolean;
+  rating: number;
+  location: string;
+  industry: string;
+  description: string;
+  avgBudget: string;
+  totalHires: number;
+  openProjects: number;
+}
+
+export const clientIndustries = [
+  "All",
+  "SaaS",
+  "Fintech",
+  "E-commerce",
+  "Agency",
+  "Healthcare",
+  "Startup",
+] as const;
+
+export const clients: Client[] = [
+  {
+    id: "c1",
+    name: "Nimbus Labs",
+    initials: "NL",
+    verified: true,
+    rating: 4.8,
+    location: "Bangalore, India",
+    industry: "SaaS",
+    description:
+      "Product-led SaaS company building workflow tools for enterprise teams.",
+    avgBudget: "₹70,000",
+    totalHires: 24,
+    openProjects: 6,
+  },
+  {
+    id: "c2",
+    name: "WealthBase",
+    initials: "W",
+    verified: true,
+    rating: 4.9,
+    location: "Mumbai, India",
+    industry: "Fintech",
+    description:
+      "India's fastest-growing personal finance app. We build for 10M+ users.",
+    avgBudget: "₹85,000",
+    totalHires: 18,
+    openProjects: 4,
+  },
+  {
+    id: "c3",
+    name: "Shoplink India",
+    initials: "SI",
+    verified: true,
+    rating: 4.7,
+    location: "Pune, India",
+    industry: "E-commerce",
+    description:
+      "Omnichannel commerce platform powering 5,000+ Indian sellers.",
+    avgBudget: "₹50,000",
+    totalHires: 35,
+    openProjects: 8,
+  },
+  {
+    id: "c4",
+    name: "Pixelworks Agency",
+    initials: "PA",
+    verified: true,
+    rating: 4.9,
+    location: "Delhi, India",
+    industry: "Agency",
+    description:
+      "Full-service design and product agency. We hire specialists for client projects.",
+    avgBudget: "₹1,20,000",
+    totalHires: 47,
+    openProjects: 12,
+  },
+  {
+    id: "c5",
+    name: "GreenRoot Co.",
+    initials: "GC",
+    verified: false,
+    rating: 4.6,
+    location: "Hyderabad, India",
+    industry: "Startup",
+    description:
+      "Climate tech startup building sustainability tracking software for SMEs.",
+    avgBudget: "₹95,000",
+    totalHires: 6,
+    openProjects: 2,
+  },
+  {
+    id: "c6",
+    name: "Paylo Finance",
+    initials: "PF",
+    verified: true,
+    rating: 4.8,
+    location: "Chennai, India",
+    industry: "Fintech",
+    description: "B2B payments infrastructure for Indian supply chains.",
+    avgBudget: "₹45,000",
+    totalHires: 20,
+    openProjects: 5,
+  },
+];
