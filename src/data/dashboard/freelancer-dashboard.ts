@@ -570,3 +570,10 @@ export const interviews: Interview[] = [
     mode: "Phone",
   },
 ];
+
+export const interviewPrepTips: string[] = [
+  "Review the client's product and recent work before the call.",
+  "Prepare 2–3 relevant case studies you can reference.",
+  "Have your portfolio tab open and ready to share your screen.",
+  "Ask about timeline, revision rounds, and communication style.",
+];
