@@ -26,6 +26,9 @@ import { MyProposals } from "../_components/freelancer/my-proposal/my-proposal";
 // Search Clients Components
 import { SearchClients } from "../_components/freelancer/search-clients/search-clients";
 
+// Interviews Components
+import { Interviews } from "../_components/freelancer/Interviews/interviews";
+
 export default function FreelancerPage() {
   const [activeTab, setActiveTab] = useState("Overview");
 
@@ -54,6 +57,8 @@ export default function FreelancerPage() {
           {activeTab === "My Proposals" && <MyProposals />}
 
           {activeTab === "Search Clients" && <SearchClients />}
+
+          {activeTab === "Interviews" && <Interviews />}
         </div>
       </div>
 

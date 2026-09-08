@@ -519,3 +519,54 @@ export const clients: Client[] = [
     openProjects: 5,
   },
 ];
+
+/* ============================= INTERVIEWS DATA ============================= */
+/* Separate mock data for the "Interviews" section. Swap for an API later. */
+
+export interface Interview {
+  id: string;
+  projectTitle: string;
+  client: string;
+  dayLabel: string; // e.g. "MON"
+  monthLabel: string; // e.g. "Dec"
+  dateLabel: string; // e.g. "15 Dec"
+  time: string;
+  duration: string;
+  mode: "Video Call" | "Phone";
+}
+
+export const interviews: Interview[] = [
+  {
+    id: "i1",
+    projectTitle: "SaaS Dashboard Redesign",
+    client: "Nimbus Labs",
+    dayLabel: "MON",
+    monthLabel: "Dec",
+    dateLabel: "15 Dec",
+    time: "3:00 PM",
+    duration: "30 min",
+    mode: "Video Call",
+  },
+  {
+    id: "i2",
+    projectTitle: "Brand Identity System",
+    client: "GreenRoot Co.",
+    dayLabel: "WED",
+    monthLabel: "Dec",
+    dateLabel: "17 Dec",
+    time: "11:00 AM",
+    duration: "45 min",
+    mode: "Video Call",
+  },
+  {
+    id: "i3",
+    projectTitle: "Admin Panel Library",
+    client: "DevCloud",
+    dayLabel: "FRI",
+    monthLabel: "Dec",
+    dateLabel: "19 Dec",
+    time: "5:00 PM",
+    duration: "20 min",
+    mode: "Phone",
+  },
+];
