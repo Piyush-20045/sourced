@@ -578,7 +578,9 @@ export const interviewPrepTips: string[] = [
   "Ask about timeline, revision rounds, and communication style.",
 ];
 
-/* ================= CONTRACTS DATA ================= */
+/* ================= CONTRACTS DATA ================ */
+
+export type ContractStatus = "ACTIVE" | "COMPLETED" | "DRAFT";
 
 export interface Contract {
   id: string;
@@ -590,6 +592,7 @@ export interface Contract {
   amountValue: number;
   paid: number;
   paidLabel: string;
+  status: ContractStatus;
 }
 
 export const contracts: Contract[] = [
@@ -603,6 +606,7 @@ export const contracts: Contract[] = [
     amountValue: 140000,
     paid: 70000,
     paidLabel: "₹70K",
+    status: "ACTIVE",
   },
   {
     id: "ct2",
@@ -614,6 +618,7 @@ export const contracts: Contract[] = [
     amountValue: 75000,
     paid: 38000,
     paidLabel: "₹38K",
+    status: "ACTIVE",
   },
   {
     id: "ct3",
@@ -625,6 +630,7 @@ export const contracts: Contract[] = [
     amountValue: 48000,
     paid: 48000,
     paidLabel: "₹48K",
+    status: "COMPLETED",
   },
   {
     id: "ct4",
@@ -636,6 +642,7 @@ export const contracts: Contract[] = [
     amountValue: 90000,
     paid: 90000,
     paidLabel: "₹90K",
+    status: "COMPLETED",
   },
   {
     id: "ct5",
@@ -647,5 +654,6 @@ export const contracts: Contract[] = [
     amountValue: 220000,
     paid: 0,
     paidLabel: "₹0K",
+    status: "DRAFT",
   },
 ];
