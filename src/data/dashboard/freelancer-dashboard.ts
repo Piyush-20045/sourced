@@ -577,3 +577,75 @@ export const interviewPrepTips: string[] = [
   "Have your portfolio tab open and ready to share your screen.",
   "Ask about timeline, revision rounds, and communication style.",
 ];
+
+/* ================= CONTRACTS DATA ================= */
+
+export interface Contract {
+  id: string;
+  contractId: string;
+  title: string;
+  client: string;
+  dateRange: string;
+  amount: string;
+  amountValue: number;
+  paid: number;
+  paidLabel: string;
+}
+
+export const contracts: Contract[] = [
+  {
+    id: "ct1",
+    contractId: "CTR-0041",
+    title: "Analytics Dashboard Rebuild",
+    client: "Arjun Mehta",
+    dateRange: "Nov 1, 2024 → Dec 31, 2024",
+    amount: "₹1,40,000",
+    amountValue: 140000,
+    paid: 70000,
+    paidLabel: "₹70K",
+  },
+  {
+    id: "ct2",
+    contractId: "CTR-0038",
+    title: "Design System Audit",
+    client: "Priya Tiwari",
+    dateRange: "Oct 15, 2024 → Nov 30, 2024",
+    amount: "₹75,000",
+    amountValue: 75000,
+    paid: 38000,
+    paidLabel: "₹38K",
+  },
+  {
+    id: "ct3",
+    contractId: "CTR-0035",
+    title: "Brand Refresh – Loop Studio",
+    client: "Neha Bose",
+    dateRange: "Sep 1, 2024 → Oct 20, 2024",
+    amount: "₹48,000",
+    amountValue: 48000,
+    paid: 48000,
+    paidLabel: "₹48K",
+  },
+  {
+    id: "ct4",
+    contractId: "CTR-0029",
+    title: "Data Pipeline Setup",
+    client: "Karan Sinha",
+    dateRange: "Aug 10, 2024 → Sep 30, 2024",
+    amount: "₹90,000",
+    amountValue: 90000,
+    paid: 90000,
+    paidLabel: "₹90K",
+  },
+  {
+    id: "ct5",
+    contractId: "CTR-0021",
+    title: "iOS App – Wellness",
+    client: "Rohan Verma",
+    dateRange: "Dec 1, 2024 → Feb 28, 2025",
+    amount: "₹2,20,000",
+    amountValue: 220000,
+    paid: 0,
+    paidLabel: "₹0K",
+  },
+];
