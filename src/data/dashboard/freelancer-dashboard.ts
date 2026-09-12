@@ -676,5 +676,104 @@ export const withdrawInfo = {
 
 export type TransactionType = "RECEIVED" | "WITHDRAWN";
 
+export interface Transaction {
+  id: string;
+  description: string;
+  client: string;
+  date: string;
+  amount: string; // signed display string, e.g. "+₹36,000"
+  type: TransactionType;
+}
+
+export const transactions: Transaction[] = [
+  {
+    id: "t1",
+    description: "SaaS Dashboard Redesign — Milestone 1",
+    client: "Nimbus Labs",
+    date: "Dec 10, 2024",
+    amount: "+₹36,000",
+    type: "RECEIVED",
+  },
+  {
+    id: "t2",
+    description: "Brand Identity System — Final",
+    client: "GreenRoot Co.",
+    date: "Dec 1, 2024",
+    amount: "+₹1,10,000",
+    type: "RECEIVED",
+  },
+  {
+    id: "t3",
+    description: "Figma License Reimbursement",
+    client: "GreenRoot Co.",
+    date: "Nov 28, 2024",
+    amount: "+₹4,600",
+    type: "RECEIVED",
+  },
+  {
+    id: "t4",
+    description: "Mobile UX Audit — Full payment",
+    client: "Kart360",
+    date: "Nov 20, 2024",
+    amount: "+₹48,000",
+    type: "RECEIVED",
+  },
+  {
+    id: "t5",
+    description: "Withdrawal to HDFC Bank ****4821",
+    client: "Sourced",
+    date: "Nov 15, 2024",
+    amount: "-₹80,000",
+    type: "WITHDRAWN",
+  },
+  {
+    id: "t6",
+    description: "Admin Panel — Phase 1 hours",
+    client: "DevCloud",
+    date: "Nov 12, 2024",
+    amount: "+₹17,000",
+    type: "RECEIVED",
+  },
+];
+
 export type InvoiceStatus = "PARTIAL" | "PAID" | "PENDING";
 
+export interface Invoice {
+  id: string;
+  invoiceId: string;
+  title: string;
+  client: string;
+  due: string;
+  amount: string;
+  status: InvoiceStatus;
+}
+
+export const invoices: Invoice[] = [
+  {
+    id: "inv1",
+    invoiceId: "INV-2024-012",
+    title: "SaaS Dashboard Redesign",
+    client: "Nimbus Labs",
+    due: "Due Dec 30, 2024",
+    amount: "₹72,000",
+    status: "PARTIAL",
+  },
+  {
+    id: "inv2",
+    invoiceId: "INV-2024-011",
+    title: "Brand Identity System",
+    client: "GreenRoot Co.",
+    due: "Due Dec 1, 2024",
+    amount: "₹1,10,000",
+    status: "PAID",
+  },
+  {
+    id: "inv3",
+    invoiceId: "INV-2024-010",
+    title: "B2B Checkout UX Audit",
+    client: "Paylo Finance",
+    due: "Due Dec 28, 2024",
+    amount: "₹32,000",
+    status: "PENDING",
+  },
+];
