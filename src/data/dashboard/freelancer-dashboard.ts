@@ -657,3 +657,24 @@ export const contracts: Contract[] = [
     status: "DRAFT",
   },
 ];
+
+/* ================== PAYMENTS DATA ================= */
+/* Separate mock data for the "Payments" section (transactions + invoices). */
+
+export const paymentStats = [
+  { label: "TOTAL EARNED", value: "₹2,84,600", sub: "Lifetime" },
+  { label: "THIS MONTH", value: "₹68,400", sub: "+12% vs Nov" },
+  { label: "PENDING", value: "₹55,000", sub: "Awaiting release" },
+  { label: "AVG. PER PROJECT", value: "₹71,150", sub: "Last 4 projects" },
+];
+
+export const withdrawInfo = {
+  amount: "₹68,400",
+  bank: "HDFC Bank ****4821",
+  note: "Transfers to HDFC Bank ****4821 within 2 business days.",
+};
+
+export type TransactionType = "RECEIVED" | "WITHDRAWN";
+
+export type InvoiceStatus = "PARTIAL" | "PAID" | "PENDING";
+
