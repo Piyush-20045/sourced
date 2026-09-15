@@ -35,6 +35,9 @@ import { Contracts } from "../_components/freelancer/contracts/contracts";
 // Payments Components
 import { Payments } from "../_components/freelancer/payments/payments";
 
+// Portfolio Components
+import { PortfolioSection } from "../_components/freelancer/portfolios/portfolios";
+
 export default function FreelancerPage() {
   const [activeTab, setActiveTab] = useState("Overview");
 
@@ -69,6 +72,8 @@ export default function FreelancerPage() {
           {activeTab === "Contracts" && <Contracts />}
 
           {activeTab === "Payments" && <Payments />}
+
+          {activeTab === "Portfolio" && <PortfolioSection />}
         </div>
       </div>
 

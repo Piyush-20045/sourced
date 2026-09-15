@@ -36,13 +36,6 @@ export interface Recommendation {
   bids: number;
 }
 
-export interface PortfolioItem {
-  id: string;
-  title: string;
-  image: string;
-  state: "published" | "draft";
-}
-
 export interface Skill {
   name: string;
 }
@@ -141,16 +134,6 @@ export const recommendations: Recommendation[] = [
     client: "Nimbus Labs",
     budget: "₹5L-₹7L",
     bids: 9,
-  },
-];
-
-export const portfolio: PortfolioItem[] = [
-  {
-    id: "p1",
-    title: "PORTFOLIO",
-    image:
-      "https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=800&q=80",
-    state: "published",
   },
 ];
 
@@ -777,3 +760,264 @@ export const invoices: Invoice[] = [
     status: "PENDING",
   },
 ];
+
+/* ================ PORTFOLIO DATA =============== */
+
+// === PORTFOLIO DATA (SHARED IN OVERVIEW & PORTFOLIO SECTION) ===
+export interface PortfolioItem {
+  id: string;
+  title: string;
+  state: "published" | "draft";
+  client: string;
+  discipline: string;
+  year: string;
+  duration: string;
+  role: string;
+  category: PortfolioCategory;
+  summary: string;
+  symbol: string;
+  visualClass: string;
+  tools: string[];
+  tags: string[];
+  metrics: PortfolioMetric[];
+  overview: string;
+  problem: string;
+  process: string[];
+  outcome: string;
+}
+
+export type PortfolioCategory =
+  | "UI/UX Design"
+  | "Branding"
+  | "UX Research"
+  | "Design Systems";
+
+export interface PortfolioMetric {
+  value: string;
+  label: string;
+}
+
+export const portfolioCategories = [
+  "All",
+  "UI/UX Design",
+  "Branding",
+  "UX Research",
+  "Design Systems",
+] as const;
+
+export const portfolio: PortfolioItem[] = [
+  {
+    id: "wealthbase-app-redesign",
+    title: "WealthBase App Redesign",
+    state: "published",
+    client: "WealthBase",
+    discipline: "UI/UX Design",
+    year: "2024",
+    duration: "6 weeks",
+    role: "Lead Product Designer",
+    category: "UI/UX Design",
+    summary:
+      "End-to-end redesign of a fintech personal finance app. Reduced onboarding drop-off by 40%.",
+    symbol: "💰",
+    visualClass: "bg-accent/15",
+    tools: ["Figma", "Maze", "Notion", "Loom"],
+    tags: ["Figma", "Prototyping", "User Testing"],
+    metrics: [
+      { value: "−40%", label: "Drop-off reduction" },
+      { value: "+34%", label: "Daily active usage" },
+      { value: "12", label: "User interviews" },
+      { value: "48", label: "Screens designed" },
+    ],
+    overview:
+      "End-to-end redesign of a fintech personal finance app. Reduced onboarding drop-off by 40%.",
+    problem:
+      "WealthBase had a 68% onboarding drop-off rate. Users found the KYC flow confusing and the dashboard overwhelming — too much data, too little hierarchy.",
+    process: [
+      "Ran 12 moderated user interviews to identify friction points in the existing onboarding funnel.",
+      "Mapped a revised 4-step onboarding flow, replacing the existing 9-step KYC process with progressive disclosure.",
+      "Designed a new dashboard with a Money Health Score as the primary anchor — one number with drill-down context.",
+      "Ran two rounds of unmoderated testing via Maze, iterating on microcopy and empty states.",
+    ],
+    outcome:
+      "Reduced onboarding drop-off from 68% to 28%. The redesigned dashboard increased daily active usage by 34% in the first 30 days post-launch.",
+  },
+  {
+    id: "kart360-checkout-flow",
+    title: "Kart360 Checkout Flow",
+    state: "published",
+    client: "Kart360",
+    discipline: "UX Design",
+    year: "2024",
+    duration: "4 weeks",
+    role: "Product Designer",
+    category: "UI/UX Design",
+    summary:
+      "Streamlined the 6-step checkout to 3 steps, improving completed purchases by 28% over 6 weeks.",
+    symbol: "🛒",
+    visualClass: "bg-accent-soft/70",
+    tools: ["Figma", "Hotjar", "Maze"],
+    tags: ["Figma", "A/B Testing", "Mobile"],
+    metrics: [
+      { value: "+28%", label: "Conversions" },
+      { value: "−50%", label: "Checkout steps" },
+      { value: "18", label: "Tests run" },
+      { value: "36", label: "Screens designed" },
+    ],
+    overview:
+      "A focused checkout redesign for Kart360's mobile commerce experience, built around speed and confidence.",
+    problem:
+      "Shoppers abandoned purchases when shipping, account creation, and payment details were split across six unclear screens.",
+    process: [
+      "Reviewed session recordings and mapped the highest-friction checkout moments.",
+      "Combined related form fields into three clear stages with visible progress.",
+      "Designed guest checkout, address suggestions, and clearer payment states.",
+      "Validated the flow through moderated testing and two live A/B experiments.",
+    ],
+    outcome:
+      "The new checkout lifted completed purchases by 28% and reduced average checkout time by 41 seconds.",
+  },
+  {
+    id: "greenroot-brand-identity",
+    title: "GreenRoot Brand Identity",
+    state: "published",
+    client: "GreenRoot Co.",
+    discipline: "Branding",
+    year: "2024",
+    duration: "8 weeks",
+    role: "Brand Designer",
+    category: "Branding",
+    summary:
+      "Complete brand identity including logo, typography, colour system, and brand guidelines.",
+    symbol: "🌿",
+    visualClass: "bg-destructive/10",
+    tools: ["Illustrator", "Figma", "InDesign"],
+    tags: ["Branding", "Illustrator", "Typography"],
+    metrics: [
+      { value: "3×", label: "Brand recall" },
+      { value: "42", label: "Assets created" },
+      { value: "8", label: "Stakeholders" },
+      { value: "64", label: "Guideline pages" },
+    ],
+    overview:
+      "A warm, credible identity system for a climate-tech company helping small businesses track sustainability.",
+    problem:
+      "GreenRoot's original identity felt generic and failed to communicate the trust and technical clarity its platform offered.",
+    process: [
+      "Interviewed founders, customers, and partners to define the brand's strongest attributes.",
+      "Developed three visual territories and tested recognition with target customers.",
+      "Built a flexible logo, typography, illustration, and colour system.",
+      "Delivered practical guidelines and templates for product, sales, and social teams.",
+    ],
+    outcome:
+      "The new identity tripled unaided brand recall in customer testing and gave every team a consistent launch toolkit.",
+  },
+  {
+    id: "devcloud-admin-dashboard",
+    title: "DevCloud Admin Dashboard",
+    state: "published",
+    client: "DevCloud",
+    discipline: "UI Design",
+    year: "2024",
+    duration: "10 weeks",
+    role: "Senior UI Designer",
+    category: "Design Systems",
+    summary:
+      "A multi-level admin panel with a reusable React component library built in parallel with Storybook.",
+    symbol: "🖥️",
+    visualClass: "bg-chart-4/25",
+    tools: ["Figma", "Storybook", "Notion"],
+    tags: ["React", "Figma", "Design Systems"],
+    metrics: [
+      { value: "46", label: "Components" },
+      { value: "31%", label: "Faster delivery" },
+      { value: "5", label: "Product teams" },
+      { value: "AA", label: "Accessibility" },
+    ],
+    overview:
+      "A scalable administration experience and shared component library for DevCloud's growing product suite.",
+    problem:
+      "Five product teams were rebuilding similar admin patterns, creating inconsistent behavior and slower releases.",
+    process: [
+      "Audited all existing product screens and grouped repeated patterns.",
+      "Defined foundations and reusable interaction standards with engineering.",
+      "Designed and documented 46 responsive components with accessibility states.",
+      "Piloted the system in the billing dashboard before wider adoption.",
+    ],
+    outcome:
+      "The shared system reduced interface delivery time by 31% and brought all core workflows to WCAG AA standards.",
+  },
+  {
+    id: "paylo-ux-audit",
+    title: "Paylo UX Audit Report",
+    state: "published",
+    client: "Paylo Finance",
+    discipline: "UX Research",
+    year: "2023",
+    duration: "3 weeks",
+    role: "UX Researcher",
+    category: "UX Research",
+    summary:
+      "Comprehensive heuristic evaluation of B2B checkout with 22 actionable recommendations.",
+    symbol: "🔍",
+    visualClass: "bg-chart-1/15",
+    tools: ["FigJam", "Maze", "Dovetail"],
+    tags: ["UX Research", "Heuristics", "Report"],
+    metrics: [
+      { value: "22", label: "Recommendations" },
+      { value: "9", label: "Critical issues" },
+      { value: "+19%", label: "Task success" },
+      { value: "14", label: "Users tested" },
+    ],
+    overview:
+      "A prioritized UX audit of Paylo's B2B checkout and account approval experience.",
+    problem:
+      "Business buyers struggled to understand approval status, payment limits, and the next action required from their teams.",
+    process: [
+      "Combined a heuristic review with funnel analytics and support-ticket themes.",
+      "Observed 14 finance operators completing representative payment tasks.",
+      "Grouped issues by severity, effort, and expected commercial impact.",
+      "Presented an action plan with annotated redesign concepts for critical issues.",
+    ],
+    outcome:
+      "Paylo shipped the nine critical fixes first, improving task success by 19% and reducing checkout support tickets.",
+  },
+  {
+    id: "nimbus-design-system",
+    title: "Nimbus Labs Design System",
+    state: "published",
+    client: "Nimbus Labs",
+    discipline: "Design Systems",
+    year: "2023",
+    duration: "12 weeks",
+    role: "Design Systems Lead",
+    category: "Design Systems",
+    summary:
+      "Built a scalable component library in Figma and Storybook covering 120+ components.",
+    symbol: "📐",
+    visualClass: "bg-accent-soft/45",
+    tools: ["Figma", "Storybook", "Zeroheight"],
+    tags: ["Design Systems", "Figma", "Storybook"],
+    metrics: [
+      { value: "120+", label: "Components" },
+      { value: "4", label: "Products unified" },
+      { value: "38%", label: "Less design debt" },
+      { value: "16", label: "Contributors" },
+    ],
+    overview:
+      "A shared design language and production-ready component library across the Nimbus product portfolio.",
+    problem:
+      "Four products used different patterns for the same tasks, slowing teams down and eroding customer trust.",
+    process: [
+      "Audited product interfaces and coded components to establish the system baseline.",
+      "Aligned design and engineering on tokens, contribution rules, and governance.",
+      "Built and documented responsive components in Figma and Storybook.",
+      "Ran office hours and adoption workshops with all product squads.",
+    ],
+    outcome:
+      "Nimbus unified four products, reduced measured design debt by 38%, and established an active 16-person contributor group.",
+  },
+];
+
+export function getPortfolioItemById(id: string) {
+  return portfolio.find((item) => item.id === id);
+}
