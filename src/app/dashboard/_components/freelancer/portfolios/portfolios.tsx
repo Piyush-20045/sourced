@@ -5,6 +5,7 @@ import {
   portfolio,
   portfolioCategories,
 } from "@/data/dashboard/freelancer-dashboard";
+import Link from "next/link";
 
 type PortfolioFilter = (typeof portfolioCategories)[number];
 
@@ -46,6 +47,61 @@ export function PortfolioSection() {
           >
             {category}
           </Button>
+        ))}
+      </div>
+
+      {/* Case-study cards */}
+      <div className="mt-5 grid gap-5 md:grid-cols-2">
+        {visibleItems.map((item) => (
+          <article
+            key={item.id}
+            className="min-w-0 overflow-hidden rounded-lg border border-border bg-card"
+          >
+            <div
+              className={`grid h-32 place-items-center text-4xl ${item.visualClass}`}
+              aria-hidden="true"
+            >
+              {item.symbol}
+            </div>
+
+            <div className="p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <h3 className="font-bold leading-snug">{item.title}</h3>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    {item.client} · {item.discipline}
+                  </p>
+                </div>
+                <span className="shrink-0 text-[10px] text-muted-foreground">
+                  {item.year}
+                </span>
+              </div>
+
+              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                {item.summary}
+              </p>
+
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {item.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded border border-border bg-muted/50 px-2 py-1 text-[10px] text-muted-foreground"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-4 flex gap-2">
+                <Button size="sm" className="min-w-0 flex-1">
+                  <Link href={`/portfolio/${item.id}`}>View Case Study</Link>
+                </Button>
+                <Button type="button" variant="outline" size="sm">
+                  Edit
+                </Button>
+              </div>
+            </div>
+          </article>
         ))}
       </div>
 

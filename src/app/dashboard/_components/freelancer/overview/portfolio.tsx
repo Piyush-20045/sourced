@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Plus } from "lucide-react";
 import { portfolio } from "@/data/dashboard/freelancer-dashboard";
+import Link from "next/link";
 
 /** Published / draft portfolio pieces. */
 export function Portfolio() {
@@ -36,12 +37,13 @@ export function Portfolio() {
       <div className="mt-6 grid gap-6 sm:grid-cols-2">
         {items.map((item) => (
           <figure key={item.id}>
-            <img
-              src={item.image}
-              alt={item.title}
-              className="h-36 w-full rounded object-cover"
-              loading="lazy"
-            />
+            <Link
+              href={`/portfolio/${item.id}`}
+              className={`grid h-36 w-full place-items-center rounded text-4xl border ${item.visualClass}`}
+              aria-label={`View ${item.title}`}
+            >
+              <span aria-hidden="true">{item.symbol}</span>
+            </Link>
             <figcaption className="mt-2 text-xs tracking-wide text-muted-foreground">
               {item.title}
             </figcaption>
