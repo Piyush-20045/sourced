@@ -1,17 +1,34 @@
+"use client";
+
 import { useState } from "react";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   portfolio,
   portfolioCategories,
+  getPortfolioItemById,
 } from "@/data/dashboard/freelancer-dashboard";
-import Link from "next/link";
+import { SinglePortfolio } from "./single-portfolio";
 
 type PortfolioFilter = (typeof portfolioCategories)[number];
 
 /** Full portfolio manager shown from the dashboard side navigation. */
 export function PortfolioSection() {
   const [filter, setFilter] = useState<PortfolioFilter>("All");
+  const [selectedPortfolioId, setSelectedPortfolioId] = useState<string | null>(null);
+
+  const selectedItem = selectedPortfolioId
+    ? getPortfolioItemById(selectedPortfolioId)
+    : null;
+
+  if (selectedItem) {
+    return (
+      <SinglePortfolio
+        item={selectedItem}
+        onBack={() => setSelectedPortfolioId(null)}
+      />
+    );
+  }
 
   const published = portfolio.filter((item) => item.state === "published");
   const visibleItems = published.filter(
@@ -55,11 +72,12 @@ export function PortfolioSection() {
         {visibleItems.map((item) => (
           <article
             key={item.id}
-            className="min-w-0 overflow-hidden rounded-lg border border-border bg-card"
+            className="min-w-0 overflow-hidden rounded-lg border border-border bg-card transition-shadow hover:shadow-xs"
           >
             <div
-              className={`grid h-32 place-items-center text-4xl ${item.visualClass}`}
+              className={`grid h-32 cursor-pointer place-items-center text-4xl ${item.visualClass}`}
               aria-hidden="true"
+              onClick={() => setSelectedPortfolioId(item.id)}
             >
               {item.symbol}
             </div>
@@ -67,7 +85,12 @@ export function PortfolioSection() {
             <div className="p-4">
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <h3 className="font-bold leading-snug">{item.title}</h3>
+                  <h3
+                    className="cursor-pointer font-bold leading-snug hover:underline"
+                    onClick={() => setSelectedPortfolioId(item.id)}
+                  >
+                    {item.title}
+                  </h3>
                   <p className="mt-1 text-xs text-muted-foreground">
                     {item.client} · {item.discipline}
                   </p>
@@ -93,8 +116,13 @@ export function PortfolioSection() {
               </div>
 
               <div className="mt-4 flex gap-2">
-                <Button size="sm" className="min-w-0 flex-1">
-                  <Link href={`/portfolio/${item.id}`}>View Case Study</Link>
+                <Button
+                  type="button"
+                  size="sm"
+                  className="min-w-0 flex-1"
+                  onClick={() => setSelectedPortfolioId(item.id)}
+                >
+                  View Case Study
                 </Button>
                 <Button type="button" variant="outline" size="sm">
                   Edit
