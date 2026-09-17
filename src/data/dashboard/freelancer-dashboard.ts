@@ -1031,6 +1031,20 @@ export interface AnalyticsMetric {
   change: string;
 }
 
+export interface AnalyticsMonth {
+  month: string;
+  monthLabel: string;
+  profileViews: number;
+  proposalsSent: number;
+  earnings: number;
+  earningsLabel: string;
+}
+
+export interface SkillEarning {
+  skill: string;
+  percentage: number;
+}
+
 export const analyticsMetrics: AnalyticsMetric[] = [
   { label: "PROFILE VIEWS", value: "245", change: "+17% vs last month" },
   { label: "PROPOSAL WIN RATE", value: "14%", change: "1 of 7 won" },
@@ -1040,4 +1054,62 @@ export const analyticsMetrics: AnalyticsMetric[] = [
     change: "Below platform avg.",
   },
   { label: "REPEAT CLIENTS", value: "3", change: "Returning this year" },
+];
+
+export const analyticsMonths: AnalyticsMonth[] = [
+  {
+    month: "Jul",
+    monthLabel: "Jul 2024",
+    profileViews: 140,
+    proposalsSent: 8,
+    earnings: 45000,
+    earningsLabel: "₹45,000",
+  },
+  {
+    month: "Aug",
+    monthLabel: "Aug 2024",
+    profileViews: 160,
+    proposalsSent: 9,
+    earnings: 52000,
+    earningsLabel: "₹52,000",
+  },
+  {
+    month: "Sep",
+    monthLabel: "Sep 2024",
+    profileViews: 130,
+    proposalsSent: 7,
+    earnings: 38000,
+    earningsLabel: "₹38,000",
+  },
+  {
+    month: "Oct",
+    monthLabel: "Oct 2024",
+    profileViews: 180,
+    proposalsSent: 11,
+    earnings: 61000,
+    earningsLabel: "₹61,000",
+  },
+  {
+    month: "Nov",
+    monthLabel: "Nov 2024",
+    profileViews: 210,
+    proposalsSent: 13,
+    earnings: 72000,
+    earningsLabel: "₹72,000",
+  },
+  {
+    month: "Dec",
+    monthLabel: "Dec 2024",
+    profileViews: 245,
+    proposalsSent: 14,
+    earnings: 68400,
+    earningsLabel: "₹68,400",
+  },
+];
+
+export const skillEarnings: SkillEarning[] = [
+  { skill: "UI/UX Design", percentage: 55 },
+  { skill: "Branding", percentage: 20 },
+  { skill: "Design Systems", percentage: 15 },
+  { skill: "UX Research", percentage: 10 },
 ];
