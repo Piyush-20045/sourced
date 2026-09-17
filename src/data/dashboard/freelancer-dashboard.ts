@@ -1021,3 +1021,23 @@ export const portfolio: PortfolioItem[] = [
 export function getPortfolioItemById(id: string) {
   return portfolio.find((item) => item.id === id);
 }
+
+/* ============== ANALYTICS DATA ================ */
+/* Monthly performance data for the freelancer Analytics section. */
+
+export interface AnalyticsMetric {
+  label: string;
+  value: string;
+  change: string;
+}
+
+export const analyticsMetrics: AnalyticsMetric[] = [
+  { label: "PROFILE VIEWS", value: "245", change: "+17% vs last month" },
+  { label: "PROPOSAL WIN RATE", value: "14%", change: "1 of 7 won" },
+  {
+    label: "AVG. RESPONSE TIME",
+    value: "4 hrs",
+    change: "Below platform avg.",
+  },
+  { label: "REPEAT CLIENTS", value: "3", change: "Returning this year" },
+];
