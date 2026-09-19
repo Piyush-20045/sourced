@@ -1022,6 +1022,22 @@ export function getPortfolioItemById(id: string) {
   return portfolio.find((item) => item.id === id);
 }
 
+/* ------- ADD PORTFOLIO WIZARD (options for the Add Project form) -------- */
+
+export interface PortfolioCoverOption {
+  /** swatch shown in the picker */
+  swatchClass: string;
+  /** tailwind class stored on the item / used for banners */
+  visualClass: string;
+}
+
+export const portfolioWizardSteps = [
+  "Project Info",
+  "Details & Outcomes",
+  "Tools & Links",
+  "Review & Publish",
+] as const;
+
 /* ============== ANALYTICS DATA ================ */
 /* Monthly performance data for the freelancer Analytics section. */
 

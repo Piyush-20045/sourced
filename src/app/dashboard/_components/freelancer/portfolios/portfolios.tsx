@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,17 +8,30 @@ import {
   getPortfolioItemById,
 } from "@/data/dashboard/freelancer-dashboard";
 import { SinglePortfolio } from "./single-portfolio";
+import { AddPortfolio } from "./add-portfolio";
 
 type PortfolioFilter = (typeof portfolioCategories)[number];
 
 /** Full portfolio manager shown from the dashboard side navigation. */
 export function PortfolioSection() {
   const [filter, setFilter] = useState<PortfolioFilter>("All");
-  const [selectedPortfolioId, setSelectedPortfolioId] = useState<string | null>(null);
+  const [adding, setAdding] = useState(false);
+  const [selectedPortfolioId, setSelectedPortfolioId] = useState<string | null>(
+    null,
+  );
 
   const selectedItem = selectedPortfolioId
     ? getPortfolioItemById(selectedPortfolioId)
     : null;
+
+  const published = portfolio.filter((item) => item.state === "published");
+  const visibleItems = published.filter(
+    (item) => filter === "All" || item.category === filter,
+  );
+
+  if (adding) {
+    return <AddPortfolio onClose={() => setAdding(false)} />;
+  }
 
   if (selectedItem) {
     return (
@@ -29,12 +41,6 @@ export function PortfolioSection() {
       />
     );
   }
-
-  const published = portfolio.filter((item) => item.state === "published");
-  const visibleItems = published.filter(
-    (item) => filter === "All" || item.category === filter,
-  );
-
   return (
     <section>
       {/* Heading and primary action */}
@@ -45,7 +51,7 @@ export function PortfolioSection() {
             {published.length} published case studies
           </p>
         </div>
-        <Button type="button" size="sm">
+        <Button type="button" size="sm" onClick={() => setAdding(true)}>
           <Plus />
           Add Project
         </Button>
