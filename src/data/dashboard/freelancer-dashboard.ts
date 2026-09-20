@@ -1031,6 +1031,32 @@ export interface PortfolioCoverOption {
   visualClass: string;
 }
 
+export const portfolioIconOptions = [
+  "💰",
+  "🛒",
+  "🌿",
+  "🖥️",
+  "🔍",
+  "📐",
+  "🎨",
+  "📱",
+  "⚡",
+  "🏆",
+  "🛠️",
+  "🚀",
+];
+
+export const portfolioBackgroundOptions: PortfolioCoverOption[] = [
+  { swatchClass: "bg-teal-100", visualClass: "bg-accent/15" },
+  { swatchClass: "bg-slate-200", visualClass: "bg-accent-soft/70" },
+  { swatchClass: "bg-rose-100", visualClass: "bg-destructive/10" },
+  { swatchClass: "bg-amber-100", visualClass: "bg-chart-4/25" },
+  { swatchClass: "bg-sky-100", visualClass: "bg-chart-1/15" },
+  { swatchClass: "bg-violet-100", visualClass: "bg-accent-soft/45" },
+  { swatchClass: "bg-pink-100", visualClass: "bg-destructive/15" },
+  { swatchClass: "bg-emerald-100", visualClass: "bg-chart-2/20" },
+];
+
 export const portfolioWizardSteps = [
   "Project Info",
   "Details & Outcomes",
