@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   ArrowRight,
   Compass,
@@ -116,13 +117,12 @@ export default function PricingCards({
               )}
             </div>
 
-            <button
-              type="button"
-              onClick={() => setSelectedPlanModal("Professional")}
-              className="rounded-full bg-black hover:bg-neutral-900 px-7 py-3.5 text-xs font-black uppercase tracking-widest text-white shadow-lg border border-white/10 transition-transform active:scale-95"
+            <Link
+              href="/subscriptions/pro"
+              className="rounded-full bg-black hover:bg-neutral-900 px-7 py-3.5 text-xs font-black uppercase tracking-widest text-white shadow-lg border border-white/10 transition-transform active:scale-95 inline-block text-center"
             >
               UPGRADE NOW
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -186,13 +186,12 @@ export default function PricingCards({
               )}
             </div>
 
-            <button
-              type="button"
-              onClick={() => setSelectedPlanModal("Enterprise")}
-              className="rounded-full bg-black hover:bg-neutral-900 px-7 py-3.5 text-xs font-black uppercase tracking-widest text-white shadow-lg active:scale-95 transition-transform"
+            <Link
+              href="/subscriptions/enterprise"
+              className="rounded-full bg-black hover:bg-neutral-900 px-7 py-3.5 text-xs font-black uppercase tracking-widest text-white shadow-lg active:scale-95 transition-transform inline-block text-center"
             >
               UPGRADE NOW
-            </button>
+            </Link>
           </div>
         </div>
       </div>
