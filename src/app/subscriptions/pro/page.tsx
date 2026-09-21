@@ -5,6 +5,8 @@ import {
   ArrowLeft,
   BadgeCheck,
   BarChart3,
+  Check,
+  CreditCard,
   Headphones,
   Infinity as InfinityIcon,
   Lock,
@@ -20,6 +22,18 @@ export default function ProSubscriptionPage() {
   const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">(
     "yearly",
   );
+  const [paymentMethod, setPaymentMethod] = useState<
+    "card" | "upi" | "netbanking"
+  >("card");
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  // Form states
+  const [cardName, setCardName] = useState("Samiya A.");
+  const [cardNumber, setCardNumber] = useState("4532 •••• •••• 8892");
+  const [expiry, setExpiry] = useState("08/28");
+  const [cvc, setCvc] = useState("•••");
+  const [upiId, setUpiId] = useState("samiya@upi");
 
   const monthlyPrice = 490;
   const yearlyMonthlyPrice = 392; // 20% off
@@ -27,6 +41,16 @@ export default function ProSubscriptionPage() {
 
   const activePrice =
     billingCycle === "yearly" ? yearlyMonthlyPrice : monthlyPrice;
+  const totalDueToday = billingCycle === "yearly" ? yearlyTotal : monthlyPrice;
+
+  const handleConfirmUpgrade = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 1200);
+  };
 
   return (
     <div className="min-h-screen overflow-x-clip bg-[#f8f9fa] font-sans text-foreground flex flex-col justify-between">
@@ -249,8 +273,220 @@ export default function ProSubscriptionPage() {
               </p>
             </div>
           </div>
+
+          {/* Payment Method / Checkout Box */}
+          <div className="rounded-3xl border border-neutral-300 bg-white p-7 sm:p-10 shadow-lg max-w-3xl mx-auto">
+            <div className="flex items-center justify-between border-b border-neutral-200 pb-5">
+              <h2 className="text-xl sm:text-2xl font-black uppercase tracking-wider text-neutral-900">
+                PAYMENT METHOD
+              </h2>
+              <div className="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+                <ShieldCheck className="h-4 w-4" />
+                <span>AES-256 Secure</span>
+              </div>
+            </div>
+
+            {/* Payment Method Tabs */}
+            <div className="mt-6 flex rounded-2xl bg-neutral-100 p-1 text-xs font-bold">
+              <button
+                type="button"
+                onClick={() => setPaymentMethod("card")}
+                className={`flex-1 rounded-xl py-2.5 transition-all ${
+                  paymentMethod === "card"
+                    ? "bg-white text-neutral-900 shadow-sm"
+                    : "text-neutral-500 hover:text-neutral-900"
+                }`}
+              >
+                Credit / Debit Card
+              </button>
+              <button
+                type="button"
+                onClick={() => setPaymentMethod("upi")}
+                className={`flex-1 rounded-xl py-2.5 transition-all ${
+                  paymentMethod === "upi"
+                    ? "bg-white text-neutral-900 shadow-sm"
+                    : "text-neutral-500 hover:text-neutral-900"
+                }`}
+              >
+                UPI / QR Code
+              </button>
+              <button
+                type="button"
+                onClick={() => setPaymentMethod("netbanking")}
+                className={`flex-1 rounded-xl py-2.5 transition-all ${
+                  paymentMethod === "netbanking"
+                    ? "bg-white text-neutral-900 shadow-sm"
+                    : "text-neutral-500 hover:text-neutral-900"
+                }`}
+              >
+                Net Banking
+              </button>
+            </div>
+
+            <form onSubmit={handleConfirmUpgrade} className="mt-6 space-y-5">
+              {paymentMethod === "card" && (
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-neutral-600 mb-1.5">
+                      CARDHOLDER NAME
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={cardName}
+                      onChange={(e) => setCardName(e.target.value)}
+                      placeholder="JOHN DOE"
+                      className="w-full rounded-xl border border-neutral-200 bg-neutral-50/70 px-4 py-3 text-sm font-semibold text-neutral-900 outline-none focus:border-neutral-900 focus:bg-white transition-all uppercase"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-neutral-600 mb-1.5">
+                      CARD NUMBER
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        required
+                        value={cardNumber}
+                        onChange={(e) => setCardNumber(e.target.value)}
+                        placeholder="XXXX XXXX XXXX XXXX"
+                        className="w-full rounded-xl border border-neutral-200 bg-neutral-50/70 px-4 py-3 text-sm font-semibold text-neutral-900 outline-none focus:border-neutral-900 focus:bg-white transition-all"
+                      />
+                      <CreditCard className="absolute right-4 top-3.5 h-4 w-4 text-neutral-400" />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-600 mb-1.5">
+                        EXPIRY
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={expiry}
+                        onChange={(e) => setExpiry(e.target.value)}
+                        placeholder="MM/YY"
+                        className="w-full rounded-xl border border-neutral-200 bg-neutral-50/70 px-4 py-3 text-sm font-semibold text-neutral-900 outline-none focus:border-neutral-900 focus:bg-white transition-all"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-600 mb-1.5">
+                        CVC
+                      </label>
+                      <input
+                        type="password"
+                        maxLength={4}
+                        required
+                        value={cvc}
+                        onChange={(e) => setCvc(e.target.value)}
+                        placeholder="•••"
+                        className="w-full rounded-xl border border-neutral-200 bg-neutral-50/70 px-4 py-3 text-sm font-semibold text-neutral-900 outline-none focus:border-neutral-900 focus:bg-white transition-all"
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {paymentMethod === "upi" && (
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-neutral-600 mb-1.5">
+                      VIRTUAL PAYMENT ADDRESS (UPI ID)
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={upiId}
+                      onChange={(e) => setUpiId(e.target.value)}
+                      placeholder="username@upi"
+                      className="w-full rounded-xl border border-neutral-200 bg-neutral-50/70 px-4 py-3 text-sm font-semibold text-neutral-900 outline-none focus:border-neutral-900 focus:bg-white transition-all"
+                    />
+                  </div>
+                  <p className="text-xs text-neutral-500">
+                    Supported: GPay, PhonePe, Paytm, BHIM, and all major bank
+                    UPI apps.
+                  </p>
+                </div>
+              )}
+
+              {paymentMethod === "netbanking" && (
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-neutral-600 mb-1.5">
+                      SELECT YOUR BANK
+                    </label>
+                    <select className="w-full rounded-xl border border-neutral-200 bg-neutral-50/70 px-4 py-3 text-sm font-semibold text-neutral-900 outline-none focus:border-neutral-900 focus:bg-white transition-all">
+                      <option>HDFC Bank</option>
+                      <option>ICICI Bank</option>
+                      <option>State Bank of India (SBI)</option>
+                      <option>Axis Bank</option>
+                      <option>Kotak Mahindra Bank</option>
+                    </select>
+                  </div>
+                </div>
+              )}
+
+              {/* Encryption Banner */}
+              <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-3.5 flex items-center gap-3">
+                <Lock className="h-4 w-4 text-emerald-600 shrink-0" />
+                <p className="text-xs text-neutral-600">
+                  Your payment details are encrypted with 256-bit AES protocol.
+                  Cancel anytime with one click.
+                </p>
+              </div>
+
+              {/* Total Summary Row & Confirm Button */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-4 border-t border-neutral-200">
+                <div>
+                  <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider">
+                    Total due today
+                  </p>
+                  <p className="text-2xl font-black text-neutral-900">
+                    ₹{totalDueToday.toLocaleString()} INR
+                  </p>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isProcessing}
+                  className="rounded-xl bg-black hover:bg-neutral-900 px-8 py-3.5 text-xs font-extrabold uppercase tracking-widest text-white shadow-lg active:scale-98 transition-all disabled:opacity-50"
+                >
+                  {isProcessing ? "Processing Payment..." : "Confirm upgrade"}
+                </button>
+              </div>
+            </form>
+          </div>
         </main>
       </div>
+
+      {/* Success Modal */}
+      {isSuccess && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4">
+          <div className="w-full max-w-md rounded-3xl bg-white p-7 text-center shadow-2xl space-y-4 animate-in fade-in zoom-in duration-200">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+              <Check className="h-7 w-7 stroke-[2.5]" />
+            </div>
+            <h3 className="text-2xl font-extrabold text-neutral-900">
+              Upgrade Successful!
+            </h3>
+            <p className="text-sm text-neutral-600">
+              Welcome to <strong>Professional Dashboard</strong>. Your gold
+              verification badge, priority support, and 0% commission benefits
+              are now active.
+            </p>
+            <button
+              type="button"
+              onClick={() => setIsSuccess(false)}
+              className="mt-2 w-full rounded-xl bg-black py-3 text-xs font-extrabold uppercase tracking-widest text-white shadow-md hover:bg-neutral-900"
+            >
+              Go to Dashboard
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <Footer />
