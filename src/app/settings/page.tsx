@@ -1,9 +1,9 @@
 "use client";
-
 import { useState } from "react";
 import { DashboardNav } from "../dashboard/_components/dashboard-nav";
 import Footer from "@/components/layout/footer";
 import { SettingsNav } from "./_components/settings-nav";
+import { AccountTab } from "./_components/account-tab";
 
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState("Account");
@@ -33,7 +33,10 @@ export default function SettingsPage() {
             </aside>
 
             {/* Center Content Tab View */}
-            Center
+            <div className="min-w-0">
+              {activeTab === "Account" && <AccountTab />}
+            </div>
+
           </div>
         </main>
       </div>
