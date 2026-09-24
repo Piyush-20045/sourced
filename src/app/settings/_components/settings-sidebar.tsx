@@ -34,7 +34,9 @@ export function SettingsSidebar({ activeTab }: SettingsSidebarProps) {
             <span className="text-5xl font-black text-white tracking-tight">
               94%
             </span>
-            <span className="text-sm font-bold text-emerald-400">Excellent</span>
+            <span className="text-sm font-bold text-emerald-400">
+              Excellent
+            </span>
           </div>
 
           {/* Password Strength Progress Bar */}
@@ -49,8 +51,8 @@ export function SettingsSidebar({ activeTab }: SettingsSidebarProps) {
           </div>
 
           <p className="text-xs text-neutral-400 leading-relaxed pt-1">
-            Your account is well-protected. We recommend a monthly security audit
-            to maintain your status.
+            Your account is well-protected. We recommend a monthly security
+            audit to maintain your status.
           </p>
         </div>
 
@@ -78,7 +80,8 @@ export function SettingsSidebar({ activeTab }: SettingsSidebarProps) {
             <div className="flex items-start gap-3">
               <Key className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
               <p className="leading-relaxed">
-                API keys should be rotated every 90 days to ensure maximum security.
+                API keys should be rotated every 90 days to ensure maximum
+                security.
               </p>
             </div>
           </div>
@@ -123,7 +126,10 @@ export function SettingsSidebar({ activeTab }: SettingsSidebarProps) {
 
         {/* Circular Progress Gauge */}
         <div className="relative mx-auto h-36 w-36 flex items-center justify-center">
-          <svg className="h-full w-full -rotate-90 transform" viewBox="0 0 100 100">
+          <svg
+            className="h-full w-full -rotate-90 transform"
+            viewBox="0 0 100 100"
+          >
             {/* Background Circle */}
             <circle
               cx="50"
@@ -186,7 +192,7 @@ export function SettingsSidebar({ activeTab }: SettingsSidebarProps) {
           alt="Global Network"
           className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent" />
         <h3 className="absolute bottom-4 left-5 text-xl font-extrabold text-white tracking-tight">
           Global Network
         </h3>
@@ -199,8 +205,8 @@ export function SettingsSidebar({ activeTab }: SettingsSidebarProps) {
           <span>EXPERT TIP</span>
         </div>
         <p className="text-xs font-medium text-blue-950 leading-relaxed pt-1">
-          &quot;Authenticity is the new premium. Keep your headline sharp and your
-          bio direct.&quot;
+          &quot;Authenticity is the new premium. Keep your headline sharp and
+          your bio direct.&quot;
         </p>
         <p className="text-[11px] font-semibold text-blue-800">
           — Design Council

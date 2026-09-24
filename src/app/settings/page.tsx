@@ -4,6 +4,7 @@ import { DashboardNav } from "../dashboard/_components/dashboard-nav";
 import Footer from "@/components/layout/footer";
 import { SettingsNav } from "./_components/settings-nav";
 import { AccountTab } from "./_components/account-tab";
+import { SecurityTab } from "./_components/security-tab";
 import { SettingsSidebar } from "./_components/settings-sidebar";
 
 export default function SettingsPage() {
@@ -44,6 +45,7 @@ export default function SettingsPage() {
             {/* Center Content Tab View */}
             <div className="min-w-0">
               {activeTab === "Account" && <AccountTab />}
+              {activeTab === "Security" && <SecurityTab />}
             </div>
 
             {/* Right Information Sidebar */}
