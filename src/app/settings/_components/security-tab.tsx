@@ -2,8 +2,10 @@
 import { useState } from "react";
 import {
   Check,
+  Laptop,
   Lock,
   MessageSquare,
+  Monitor,
   ShieldCheck,
   Smartphone,
 } from "lucide-react";
@@ -18,6 +20,31 @@ export function SecurityTab() {
   const [authenticatorApp, setAuthenticatorApp] = useState(true);
   const [smsAuth, setSmsAuth] = useState(false);
 
+  // Active Sessions
+  const [sessions, setSessions] = useState([
+    {
+      id: "s1",
+      device: 'MacBook Pro 16"',
+      isCurrent: true,
+      location: "San Francisco, USA • Chrome • 192.168.1.1",
+      icon: Laptop,
+    },
+    {
+      id: "s2",
+      device: "iPhone 15 Pro",
+      isCurrent: false,
+      location: "San Francisco, USA • App • 2 hours ago",
+      icon: Smartphone,
+    },
+    {
+      id: "s3",
+      device: "Windows Desktop",
+      isCurrent: false,
+      location: "London, UK • Edge • 3 days ago",
+      icon: Monitor,
+    },
+  ]);
+
   const handlePasswordSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (newPassword && newPassword !== confirmPassword) {
@@ -26,6 +53,10 @@ export function SecurityTab() {
     }
     setIsSaved(true);
     setTimeout(() => setIsSaved(false), 3000);
+  };
+
+  const handleRevokeSession = (id: string) => {
+    setSessions((prev) => prev.filter((s) => s.id !== id));
   };
 
   return (
@@ -175,6 +206,58 @@ export function SecurityTab() {
               />
             </button>
           </div>
+        </div>
+      </div>
+
+      {/* 3. Active Sessions Card */}
+      <div className="rounded-3xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-xs">
+        <h2 className="text-xl font-extrabold text-neutral-900 tracking-tight pb-4 border-b border-neutral-100">
+          Active Sessions
+        </h2>
+
+        <div className="divide-y divide-neutral-100">
+          {sessions.map((session) => {
+            const Icon = session.icon;
+            return (
+              <div
+                key={session.id}
+                className="flex items-center justify-between py-4 first:pt-4 last:pb-0"
+              >
+                <div className="flex items-center gap-3.5">
+                  <Icon className="h-5 w-5 text-neutral-700 shrink-0" />
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-sm font-extrabold text-neutral-900">
+                        {session.device}
+                      </h3>
+                      {session.isCurrent && (
+                        <span className="rounded-full bg-blue-100 px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wider text-blue-700">
+                          CURRENT
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-neutral-500 mt-0.5">
+                      {session.location}
+                    </p>
+                  </div>
+                </div>
+
+                {session.isCurrent ? (
+                  <span className="text-xs font-medium text-neutral-400">
+                    Revoke
+                  </span>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => handleRevokeSession(session.id)}
+                    className="text-xs font-bold text-rose-600 hover:text-rose-800 hover:underline transition-colors"
+                  >
+                    Revoke
+                  </button>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import Footer from "@/components/layout/footer";
 import { SettingsNav } from "./_components/settings-nav";
 import { AccountTab } from "./_components/account-tab";
 import { SecurityTab } from "./_components/security-tab";
+import { BillingTab } from "./_components/billing-tab";
 import { SettingsSidebar } from "./_components/settings-sidebar";
 
 export default function SettingsPage() {
@@ -46,6 +47,7 @@ export default function SettingsPage() {
             <div className="min-w-0">
               {activeTab === "Account" && <AccountTab />}
               {activeTab === "Security" && <SecurityTab />}
+              {activeTab === "Billing" && <BillingTab />}
             </div>
 
             {/* Right Information Sidebar */}
