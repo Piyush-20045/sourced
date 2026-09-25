@@ -6,6 +6,7 @@ import { SettingsNav } from "./_components/settings-nav";
 import { AccountTab } from "./_components/account-tab";
 import { SecurityTab } from "./_components/security-tab";
 import { BillingTab } from "./_components/billing-tab";
+import { NotificationsTab } from "./_components/notifications-tab";
 import { SettingsSidebar } from "./_components/settings-sidebar";
 
 export default function SettingsPage() {
@@ -25,7 +26,7 @@ export default function SettingsPage() {
         {/* Sticky top navbar */}
         <DashboardNav />
 
-        <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6 md:py-12">
+        <main className="mx-auto max-w-[1380px] px-4 py-8 sm:px-6 md:py-12">
           {/* Header Title */}
           <div className="space-y-2 pb-8">
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-950">
@@ -48,6 +49,7 @@ export default function SettingsPage() {
               {activeTab === "Account" && <AccountTab />}
               {activeTab === "Security" && <SecurityTab />}
               {activeTab === "Billing" && <BillingTab />}
+              {activeTab === "Notifications" && <NotificationsTab />}
             </div>
 
             {/* Right Information Sidebar */}

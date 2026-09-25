@@ -6,7 +6,7 @@ import { topNav, user } from "@/data/dashboard/freelancer-dashboard";
 export function DashboardNav() {
   return (
     <header className="sticky top-0 z-50 w-full backdrop-blur-md border-b border-white/20 bg-[#e3e3e3]/50 text-[#063242] shadow-md">
-      <div className="mx-auto flex min-h-16 w-full max-w-333 items-center gap-4 px-4 py-4.5 sm:px-6 md:gap-6">
+      <div className="mx-auto flex min-h-16 w-full items-center gap-4 px-4 py-4.5 sm:px-6 md:gap-6">
         {/* logo */}
         <Link
           href="/"
@@ -21,13 +21,13 @@ export function DashboardNav() {
         {/* primary links */}
         <nav className="hidden min-w-0 items-center gap-6 text-sm md:flex">
           {topNav.map((item) => (
-            <a
-              key={item}
-              href="#"
-              className="text-foreground/80 hover:text-foreground"
+            <Link
+              key={item.label}
+              href={item.href}
+              className="text-primary/80 hover:text-primary"
             >
-              {item}
-            </a>
+              {item.label}
+            </Link>
           ))}
         </nav>
 
@@ -48,9 +48,9 @@ export function DashboardNav() {
               3
             </span>
           </button>
-          <button aria-label="Settings">
-            <Settings className="h-4 w-4" />
-          </button>
+          <Link href={"/settings"} aria-label="Settings">
+            <Settings className="h-4 w-4 hover:text-foreground" />
+          </Link>
           <div className="flex items-center gap-2">
             <div className="hidden text-right leading-tight sm:block">
               <p className="text-sm font-semibold">{user.name.split(" ")[0]}</p>

@@ -34,7 +34,7 @@ export function AccountTab() {
   return (
     <div className="space-y-6">
       {/* Account Details Form Card */}
-      <div className="rounded-3xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-xs">
+      <div className="rounded-xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-xs">
         <div className="flex items-center justify-between border-b border-neutral-100 pb-4">
           <h2 className="text-2xl font-bold text-neutral-900">
             Account Details
@@ -66,7 +66,7 @@ export function AccountTab() {
                 required
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                className="w-full rounded-xl border border-neutral-200 bg-neutral-50/70 px-4 py-3 text-sm font-semibold text-neutral-900 outline-none focus:border-neutral-900 focus:bg-white transition-all"
+                className="w-full rounded-md border border-neutral-200 bg-neutral-50/70 px-4 py-3 text-sm font-semibold text-neutral-900 outline-none focus:border-neutral-900 focus:bg-white transition-all"
               />
             </div>
 
@@ -83,7 +83,7 @@ export function AccountTab() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-xl border border-neutral-200 bg-neutral-50/70 px-4 py-3 text-sm font-semibold text-neutral-900 outline-none focus:border-neutral-900 focus:bg-white transition-all"
+                className="w-full rounded-md border border-neutral-200 bg-neutral-50/70 px-4 py-3 text-sm font-semibold text-neutral-900 outline-none focus:border-neutral-900 focus:bg-white transition-all"
               />
             </div>
           </div>
@@ -101,7 +101,7 @@ export function AccountTab() {
               required
               value={headline}
               onChange={(e) => setHeadline(e.target.value)}
-              className="w-full rounded-xl border border-neutral-200 bg-neutral-50/70 px-4 py-3 text-sm font-semibold text-neutral-900 outline-none focus:border-neutral-900 focus:bg-white transition-all"
+              className="w-full rounded-md border border-neutral-200 bg-neutral-50/70 px-4 py-3 text-sm font-semibold text-neutral-900 outline-none focus:border-neutral-900 focus:bg-white transition-all"
             />
           </div>
 
@@ -110,13 +110,13 @@ export function AccountTab() {
             <button
               type="button"
               onClick={handleDiscard}
-              className="rounded-xl border border-neutral-200 px-5 py-2.5 text-xs font-bold text-neutral-700 hover:bg-neutral-100 transition-all"
+              className="rounded-md border border-neutral-200 px-5 py-2.5 text-xs font-bold text-neutral-700 hover:bg-neutral-100 transition-all"
             >
               Discard Changes
             </button>
             <button
               type="submit"
-              className="rounded-xl bg-[#042430] hover:bg-black px-6 py-2.5 text-xs font-extrabold text-white shadow-xs transition-all active:scale-98 flex items-center gap-1.5"
+              className="rounded-md bg-[#042430] hover:bg-black px-6 py-2.5 text-xs font-extrabold text-white shadow-xs transition-all active:scale-98 flex items-center gap-1.5"
             >
               {isSaved ? (
                 <>
@@ -134,7 +134,7 @@ export function AccountTab() {
       {/* Bottom Grid: Profile Visibility & Connected Accounts */}
       <div className="grid gap-6 sm:grid-cols-2">
         {/* Profile Visibility Card */}
-        <div className="rounded-3xl bg-[#042430] p-6 text-white shadow-md flex flex-col justify-between space-y-6 relative overflow-hidden">
+        <div className="rounded-xl bg-[#042430] p-6 text-white shadow-md flex flex-col justify-between space-y-6 relative overflow-hidden">
           <div>
             <div className="flex items-center justify-between">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-950/80 text-emerald-400">
@@ -183,7 +183,7 @@ export function AccountTab() {
         </div>
 
         {/* Connected Accounts Card */}
-        <div className="rounded-3xl bg-[#eaeced] border border-neutral-200/90 p-6 shadow-xs flex flex-col justify-between space-y-6 relative overflow-hidden">
+        <div className="rounded-xl bg-[#eaeced] border border-neutral-200/90 p-6 shadow-xs flex flex-col justify-between space-y-6 relative overflow-hidden">
           <Link2 className="absolute -right-4 -bottom-4 h-32 w-32 text-neutral-300/40 pointer-events-none stroke-1" />
 
           <div>

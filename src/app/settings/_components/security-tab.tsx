@@ -62,7 +62,7 @@ export function SecurityTab() {
   return (
     <div className="space-y-6">
       {/* 1. Update Password Card */}
-      <div className="rounded-3xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-xs">
+      <div className="rounded-xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-xs">
         <div className="flex items-center gap-2.5 pb-4 border-b border-neutral-100">
           <Lock className="h-5 w-5 text-emerald-600" />
           <h2 className="text-xl font-extrabold text-neutral-900 tracking-tight">
@@ -80,7 +80,7 @@ export function SecurityTab() {
               value={currentPassword}
               onChange={(e) => setCurrentPassword(e.target.value)}
               placeholder="Enter current password"
-              className="w-full rounded-xl border border-neutral-200 bg-neutral-50/70 px-4 py-3 text-sm font-semibold text-neutral-900 outline-none focus:border-neutral-900 focus:bg-white transition-all placeholder:text-neutral-400 placeholder:font-normal"
+              className="w-full rounded-md border border-neutral-200 bg-neutral-50/70 px-4 py-3 text-sm font-semibold text-neutral-900 outline-none focus:border-neutral-900 focus:bg-white transition-all placeholder:text-neutral-400 placeholder:font-normal"
             />
           </div>
 
@@ -94,7 +94,7 @@ export function SecurityTab() {
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="At least 12 characters"
-                className="w-full rounded-xl border border-neutral-200 bg-neutral-50/70 px-4 py-3 text-sm font-semibold text-neutral-900 outline-none focus:border-neutral-900 focus:bg-white transition-all placeholder:text-neutral-400 placeholder:font-normal"
+                className="w-full rounded-md border border-neutral-200 bg-neutral-50/70 px-4 py-3 text-sm font-semibold text-neutral-900 outline-none focus:border-neutral-900 focus:bg-white transition-all placeholder:text-neutral-400 placeholder:font-normal"
               />
             </div>
 
@@ -107,7 +107,7 @@ export function SecurityTab() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Repeat new password"
-                className="w-full rounded-xl border border-neutral-200 bg-neutral-50/70 px-4 py-3 text-sm font-semibold text-neutral-900 outline-none focus:border-neutral-900 focus:bg-white transition-all placeholder:text-neutral-400 placeholder:font-normal"
+                className="w-full rounded-md border border-neutral-200 bg-neutral-50/70 px-4 py-3 text-sm font-semibold text-neutral-900 outline-none focus:border-neutral-900 focus:bg-white transition-all placeholder:text-neutral-400 placeholder:font-normal"
               />
             </div>
           </div>
@@ -115,7 +115,7 @@ export function SecurityTab() {
           <div className="pt-2">
             <button
               type="submit"
-              className="rounded-xl bg-[#042430] hover:bg-black px-6 py-3 text-xs font-extrabold text-white shadow-xs transition-all active:scale-98 flex items-center gap-1.5"
+              className="rounded-md bg-[#042430] hover:bg-black px-6 py-3 text-xs font-extrabold text-white shadow-xs transition-all active:scale-98 flex items-center gap-1.5"
             >
               {isSaved ? (
                 <>
@@ -131,7 +131,7 @@ export function SecurityTab() {
       </div>
 
       {/* 2. Two-Factor Authentication (2FA) Card */}
-      <div className="rounded-3xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-xs space-y-5">
+      <div className="rounded-xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-xs space-y-5">
         <div>
           <div className="flex items-center gap-2.5">
             <ShieldCheck className="h-5 w-5 text-emerald-600" />
@@ -146,9 +146,9 @@ export function SecurityTab() {
 
         <div className="space-y-3 pt-1">
           {/* Sub-item 1: Authenticator App */}
-          <div className="flex items-center justify-between rounded-2xl border border-neutral-200/80 bg-neutral-50/60 p-4 transition-all hover:bg-neutral-50">
+          <div className="flex items-center justify-between rounded-md border border-neutral-200/80 bg-neutral-50/60 p-4 transition-all hover:bg-neutral-50">
             <div className="flex items-center gap-3.5">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100">
+              <div className="flex h-10 w-10 items-center justify-center rounded-md bg-emerald-50 text-emerald-600 border border-emerald-100">
                 <Smartphone className="h-5 w-5" />
               </div>
               <div>
@@ -177,9 +177,9 @@ export function SecurityTab() {
           </div>
 
           {/* Sub-item 2: SMS Authentication */}
-          <div className="flex items-center justify-between rounded-2xl border border-neutral-200/80 bg-neutral-50/60 p-4 transition-all hover:bg-neutral-50">
+          <div className="flex items-center justify-between rounded-md border border-neutral-200/80 bg-neutral-50/60 p-4 transition-all hover:bg-neutral-50">
             <div className="flex items-center gap-3.5">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-100 text-neutral-500 border border-neutral-200">
+              <div className="flex h-10 w-10 items-center justify-center rounded-md bg-neutral-100 text-neutral-500 border border-neutral-200">
                 <MessageSquare className="h-5 w-5" />
               </div>
               <div>
@@ -210,7 +210,7 @@ export function SecurityTab() {
       </div>
 
       {/* 3. Active Sessions Card */}
-      <div className="rounded-3xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-xs">
+      <div className="rounded-xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-xs">
         <h2 className="text-xl font-extrabold text-neutral-900 tracking-tight pb-4 border-b border-neutral-100">
           Active Sessions
         </h2>

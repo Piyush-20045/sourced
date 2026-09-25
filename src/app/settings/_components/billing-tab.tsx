@@ -6,7 +6,7 @@ export function BillingTab() {
   return (
     <div className="space-y-6">
       {/* Current Plan Overview */}
-      <div className="rounded-3xl bg-[#042430] p-6 sm:p-8 text-white shadow-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+      <div className="rounded-xl bg-[#042430] p-6 sm:p-8 text-white shadow-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
         <div>
           <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-400 flex items-center gap-1">
             <Zap className="h-3 w-3 fill-emerald-400" />
@@ -22,14 +22,14 @@ export function BillingTab() {
 
         <Link
           href="/subscriptions"
-          className="rounded-xl bg-white hover:bg-neutral-100 px-6 py-3 text-center text-xs font-extrabold uppercase tracking-wider text-neutral-900 shadow-xs transition-all active:scale-98"
+          className="rounded-md bg-white hover:bg-neutral-100 px-6 py-3 text-center text-xs font-extrabold uppercase tracking-wider text-neutral-900 shadow-xs transition-all active:scale-98"
         >
           Change Plan
         </Link>
       </div>
 
       {/* Payment Method Card */}
-      <div className="rounded-3xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-xs">
+      <div className="rounded-xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-xs">
         <div className="flex items-center justify-between border-b border-neutral-100 pb-4">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-100 text-neutral-900">
@@ -47,7 +47,7 @@ export function BillingTab() {
           </button>
         </div>
 
-        <div className="mt-4 flex items-center justify-between rounded-2xl border border-neutral-200 bg-neutral-50/70 p-4">
+        <div className="mt-4 flex items-center justify-between rounded-md border border-neutral-200 bg-neutral-50/70 p-4">
           <div className="flex items-center gap-3">
             <div className="rounded-lg bg-neutral-900 px-3 py-1.5 text-xs font-black text-white">
               VISA
@@ -66,7 +66,7 @@ export function BillingTab() {
       </div>
 
       {/* Invoice History */}
-      <div className="rounded-3xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-xs">
+      <div className="rounded-xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-xs">
         <h3 className="text-xl font-extrabold text-neutral-900 border-b border-neutral-100 pb-4">
           Invoice History
         </h3>

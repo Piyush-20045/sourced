@@ -35,7 +35,7 @@ export function SettingsNav({ activeTab, onSelectTab }: SettingsNavProps) {
               key={item.id}
               type="button"
               onClick={() => onSelectTab(item.id)}
-              className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 font-semibold transition-all ${
+              className={`flex w-full items-center gap-3 rounded-md px-4 py-3 font-semibold transition-all ${
                 isActive
                   ? "bg-[#dbeafe] text-[#1e40af] shadow-2xs"
                   : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900"
@@ -49,7 +49,7 @@ export function SettingsNav({ activeTab, onSelectTab }: SettingsNavProps) {
       </div>
 
       {/* Power User Callout Box */}
-      <div className="rounded-2xl bg-[#042430] p-5 text-white shadow-md space-y-3">
+      <div className="rounded-xl bg-[#042430] p-5 text-white shadow-md space-y-3">
         <div>
           <p className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400 flex items-center gap-1">
             <Zap className="h-3 w-3 fill-emerald-400" />

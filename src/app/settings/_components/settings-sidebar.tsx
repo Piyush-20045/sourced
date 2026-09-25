@@ -22,7 +22,7 @@ export function SettingsSidebar({ activeTab }: SettingsSidebarProps) {
     return (
       <div className="space-y-6">
         {/* Trust Score Card */}
-        <div className="rounded-3xl bg-black p-6 text-white shadow-md space-y-4 relative overflow-hidden">
+        <div className="rounded-xl bg-black p-6 text-white shadow-md space-y-4 relative overflow-hidden">
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-extrabold uppercase tracking-widest text-neutral-400">
               TRUST SCORE
@@ -57,7 +57,7 @@ export function SettingsSidebar({ activeTab }: SettingsSidebarProps) {
         </div>
 
         {/* Security Insights Card */}
-        <div className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-xs space-y-4">
+        <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs space-y-4">
           <h3 className="text-base font-extrabold text-neutral-900 tracking-tight">
             Security Insights
           </h3>
@@ -88,7 +88,7 @@ export function SettingsSidebar({ activeTab }: SettingsSidebarProps) {
         </div>
 
         {/* Identity Verified Card */}
-        <div className="rounded-3xl border border-neutral-200 bg-white p-4 shadow-xs flex items-center gap-3.5">
+        <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-xs flex items-center gap-3.5">
           <img
             src={user.avatar || "/dashboard/salman.jpeg"}
             alt={user.name}
@@ -119,7 +119,7 @@ export function SettingsSidebar({ activeTab }: SettingsSidebarProps) {
   return (
     <div className="space-y-6">
       {/* Profile Strength Card */}
-      <div className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-xs text-center space-y-4">
+      <div className="rounded-xl border border-neutral-200 bg-white p-6 shadow-xs text-center space-y-4">
         <p className="text-[11px] font-bold uppercase tracking-widest text-neutral-400">
           PROFILE STRENGTH
         </p>
@@ -186,7 +186,7 @@ export function SettingsSidebar({ activeTab }: SettingsSidebarProps) {
       </div>
 
       {/* Global Network Image Card */}
-      <div className="group relative h-52 w-full overflow-hidden rounded-3xl border border-neutral-200 shadow-xs">
+      <div className="group relative h-52 w-full overflow-hidden rounded-xl border border-neutral-200 shadow-xs">
         <img
           src="/settings/setting-side-image.png"
           alt="Global Network"
@@ -199,7 +199,7 @@ export function SettingsSidebar({ activeTab }: SettingsSidebarProps) {
       </div>
 
       {/* Expert Tip Card */}
-      <div className="rounded-3xl border border-blue-200/80 bg-[#dbeafe]/90 p-5 shadow-2xs space-y-2">
+      <div className="rounded-xl border border-blue-200/80 bg-[#dbeafe]/90 p-5 shadow-2xs space-y-2">
         <div className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-widest text-blue-900">
           <Lightbulb className="h-3.5 w-3.5 text-blue-700" />
           <span>EXPERT TIP</span>
