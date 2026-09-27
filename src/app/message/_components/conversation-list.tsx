@@ -68,7 +68,7 @@ export function ConversationList({
       </div>
 
       {/* Conversations Scrollable List */}
-      <div className="flex-1 overflow-y-auto divide-y divide-neutral-100">
+      <div className="flex-1 overflow-y-auto divide-y divide-neutral-100 scrollbar-thin">
         {filteredConversations.map((conv) => {
           const isSelected = conv.id === selectedId;
           return (

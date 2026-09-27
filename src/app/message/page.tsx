@@ -5,6 +5,7 @@ import { DashboardNav } from "../dashboard/_components/dashboard-nav";
 import { conversations as initialConversations } from "@/data/message-data";
 import { ConversationList } from "./_components/conversation-list";
 import { ChatArea } from "./_components/chat-area";
+import { ProjectDetailsSidebar } from "./_components/project-details-sidebar";
 
 export default function MessagePage() {
   const [conversations, setConversations] = useState(initialConversations);
@@ -45,7 +46,7 @@ export default function MessagePage() {
           };
         }
         return conv;
-      })
+      }),
     );
   };
 
@@ -81,6 +82,11 @@ export default function MessagePage() {
               onSendMessage={handleSendMessage}
               onMobileBack={() => setMobileView("list")}
             />
+          </div>
+
+          {/* Column 3: Contact & Project Details (Desktop only) */}
+          <div className="hidden lg:block min-h-0 h-full">
+            <ProjectDetailsSidebar conversation={activeConversation} />
           </div>
         </div>
       </div>
