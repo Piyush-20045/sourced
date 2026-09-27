@@ -15,6 +15,7 @@ import {
   Video,
 } from "lucide-react";
 import { Conversation } from "@/data/message-data";
+import { ChatEmojiPicker } from "./chat-emoji-picker";
 
 interface ChatAreaProps {
   conversation: Conversation;
@@ -30,6 +31,8 @@ export function ChatArea({
   const [inputText, setInputText] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const pickerRef = useRef<HTMLDivElement>(null);
 
   const { name, avatar, initials, statusText, messages } = conversation;
 
@@ -38,11 +41,33 @@ export function ChatArea({
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  // Close emoji picker on outside click / Escape
+  useEffect(() => {
+    if (!showEmojiPicker) return;
+
+    const handlePointerDown = (e: MouseEvent) => {
+      if (pickerRef.current && !pickerRef.current.contains(e.target as Node)) {
+        setShowEmojiPicker(false);
+      }
+    };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setShowEmojiPicker(false);
+    };
+
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [showEmojiPicker]);
+
   const handleSend = (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputText.trim()) return;
     onSendMessage(conversation.id, inputText.trim());
     setInputText("");
+    setShowEmojiPicker(false);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -53,8 +78,21 @@ export function ChatArea({
   };
 
   const addEmoji = (emoji: string) => {
-    setInputText((prev) => prev + emoji);
-    setShowEmojiPicker(false);
+    const input = inputRef.current;
+    if (!input) {
+      setInputText((prev) => prev + emoji);
+      return;
+    }
+    const start = input.selectionStart ?? inputText.length;
+    const end = input.selectionEnd ?? inputText.length;
+    const next = inputText.slice(0, start) + emoji + inputText.slice(end);
+    setInputText(next);
+    // Restore caret after the inserted emoji and keep focus for multi-select
+    requestAnimationFrame(() => {
+      input.focus();
+      const caret = start + emoji.length;
+      input.setSelectionRange(caret, caret);
+    });
   };
 
   return (
@@ -241,23 +279,15 @@ export function ChatArea({
           onSubmit={handleSend}
           className="relative rounded-xl border border-neutral-200/90 bg-white p-3 shadow-xs space-y-2 focus-within:border-neutral-900 transition-all"
         >
-          {/* Emoji Quick Picker Floating Popup */}
+          {/* Full Emoji Picker Popup */}
           {showEmojiPicker && (
-            <div className="absolute bottom-16 left-3 z-20 flex gap-2 rounded-xl border border-neutral-200 bg-white p-2.5 shadow-xl animate-in fade-in duration-150">
-              {["👍", "❤️", "🙌", "🔥", "🚀", "😊"].map((e) => (
-                <button
-                  key={e}
-                  type="button"
-                  onClick={() => addEmoji(e)}
-                  className="text-lg hover:scale-125 transition-transform"
-                >
-                  {e}
-                </button>
-              ))}
+            <div ref={pickerRef}>
+              <ChatEmojiPicker onSelect={addEmoji} />
             </div>
           )}
 
           <input
+            ref={inputRef}
             type="text"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
