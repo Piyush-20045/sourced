@@ -6,6 +6,7 @@ import { INITIAL_FORM_DATA, PostProjectFormData } from "./post-project-data";
 import { PostProjectStepper } from "./post-project-stepper";
 import { StepProjectDetails } from "./step-project-details";
 import { StepBudgetScope } from "./step-budget-scope";
+import { StepReviewPost } from "./step-review-post";
 
 /** Multi-step "Post a project" flow: details → budget & scope → review & post */
 export function PostProjectCard() {
@@ -83,7 +84,13 @@ export function PostProjectCard() {
         <StepBudgetScope data={formData} onChange={patchForm} />
       )}
       {currentStep === 3 && (
-        <div>step 3</div>
+        <StepReviewPost
+          data={formData}
+          onChange={patchForm}
+          onEditStep={setCurrentStep}
+          onPublish={() => setPublished(true)}
+          onSaveDraft={() => alert("Draft saved successfully!")}
+        />
       )}
 
       {/* Bottom nav (review step has its own publish actions) */}
