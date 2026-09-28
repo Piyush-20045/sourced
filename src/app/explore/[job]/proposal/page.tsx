@@ -1,8 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { useParams, useRouter } from "next/navigation";
-import { BadgeCheck } from "lucide-react";
+import { useParams } from "next/navigation";
 import { getJobById } from "@/data/explore";
 import { DashboardNav } from "@/app/dashboard/_components/dashboard-nav";
 import Footer from "@/components/layout/footer";
@@ -13,6 +12,7 @@ import { CoverLetterEditor } from "./_components/cover-letter-editor";
 import { AttachmentDropzone } from "./_components/attachment-dropzone";
 import { ProjectBriefCard } from "./_components/project-brief-card";
 import { ProTipCard } from "./_components/pro-tip-card";
+import { ProposalSuccess } from "./_components/proposal-success";
 
 function ProposalNotFound() {
   return (
@@ -42,7 +42,6 @@ function ProposalNotFound() {
 
 export default function SubmitProposalPage() {
   const { job } = useParams();
-  const router = useRouter();
   const jobData = getJobById(job as string) || getJobById("j1");
 
   // Form state
@@ -61,9 +60,6 @@ export default function SubmitProposalPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
-    setTimeout(() => {
-      router.push(`/explore/${jobData.id}`);
-    }, 2000);
   };
 
   return (
@@ -72,21 +68,11 @@ export default function SubmitProposalPage() {
 
       <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:py-10">
         {submitted ? (
-          <div className="mx-auto max-w-lg rounded-2xl border border-border bg-white p-8 text-center shadow-sm">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
-              <BadgeCheck className="h-8 w-8" />
-            </div>
-            <h2 className="mt-4 text-2xl font-bold text-[#022b3a]">
-              Proposal Submitted!
-            </h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Your proposal for &quot;{jobData.title}&quot; has been sent to the
-              client.
-            </p>
-            <p className="mt-4 text-xs font-semibold text-primary">
-              Redirecting back to project details...
-            </p>
-          </div>
+          <ProposalSuccess
+            jobData={jobData}
+            bidAmount={bidAmount}
+            duration={duration}
+          />
         ) : (
           <form
             onSubmit={handleSubmit}
