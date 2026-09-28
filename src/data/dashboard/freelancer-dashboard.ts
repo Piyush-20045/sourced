@@ -173,7 +173,11 @@ export const skills: Skill[] = [
   "Sketch",
 ].map((name) => ({ name }));
 
-export const topNav = ["Browse projects", "Post a project", "Messages"];
+export const topNav = [
+  { label: "Browse projects", href: "/explore" },
+  { label: "Post a project", href: "/dashboard/client/post" },
+  { label: "Messages", href: "/message" },
+];
 
 /* ============ FIND PROJECTS DATA ============== */
 
