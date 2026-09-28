@@ -4,6 +4,8 @@ import { useState } from "react";
 import { ArrowLeft, ArrowRight, BadgeCheck } from "lucide-react";
 import { INITIAL_FORM_DATA, PostProjectFormData } from "./post-project-data";
 import { PostProjectStepper } from "./post-project-stepper";
+import { StepProjectDetails } from "./step-project-details";
+import { StepBudgetScope } from "./step-budget-scope";
 
 /** Multi-step "Post a project" flow: details → budget & scope → review & post */
 export function PostProjectCard() {
@@ -11,6 +13,10 @@ export function PostProjectCard() {
   const [formData, setFormData] =
     useState<PostProjectFormData>(INITIAL_FORM_DATA);
   const [published, setPublished] = useState(false);
+
+  const patchForm = (patch: Partial<PostProjectFormData>) => {
+    setFormData((prev) => ({ ...prev, ...patch }));
+  };
 
   const isStep1Valid =
     formData.title.trim().length > 0 && formData.description.trim().length > 0;
@@ -25,6 +31,7 @@ export function PostProjectCard() {
   const handleNext = () => {
     if (!canContinue || currentStep >= 3) return;
     setCurrentStep((prev) => prev + 1);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleBack = () => {
@@ -70,10 +77,10 @@ export function PostProjectCard() {
       />
 
       {currentStep === 1 && (
-        <div>step 1</div>
+        <StepProjectDetails data={formData} onChange={patchForm} />
       )}
       {currentStep === 2 && (
-        <div>step 2</div>
+        <StepBudgetScope data={formData} onChange={patchForm} />
       )}
       {currentStep === 3 && (
         <div>step 3</div>
