@@ -31,7 +31,7 @@ const footerSections = [
 function Footer() {
   return (
     <footer className="w-full bg-[#e3e3e3] text-[#44464d]">
-      <div className="mx-auto flex w-full max-w-348 flex-col gap-10 px-6 pb-9 pt-11 sm:px-10 lg:px-6">
+      <div className="mx-auto flex w-full flex-col gap-10 px-6 pb-9 pt-11 sm:px-10">
         <div className="grid gap-10 lg:grid-cols-[minmax(260px,1fr)_auto] lg:items-start">
           <div className="max-w-90">
             <Link href="/" className="text-base font-medium text-black">
