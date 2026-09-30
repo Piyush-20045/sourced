@@ -1,6 +1,5 @@
 "use client";
-
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
@@ -14,8 +13,12 @@ import {
   X,
   Briefcase,
   LayoutGrid,
+  Sparkles,
 } from "lucide-react";
-import { initialAuthState, UserProfile } from "@/data/auth";
+import { initialAuthState } from "@/data/auth";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -27,6 +30,10 @@ export function Navbar() {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+
+  // Refs for click outside
+  const profileRef = useRef<HTMLDivElement>(null);
+  const notificationsRef = useRef<HTMLDivElement>(null);
 
   const { isLoggedIn, user, notifications } = authState;
   const unreadCount = notifications.filter((n) => !n.read).length;
@@ -50,6 +57,26 @@ export function Navbar() {
         { label: "Browse projects", href: "/explore" },
         { label: "Pricing", href: "/subscriptions" },
       ];
+
+  // Close dropdowns on click outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        profileRef.current &&
+        !profileRef.current.contains(event.target as Node)
+      ) {
+        setIsProfileMenuOpen(false);
+      }
+      if (
+        notificationsRef.current &&
+        !notificationsRef.current.contains(event.target as Node)
+      ) {
+        setIsNotificationsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -80,106 +107,117 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full backdrop-blur-md border-b border-white/20 bg-[#e3e3e3]/80 text-[#063242] shadow-sm">
-      <div className="mx-auto flex min-h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 py-3.5 sm:px-6 md:gap-6">
-        {/* Brand Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2.5 text-xl font-bold leading-none shrink-0"
-        >
-          <span className="flex size-7 items-center justify-center rounded-lg bg-[#063242] text-xs font-bold text-white shadow-2xs">
-            S
-          </span>
-          <span className="tracking-tight text-neutral-900 font-extrabold">
-            Sourced
-          </span>
-        </Link>
-
-        {/* Primary Desktop Nav Links */}
-        <nav className="hidden items-center gap-6 text-sm font-semibold text-neutral-600 md:flex">
-          {navLinks.map((item) => {
-            const isActive = pathname === item.href;
-            return (
-              <Link
-                key={item.label}
-                href={item.href}
-                className={`transition-colors hover:text-[#063242] ${
-                  isActive ? "text-[#063242] font-bold" : ""
-                }`}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-        </nav>
-
-        {/* Desktop Search Bar */}
-        {isLoggedIn && (
-          <form
-            onSubmit={handleSearchSubmit}
-            className="ml-auto hidden items-center gap-2 rounded-xl border border-neutral-300/80 bg-neutral-100/90 px-3.5 py-1.5 text-sm text-neutral-600 focus-within:border-[#063242] focus-within:bg-white transition-all lg:flex"
+    <header className="sticky top-0 z-50 w-full backdrop-blur-md border-b border-border/70 bg-background/95 text-foreground shadow-2xs">
+      {/* Full width container with clean x-axis padding */}
+      <div className="flex h-16 w-full items-center justify-between gap-4 px-4 sm:px-6 md:px-8">
+        {/* Left Section: Brand Logo & Navigation */}
+        <div className="flex items-center gap-6 md:gap-8">
+          {/* Brand Logo */}
+          <Link
+            href="/"
+            className="flex items-center gap-2 text-lg font-bold tracking-tight text-foreground transition-opacity hover:opacity-90 shrink-0"
           >
-            <Search className="h-3.5 w-3.5 text-neutral-400" />
-            <input
-              type="text"
-              placeholder="Search..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-36 bg-transparent outline-none placeholder:text-neutral-400 text-neutral-900 text-xs font-medium"
-            />
-          </form>
-        )}
+            <span className="flex size-7 items-center justify-center rounded-lg bg-primary text-base font-bold text-primary-foreground shadow-2xs italic">
+              S
+            </span>
+            <span className="font-bold text-foreground tracking-wide">
+              Sourced
+            </span>
+          </Link>
 
-        {/* Right Section: Auth State / Logged-in Utilities */}
-        <div className="ml-auto flex items-center gap-3 shrink-0 sm:gap-4">
+          {/* Desktop Nav Links */}
+          <nav className="hidden items-center gap-1.5 md:flex">
+            {navLinks.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={cn(
+                    "px-3 py-1.5 text-sm font-medium rounded-md transition-colors",
+                    isActive
+                      ? "bg-muted/60 text-primary font-medium"
+                      : "text-foreground/80 hover:text-primary hover:bg-muted/60",
+                  )}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </nav>
+          {/* Middle Section: Desktop Search Bar using Shadcn Input */}
+          {isLoggedIn && (
+            <form
+              onSubmit={handleSearchSubmit}
+              className="relative hidden items-center md:flex w-56 lg:w-72"
+            >
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-3.5 text-muted-foreground pointer-events-none" />
+              <Input
+                type="search"
+                placeholder="Search projects, services..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="h-9 w-full pl-9 pr-9 text-xs bg-muted/40 focus:bg-background border-border/80 rounded-lg transition-all placeholder:text-muted-foreground/70"
+              />
+            </form>
+          )}
+        </div>
+
+        {/* Right Section: Utilities & User Profile */}
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           {isLoggedIn ? (
             <>
-              {/* Notifications Dropdown Toggle */}
-              <div className="relative">
-                <button
-                  type="button"
+              {/* Notification Bell with Shadcn Button & Clean Red Indicator */}
+              <div className="relative" ref={notificationsRef}>
+                <Button
+                  variant="ghost"
+                  size="icon"
                   onClick={() => {
                     setIsNotificationsOpen(!isNotificationsOpen);
                     setIsProfileMenuOpen(false);
                   }}
-                  className="relative rounded-xl p-2 text-neutral-700 hover:bg-black/5 transition-colors"
+                  className="relative size-9 rounded-lg hover:bg-muted text-foreground"
                   aria-label="Notifications"
                 >
-                  <Bell className="h-4 w-4" />
+                  <Bell className="size-4" />
                   {unreadCount > 0 && (
-                    <span className="absolute top-1 right-1 grid h-4 w-4 place-items-center rounded-full bg-rose-600 text-[9px] font-bold text-white shadow-2xs">
-                      {unreadCount}
+                    <span className="absolute top-2 right-2 flex size-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-rose-400 opacity-75" />
+                      <span className="relative inline-flex size-2 rounded-full bg-rose-600 ring-2 ring-background" />
                     </span>
                   )}
-                </button>
+                </Button>
 
                 {/* Notifications Dropdown Panel */}
                 {isNotificationsOpen && (
-                  <div className="absolute right-0 mt-2 w-80 rounded-2xl border border-neutral-200 bg-white p-3 shadow-2xl animate-in fade-in zoom-in-95 duration-150 z-50">
-                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-neutral-100 px-2">
-                      <h4 className="text-xs font-extrabold uppercase tracking-wider text-neutral-900">
-                        Notifications
-                      </h4>
-                      <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
+                  <div className="absolute right-0 mt-2 w-80 rounded-xl border border-border bg-popover text-popover-foreground p-2 shadow-xl animate-in fade-in zoom-in-95 duration-150 z-50">
+                    <div className="flex items-center justify-between p-2 pb-2 mb-1 border-b border-border/60">
+                      <div className="flex items-center gap-1.5">
+                        <Bell className="size-3.5 text-muted-foreground" />
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-foreground">
+                          Notifications
+                        </h4>
+                      </div>
+                      <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/40 dark:text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-200/50">
                         {unreadCount} new
                       </span>
                     </div>
 
-                    <div className="space-y-1 max-h-64 overflow-y-auto">
+                    <div className="space-y-1 max-h-64 overflow-y-auto pr-0.5">
                       {notifications.map((n) => (
                         <Link
                           key={n.id}
                           href={n.link}
                           onClick={() => setIsNotificationsOpen(false)}
-                          className="block rounded-xl p-2.5 text-xs hover:bg-neutral-50 transition-colors"
+                          className="block rounded-lg p-2 text-xs transition-colors hover:bg-muted/80"
                         >
-                          <p className="font-extrabold text-neutral-900">
+                          <p className="font-semibold text-foreground">
                             {n.title}
                           </p>
-                          <p className="text-neutral-500 mt-0.5 line-clamp-2">
+                          <p className="text-muted-foreground mt-0.5 text-[11px] line-clamp-2 leading-relaxed">
                             {n.message}
                           </p>
-                          <span className="text-[10px] text-neutral-400 mt-1 block">
+                          <span className="text-[10px] text-muted-foreground/70 mt-1 block">
                             {n.time}
                           </span>
                         </Link>
@@ -189,67 +227,94 @@ export function Navbar() {
                 )}
               </div>
 
-              {/* Settings Link */}
+              {/* Settings Icon Link */}
               <Link
                 href="/settings"
-                className="rounded-xl p-2 text-neutral-700 hover:bg-black/5 transition-colors"
+                className={buttonVariants({
+                  variant: "ghost",
+                  size: "icon",
+                  className: "size-9 rounded-lg hover:bg-muted text-foreground",
+                })}
                 aria-label="Settings"
               >
-                <SettingsIcon className="h-4 w-4" />
+                <SettingsIcon className="size-4" />
               </Link>
 
-              {/* User Avatar & Profile Dropdown */}
-              <div className="relative">
+              {/* Profile Trigger Button & Dropdown */}
+              <div className="relative" ref={profileRef}>
                 <button
                   type="button"
                   onClick={() => {
                     setIsProfileMenuOpen(!isProfileMenuOpen);
                     setIsNotificationsOpen(false);
                   }}
-                  className="flex items-center gap-2 rounded-full p-0.5 hover:ring-2 hover:ring-[#063242]/20 transition-all"
+                  className={cn(
+                    "flex items-center gap-2.5 rounded-lg border border-border/60 bg-muted/30 px-2 py-1 transition-all hover:bg-muted/80 outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                    isProfileMenuOpen && "bg-muted border-border",
+                  )}
                 >
-                  <div className="hidden text-right leading-tight sm:block">
-                    <p className="text-xs font-bold text-neutral-900">
-                      {user.name.split(" ")[0]}
-                    </p>
-                    <p className="text-[9px] uppercase font-semibold tracking-wider text-neutral-500">
-                      {currentMode} mode
-                    </p>
-                  </div>
                   <img
                     src={user.avatar}
                     alt={user.name}
-                    className="h-8 w-8 rounded-full object-cover border border-neutral-300 shadow-2xs"
+                    className="size-7 rounded-md object-cover border border-border/80 shadow-2xs shrink-0"
                   />
-                  <ChevronDown className="h-3 w-3 text-neutral-500 hidden sm:block" />
+                  <div className="hidden text-left leading-tight sm:block min-w-0">
+                    <p className="text-xs font-semibold text-foreground truncate max-w-25">
+                      {user.name.split(" ")[0]}
+                    </p>
+                    <p className="text-[9px] font-bold tracking-wider text-muted-foreground uppercase">
+                      {currentMode}
+                    </p>
+                  </div>
+                  <ChevronDown
+                    className={cn(
+                      "size-3.5 text-muted-foreground transition-transform duration-200 hidden sm:block",
+                      isProfileMenuOpen && "rotate-180",
+                    )}
+                  />
                 </button>
 
                 {/* Profile Dropdown Panel */}
                 {isProfileMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-56 rounded-2xl border border-neutral-200 bg-white p-2 shadow-2xl animate-in fade-in zoom-in-95 duration-150 z-50">
-                    <div className="p-3 border-b border-neutral-100">
-                      <p className="font-extrabold text-sm text-neutral-900">
-                        {user.name}
-                      </p>
-                      <p className="text-xs text-neutral-500">{user.email}</p>
+                  <div className="absolute right-0 mt-2 w-64 rounded-xl border border-border bg-popover text-popover-foreground p-1.5 shadow-xl animate-in fade-in zoom-in-95 duration-150 z-50">
+                    {/* Profile Header Info Card */}
+                    <div className="flex items-center gap-3 p-2.5 mb-1.5 bg-muted/40 rounded-lg border border-border/40">
+                      <img
+                        src={user.avatar}
+                        alt={user.name}
+                        className="size-9 rounded-lg object-cover border border-border shrink-0"
+                      />
+                      <div className="min-w-0 flex-1">
+                        <p className="font-bold text-xs text-foreground truncate">
+                          {user.name}
+                        </p>
+                        <p className="text-[11px] text-muted-foreground truncate">
+                          {user.email}
+                        </p>
+                        <span className="inline-flex items-center gap-1 mt-1 text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-primary/10 text-primary">
+                          <Sparkles className="size-2.5" />
+                          {currentMode} Mode
+                        </span>
+                      </div>
                     </div>
 
-                    {/* Mode Switcher */}
-                    <div className="p-2 border-b border-neutral-100">
-                      <p className="text-[10px] font-extrabold uppercase tracking-wider text-neutral-400 mb-1.5 px-1">
-                        SWITCH MODE
+                    {/* Mode Switcher Segment */}
+                    <div className="p-1.5 mb-1 bg-muted/30 rounded-lg border border-border/30">
+                      <p className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground mb-1 px-1">
+                        Active Mode
                       </p>
-                      <div className="grid grid-cols-2 gap-1 bg-neutral-100 p-1 rounded-xl text-xs font-bold">
+                      <div className="grid grid-cols-2 gap-1 bg-muted p-1 rounded-md">
                         {(["Freelancer", "Client"] as const).map((m) => (
                           <button
                             key={m}
                             type="button"
                             onClick={() => handleModeChange(m)}
-                            className={`rounded-lg py-1 transition-all ${
+                            className={cn(
+                              "rounded-sm py-1 text-xs font-semibold transition-all",
                               currentMode === m
-                                ? "bg-[#063242] text-white shadow-2xs"
-                                : "text-neutral-600 hover:text-neutral-900"
-                            }`}
+                                ? "bg-background text-foreground shadow-2xs font-bold"
+                                : "text-muted-foreground hover:text-foreground",
+                            )}
                           >
                             {m}
                           </button>
@@ -257,104 +322,116 @@ export function Navbar() {
                       </div>
                     </div>
 
-                    {/* Links */}
-                    <div className="py-1 space-y-0.5 text-xs font-semibold text-neutral-700">
+                    {/* Menu Navigation Links */}
+                    <div className="space-y-0.5 text-xs font-medium">
                       <Link
                         href="/dashboard/freelancer"
                         onClick={() => setIsProfileMenuOpen(false)}
-                        className="flex items-center gap-2 rounded-xl px-3 py-2 hover:bg-neutral-100 hover:text-neutral-900"
+                        className="flex items-center gap-2.5 rounded-md px-2.5 py-2 hover:bg-muted hover:text-accent-foreground transition-colors"
                       >
-                        <LayoutGrid className="h-3.5 w-3.5" />
+                        <LayoutGrid className="size-3.5 text-muted-foreground" />
                         Freelancer Dashboard
                       </Link>
 
                       <Link
                         href="/dashboard/client"
                         onClick={() => setIsProfileMenuOpen(false)}
-                        className="flex items-center gap-2 rounded-xl px-3 py-2 hover:bg-neutral-100 hover:text-neutral-900"
+                        className="flex items-center gap-2.5 rounded-md px-2.5 py-2 hover:bg-muted hover:text-accent-foreground transition-colors"
                       >
-                        <Briefcase className="h-3.5 w-3.5" />
+                        <Briefcase className="size-3.5 text-muted-foreground" />
                         Client Dashboard
                       </Link>
 
                       <Link
                         href="/profile"
                         onClick={() => setIsProfileMenuOpen(false)}
-                        className="flex items-center gap-2 rounded-xl px-3 py-2 hover:bg-neutral-100 hover:text-neutral-900"
+                        className="flex items-center gap-2.5 rounded-md px-2.5 py-2 hover:bg-muted hover:text-accent-foreground transition-colors"
                       >
-                        <UserIcon className="h-3.5 w-3.5" />
+                        <UserIcon className="size-3.5 text-muted-foreground" />
                         My Profile
                       </Link>
 
-                      <button
-                        type="button"
-                        onClick={toggleAuth}
-                        className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-rose-600 hover:bg-rose-50"
-                      >
-                        <LogOut className="h-3.5 w-3.5" />
-                        Sign Out (Switch Guest)
-                      </button>
+                      <div className="pt-1 my-1 border-t border-border/60">
+                        <button
+                          type="button"
+                          onClick={toggleAuth}
+                          className="flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-destructive hover:bg-destructive/10 transition-colors font-semibold"
+                        >
+                          <LogOut className="size-3.5" />
+                          Sign Out (Switch Guest)
+                        </button>
+                      </div>
                     </div>
                   </div>
                 )}
               </div>
             </>
           ) : (
-            /* Guest Auth Buttons */
-            <div className="flex items-center gap-2.5">
+            /* Guest Auth Buttons using Shadcn Button */
+            <div className="flex items-center gap-2">
               <Link
                 href="/login"
-                className="text-xs font-extrabold text-neutral-700 hover:text-[#063242] px-3 py-2 transition-colors"
+                className={buttonVariants({
+                  variant: "ghost",
+                  size: "sm",
+                  className: "text-xs font-semibold",
+                })}
               >
                 Log In
               </Link>
               <Link
                 href="/signup"
-                className="inline-flex h-9 items-center justify-center rounded-xl bg-[#063242] hover:bg-[#0a4155] px-4 text-xs font-extrabold text-white shadow-xs transition-all active:scale-95"
+                className={buttonVariants({
+                  variant: "default",
+                  size: "sm",
+                  className: "text-xs font-bold shadow-2xs",
+                })}
               >
                 Sign Up
               </Link>
-              <button
-                type="button"
+              <Button
+                variant="outline"
+                size="xs"
                 onClick={toggleAuth}
+                className="text-[10px] hidden sm:inline-flex"
                 title="Demo: Switch to Logged In User"
-                className="text-[10px] font-bold text-blue-600 hover:underline border border-blue-200 bg-blue-50 px-2 py-1 rounded-md hidden sm:inline-block"
               >
-                Demo Log In
-              </button>
+                Demo Auth
+              </Button>
             </div>
           )}
 
-          {/* Mobile Menu Button */}
-          <button
-            type="button"
-            aria-label="Toggle navigation menu"
+          {/* Mobile Menu Toggle Button */}
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white text-[#063242] shadow-2xs md:hidden"
+            className="size-9 md:hidden"
+            aria-label="Toggle Navigation Menu"
           >
             {isMobileMenuOpen ? (
-              <X className="h-5 w-5" />
+              <X className="size-5" />
             ) : (
-              <Menu className="h-5 w-5" />
+              <Menu className="size-5" />
             )}
-          </button>
+          </Button>
         </div>
       </div>
 
-      {/* Mobile Navigation Drawer / Panel */}
+      {/* Mobile Drawer Panel */}
       {isMobileMenuOpen && (
-        <div className="border-t border-black/5 bg-[#e3e3e3] px-4 pb-5 md:hidden animate-in fade-in slide-in-from-top-2 duration-200">
-          <div className="mx-auto max-w-lg space-y-3 rounded-2xl bg-white p-4 shadow-md mt-2">
+        <div className="border-t border-border bg-background px-4 pb-6 pt-3 md:hidden animate-in fade-in slide-in-from-top-2 duration-200">
+          <div className="space-y-4">
             {/* Mobile Search Input */}
             {isLoggedIn && (
               <form onSubmit={handleSearchSubmit} className="relative">
-                <Search className="absolute left-3 top-3 h-4 w-4 text-neutral-400" />
-                <input
-                  type="text"
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
+                <Input
+                  type="search"
                   placeholder="Search projects, services..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full rounded-xl border border-neutral-200 bg-neutral-50 py-2 pl-9 pr-4 text-xs font-medium outline-none focus:border-neutral-900"
+                  className="pl-9 text-xs h-9"
                 />
               </form>
             )}
@@ -366,28 +443,28 @@ export function Navbar() {
                   key={item.label}
                   href={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block rounded-xl px-3 py-2.5 text-xs font-extrabold text-neutral-800 hover:bg-neutral-100"
+                  className="block rounded-lg px-3 py-2 text-xs font-semibold text-foreground hover:bg-accent"
                 >
                   {item.label}
                 </Link>
               ))}
             </div>
 
-            {/* Mobile Logged-in Options or Auth Buttons */}
+            {/* Mobile Logged-in Info & Actions */}
             {isLoggedIn ? (
-              <div className="pt-2 border-t border-neutral-100 space-y-2">
-                <div className="flex items-center justify-between p-2 bg-neutral-50 rounded-xl">
-                  <div className="flex items-center gap-2">
+              <div className="pt-3 border-t border-border space-y-3">
+                <div className="flex items-center justify-between p-2.5 bg-muted/50 rounded-lg border border-border">
+                  <div className="flex items-center gap-2.5">
                     <img
                       src={user.avatar}
                       alt={user.name}
-                      className="h-8 w-8 rounded-full object-cover"
+                      className="size-8 rounded-md object-cover border border-border"
                     />
                     <div>
-                      <p className="text-xs font-extrabold text-neutral-900">
+                      <p className="text-xs font-bold text-foreground">
                         {user.name}
                       </p>
-                      <p className="text-[10px] text-neutral-500">
+                      <p className="text-[10px] text-muted-foreground uppercase">
                         {currentMode} Mode
                       </p>
                     </div>
@@ -397,58 +474,59 @@ export function Navbar() {
                     <button
                       type="button"
                       onClick={() => handleModeChange("Freelancer")}
-                      className={`px-2 py-1 rounded text-[10px] font-bold ${
+                      className={cn(
+                        "px-2 py-1 rounded text-[10px] font-bold transition-colors",
                         currentMode === "Freelancer"
-                          ? "bg-[#063242] text-white"
-                          : "bg-neutral-200 text-neutral-700"
-                      }`}
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-muted text-muted-foreground",
+                      )}
                     >
                       Freelancer
                     </button>
                     <button
                       type="button"
                       onClick={() => handleModeChange("Client")}
-                      className={`px-2 py-1 rounded text-[10px] font-bold ${
+                      className={cn(
+                        "px-2 py-1 rounded text-[10px] font-bold transition-colors",
                         currentMode === "Client"
-                          ? "bg-[#063242] text-white"
-                          : "bg-neutral-200 text-neutral-700"
-                      }`}
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-muted text-muted-foreground",
+                      )}
                     >
                       Client
                     </button>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-2 text-xs font-bold">
+                <div className="grid grid-cols-2 gap-2 text-xs font-semibold">
                   <Link
                     href="/settings"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="rounded-xl border border-neutral-200 p-2.5 text-center text-neutral-800"
+                    className={buttonVariants({
+                      variant: "outline",
+                      size: "sm",
+                    })}
                   >
                     Settings
                   </Link>
-                  <button
-                    type="button"
-                    onClick={toggleAuth}
-                    className="rounded-xl border border-rose-200 bg-rose-50 p-2.5 text-center text-rose-600"
-                  >
+                  <Button variant="destructive" size="sm" onClick={toggleAuth}>
                     Sign Out
-                  </button>
+                  </Button>
                 </div>
               </div>
             ) : (
-              <div className="grid grid-cols-2 gap-2 pt-2 border-t border-neutral-100">
+              <div className="grid grid-cols-2 gap-2 pt-2 border-t border-border">
                 <Link
                   href="/login"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="rounded-xl border border-neutral-300 py-2.5 text-center text-xs font-extrabold text-neutral-800"
+                  className={buttonVariants({ variant: "outline", size: "sm" })}
                 >
                   Log In
                 </Link>
                 <Link
                   href="/signup"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="rounded-xl bg-[#063242] py-2.5 text-center text-xs font-extrabold text-white"
+                  className={buttonVariants({ variant: "default", size: "sm" })}
                 >
                   Sign Up
                 </Link>
