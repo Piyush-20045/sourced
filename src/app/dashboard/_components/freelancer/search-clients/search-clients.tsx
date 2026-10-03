@@ -1,6 +1,7 @@
 import { useState } from "react";
+import Link from "next/link";
 import { BadgeCheck, Search, Star } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   clientIndustries,
   clients,
@@ -115,9 +116,16 @@ export function SearchClients() {
                   <dd className="text-sm font-bold">{client.openProjects}</dd>
                 </div>
               </dl>
-              <Button type="button" size="sm">
-                View Projects
-              </Button>
+              {client.profileSlug ? (
+                <Link
+                  href={`/profile/${client.profileSlug}`}
+                  className={buttonVariants({ size: "sm" })}
+                >
+                  View profile
+                </Link>
+              ) : (
+                <Button type="button" size="sm">View projects</Button>
+              )}
             </div>
           </article>
         ))}

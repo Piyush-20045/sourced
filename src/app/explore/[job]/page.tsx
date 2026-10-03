@@ -147,9 +147,18 @@ function JobDetailsPage() {
                 </span>
               </div>
             </div>
-            <button className="rounded-lg border border-foreground px-4 py-2 text-sm font-medium hover:bg-foreground hover:text-background">
-              View Profile
-            </button>
+            {jobData.company.profileSlug ? (
+              <Link
+                href={`/profile/${jobData.company.profileSlug}`}
+                className="rounded-lg border border-foreground px-4 py-2 text-sm font-medium transition-colors hover:bg-foreground hover:text-background"
+              >
+                View profile
+              </Link>
+            ) : (
+              <button type="button" disabled className="rounded-lg border border-border px-4 py-2 text-sm font-medium text-muted-foreground">
+                Profile coming soon
+              </button>
+            )}
           </div>
 
           <hr className="my-5 border-border" />

@@ -6,6 +6,7 @@ export interface UserProfile {
   title: string;
   activeMode: "Freelancer" | "Client" | "Agency";
   modes: ("Freelancer" | "Client" | "Agency")[];
+  profileSlugs: Record<"Freelancer" | "Client" | "Agency", string>;
 }
 
 export interface NotificationItem {
@@ -33,6 +34,11 @@ export const initialAuthState: AuthState = {
     title: "UI/UX Designer",
     activeMode: "Freelancer",
     modes: ["Freelancer", "Client", "Agency"],
+    profileSlugs: {
+      Freelancer: "salman-khan",
+      Client: "nimbus-labs",
+      Agency: "pixelworks-agency",
+    },
   },
   notifications: [
     {

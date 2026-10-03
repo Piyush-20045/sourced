@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Search, Star } from "lucide-react";
 import { browseFreelancers } from "@/data/dashboard/client-dashboard";
 
@@ -168,12 +169,18 @@ export function BrowseFreelancers() {
               >
                 Invite to project
               </button>
-              <button
-                type="button"
-                className="flex-1 rounded-lg border border-border bg-background py-2 text-center text-xs font-semibold text-[#022b3a] transition-colors hover:bg-muted"
-              >
-                View profile
-              </button>
+              {f.profileSlug ? (
+                <Link
+                  href={`/profile/${f.profileSlug}`}
+                  className="flex-1 rounded-lg border border-border bg-background py-2 text-center text-xs font-semibold text-[#022b3a] transition-colors hover:bg-muted"
+                >
+                  View profile
+                </Link>
+              ) : (
+                <button type="button" disabled className="flex-1 rounded-lg border border-border bg-background py-2 text-center text-xs font-semibold text-muted-foreground opacity-60">
+                  Profile coming soon
+                </button>
+              )}
             </div>
           </div>
         ))}

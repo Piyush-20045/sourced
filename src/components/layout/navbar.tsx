@@ -44,6 +44,7 @@ export function Navbar() {
     : pathname.includes("/dashboard/agency")
       ? "Agency"
       : user.activeMode;
+  const publicProfileHref = `/profile/${user.profileSlugs[currentMode]}`;
 
   // Navigation Links
   const navLinks = isLoggedIn
@@ -343,7 +344,7 @@ export function Navbar() {
                       </Link>
 
                       <Link
-                        href="/profile"
+                        href={publicProfileHref}
                         onClick={() => setIsProfileMenuOpen(false)}
                         className="flex items-center gap-2.5 rounded-md px-2.5 py-2 hover:bg-muted hover:text-accent-foreground transition-colors"
                       >
