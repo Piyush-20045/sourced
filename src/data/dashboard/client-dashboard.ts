@@ -135,6 +135,7 @@ export const postedProjects: PostedProject[] = [
 // Browse Freelancers Data
 export interface FreelancerItem {
   id: string;
+  profileSlug?: string;
   name: string;
   avatar: string;
   badge?: "TOP RATED" | "RISING";
@@ -149,8 +150,9 @@ export interface FreelancerItem {
 export const browseFreelancers: FreelancerItem[] = [
   {
     id: "f1",
-    name: "Samiya A.",
-    avatar: "/dashboard/freelancer/samiya.jpg",
+    profileSlug: "salman-khan",
+    name: "Salman K.",
+    avatar: "/dashboard/salman.jpeg",
     badge: "TOP RATED",
     role: "UI/UX Designer",
     location: "Lucknow, IN",

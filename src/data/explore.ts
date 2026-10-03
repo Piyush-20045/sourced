@@ -37,6 +37,7 @@ export interface JobPost {
   technicalRequirements: string[];
   company: {
     name: string;
+    profileSlug?: string;
     logo: string;
     rating: number;
     reviews: number;
@@ -199,6 +200,7 @@ export const jobs: JobPost[] = [
     ],
     company: {
       name: "Pixelworks Agency",
+      profileSlug: "pixelworks-agency",
       logo: "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=200&q=80",
       rating: 4.7,
       reviews: 58,

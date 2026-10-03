@@ -402,6 +402,7 @@ export interface Client {
   name: string;
   initials: string;
   verified: boolean;
+  profileSlug?: string;
   rating: number;
   location: string;
   industry: string;
@@ -424,6 +425,7 @@ export const clientIndustries = [
 export const clients: Client[] = [
   {
     id: "c1",
+    profileSlug: "nimbus-labs",
     name: "Nimbus Labs",
     initials: "NL",
     verified: true,
@@ -466,6 +468,7 @@ export const clients: Client[] = [
   },
   {
     id: "c4",
+    profileSlug: "pixelworks-agency",
     name: "Pixelworks Agency",
     initials: "PA",
     verified: true,
