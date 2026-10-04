@@ -1,5 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
@@ -12,6 +13,7 @@ import {
   User as UserIcon,
   X,
   Briefcase,
+  Building2,
   LayoutGrid,
   Sparkles,
 } from "lucide-react";
@@ -104,7 +106,7 @@ export function Navbar() {
     setIsProfileMenuOpen(false);
     if (mode === "Freelancer") router.push("/dashboard/freelancer");
     else if (mode === "Client") router.push("/dashboard/client");
-    else router.push("/dashboard/client");
+    else router.push("/dashboard/agency");
   };
 
   return (
@@ -254,9 +256,11 @@ export function Navbar() {
                     isProfileMenuOpen && "bg-muted border-border",
                   )}
                 >
-                  <img
+                  <Image
                     src={user.avatar}
                     alt={user.name}
+                    width={28}
+                    height={28}
                     className="size-7 rounded-md object-cover border border-border/80 shadow-2xs shrink-0"
                   />
                   <div className="hidden text-left leading-tight sm:block min-w-0">
@@ -280,9 +284,11 @@ export function Navbar() {
                   <div className="absolute right-0 mt-2 w-64 rounded-xl border border-border bg-popover text-popover-foreground p-1.5 shadow-xl animate-in fade-in zoom-in-95 duration-150 z-50">
                     {/* Profile Header Info Card */}
                     <div className="flex items-center gap-3 p-2.5 mb-1.5 bg-muted/40 rounded-lg border border-border/40">
-                      <img
+                      <Image
                         src={user.avatar}
                         alt={user.name}
+                        width={36}
+                        height={36}
                         className="size-9 rounded-lg object-cover border border-border shrink-0"
                       />
                       <div className="min-w-0 flex-1">
@@ -304,8 +310,8 @@ export function Navbar() {
                       <p className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground mb-1 px-1">
                         Active Mode
                       </p>
-                      <div className="grid grid-cols-2 gap-1 bg-muted p-1 rounded-md">
-                        {(["Freelancer", "Client"] as const).map((m) => (
+                      <div className="grid grid-cols-3 gap-1 bg-muted p-1 rounded-md">
+                        {(["Freelancer", "Client", "Agency"] as const).map((m) => (
                           <button
                             key={m}
                             type="button"
@@ -341,6 +347,15 @@ export function Navbar() {
                       >
                         <Briefcase className="size-3.5 text-muted-foreground" />
                         Client Dashboard
+                      </Link>
+
+                      <Link
+                        href="/dashboard/agency"
+                        onClick={() => setIsProfileMenuOpen(false)}
+                        className="flex items-center gap-2.5 rounded-md px-2.5 py-2 hover:bg-muted hover:text-accent-foreground transition-colors"
+                      >
+                        <Building2 className="size-3.5 text-muted-foreground" />
+                        Agency Dashboard
                       </Link>
 
                       <Link
@@ -456,9 +471,11 @@ export function Navbar() {
               <div className="pt-3 border-t border-border space-y-3">
                 <div className="flex items-center justify-between p-2.5 bg-muted/50 rounded-lg border border-border">
                   <div className="flex items-center gap-2.5">
-                    <img
+                    <Image
                       src={user.avatar}
                       alt={user.name}
+                      width={32}
+                      height={32}
                       className="size-8 rounded-md object-cover border border-border"
                     />
                     <div>
@@ -471,31 +488,22 @@ export function Navbar() {
                     </div>
                   </div>
 
-                  <div className="flex gap-1">
-                    <button
-                      type="button"
-                      onClick={() => handleModeChange("Freelancer")}
-                      className={cn(
-                        "px-2 py-1 rounded text-[10px] font-bold transition-colors",
-                        currentMode === "Freelancer"
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-muted text-muted-foreground",
-                      )}
-                    >
-                      Freelancer
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleModeChange("Client")}
-                      className={cn(
-                        "px-2 py-1 rounded text-[10px] font-bold transition-colors",
-                        currentMode === "Client"
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-muted text-muted-foreground",
-                      )}
-                    >
-                      Client
-                    </button>
+                  <div className="grid grid-cols-3 gap-1">
+                    {(["Freelancer", "Client", "Agency"] as const).map((mode) => (
+                      <button
+                        key={mode}
+                        type="button"
+                        onClick={() => handleModeChange(mode)}
+                        className={cn(
+                          "rounded px-2 py-1 text-[10px] font-bold transition-colors",
+                          currentMode === mode
+                            ? "bg-primary text-primary-foreground"
+                            : "bg-muted text-muted-foreground",
+                        )}
+                      >
+                        {mode}
+                      </button>
+                    ))}
                   </div>
                 </div>
 
