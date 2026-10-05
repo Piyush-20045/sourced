@@ -68,7 +68,7 @@ export function ProfileHeader({
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         {/* avatar + name row */}
         <div className="-mt-10 flex flex-wrap items-end gap-4 pt-2">
-          <div className="flex items-end">
+          <div className="flex min-w-0 w-full flex-col items-start gap-3 sm:w-auto sm:flex-row sm:items-end sm:gap-4">
             <div className="relative shrink-0">
               {profile.avatar ? (
                 <Image
@@ -88,8 +88,8 @@ export function ProfileHeader({
               )}
             </div>
 
-            <div className="ml-1 sm:ml-4 mb-1 min-w-0 basis-full sm:basis-auto">
-              <h1 className="truncate text-2xl font-bold">{profile.name}</h1>
+            <div className="mb-1 min-w-0 max-w-full">
+              <h1 className="break-words text-xl font-bold sm:text-2xl">{profile.name}</h1>
               <p className="flex flex-wrap items-center gap-1 text-xs md:text-sm text-muted-foreground">
                 <MapPin className="h-3.5 w-3.5 shrink-0" />
                 {profile.location} <span className="mx-1">|</span> {profile.title}
@@ -98,13 +98,13 @@ export function ProfileHeader({
           </div>
 
           {/* actions */}
-          <div className="mb-1 flex w-full flex-wrap gap-2 sm:ml-auto sm:w-auto">
-            <button className="flex-1 rounded-md border border-border px-4 py-2 text-sm font-medium hover:bg-muted sm:flex-none">
+          <div className="mb-1 flex w-full flex-col gap-2 min-[400px]:flex-row sm:ml-auto sm:w-auto">
+            <button className="min-w-0 flex-1 rounded-md border border-border px-4 py-2 text-sm font-medium hover:bg-muted sm:flex-none">
               {editLabel}
             </button>
             <Link
               href={actionHref}
-              className="flex flex-1 items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 sm:flex-none"
+              className="flex min-w-0 flex-1 items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 sm:flex-none"
             >
               <Search className="h-3.5 w-3.5 shrink-0" />
               {actionLabel}
@@ -119,7 +119,7 @@ export function ProfileHeader({
               <button
                 key={m}
                 onClick={() => handleModeChange(m)}
-                className={`flex-1 rounded px-3 py-1.5 font-medium transition-colors sm:flex-none sm:px-4 ${
+                className={`min-w-0 flex-1 rounded px-2 py-1.5 text-xs font-medium transition-colors sm:flex-none sm:px-4 sm:text-sm ${
                   currentMode === m
                     ? "bg-primary text-primary-foreground"
                     : "text-muted-foreground"
