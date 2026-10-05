@@ -10,6 +10,7 @@ import { AgencyStatsGrid } from "../_components/agency/shared/agency-stats-grid"
 import { AgencyOverview } from "../_components/agency/overview/agency-overview";
 import { AgencyFindWork } from "../_components/agency/find-work/agency-find-work";
 import { AgencyProposals } from "../_components/agency/proposals/agency-proposals";
+import { AgencyProjects } from "../_components/agency/projects/agency-projects";
 
 export default function AgencyDashboardPage() {
   const [activeTab, setActiveTab] = useState("Overview");
@@ -33,6 +34,7 @@ export default function AgencyDashboardPage() {
           {activeTab === "Overview" && <AgencyOverview />}
           {activeTab === "Find Work" && <AgencyFindWork />}
           {activeTab === "Proposals" && <AgencyProposals />}
+          {activeTab === "Projects" && <AgencyProjects />}
         </div>
       </div>
 

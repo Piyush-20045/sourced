@@ -138,14 +138,14 @@ export function AgencyFindWork() {
                   </dl>
                 </div>
                 <div className="flex shrink-0 gap-2 lg:flex-col lg:items-stretch">
-                  <button type="button" className="flex-1 rounded-xl bg-primary px-5 py-2.5 text-xs font-bold text-primary-foreground hover:bg-primary/90">
+                  <button type="button" className="rounded-xl bg-primary px-5 py-2.5 text-xs font-bold text-primary-foreground hover:bg-primary/90">
                     Build proposal
                   </button>
                   <button
                     type="button"
                     onClick={() => toggleSaved(brief.id)}
                     aria-pressed={isSaved}
-                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-border px-5 py-2.5 text-xs font-semibold hover:bg-muted"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-border px-5 py-2.5 text-xs font-semibold hover:bg-muted"
                   >
                     <Bookmark className={`size-3.5 ${isSaved ? "fill-primary text-primary" : ""}`} />
                     {isSaved ? "Saved" : "Save"}
