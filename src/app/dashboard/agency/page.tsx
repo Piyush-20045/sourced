@@ -8,6 +8,8 @@ import { agencyIdentity } from "@/data/dashboard/agency-dashboard";
 import { AgencySideNav } from "../_components/agency/shared/agency-side-nav";
 import { AgencyStatsGrid } from "../_components/agency/shared/agency-stats-grid";
 import { AgencyOverview } from "../_components/agency/overview/agency-overview";
+import { AgencyFindWork } from "../_components/agency/find-work/agency-find-work";
+import { AgencyProposals } from "../_components/agency/proposals/agency-proposals";
 
 export default function AgencyDashboardPage() {
   const [activeTab, setActiveTab] = useState("Overview");
@@ -29,6 +31,8 @@ export default function AgencyDashboardPage() {
         </div>
         <div className="min-w-0">
           {activeTab === "Overview" && <AgencyOverview />}
+          {activeTab === "Find Work" && <AgencyFindWork />}
+          {activeTab === "Proposals" && <AgencyProposals />}
         </div>
       </div>
 
