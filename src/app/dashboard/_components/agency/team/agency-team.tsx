@@ -30,27 +30,48 @@ export function AgencyTeam() {
     <section className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-primary sm:text-3xl">Team & capacity</h1>
-          <p className="mt-1 text-sm text-muted-foreground">Balance assignments, availability, and billable utilization.</p>
+          <h1 className="text-2xl font-bold text-primary sm:text-3xl">
+            Team & capacity
+          </h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Balance assignments, availability, and billable utilization.
+          </p>
         </div>
-        <button type="button" className="inline-flex h-10 items-center justify-center gap-2 self-start rounded-xl bg-primary px-4 text-xs font-bold text-primary-foreground sm:self-auto">
+        <button
+          type="button"
+          className="inline-flex h-10 items-center justify-center gap-2 self-start rounded-xl bg-primary px-4 text-xs font-bold text-primary-foreground sm:self-auto"
+        >
           <Plus className="size-4" /> Invite member
         </button>
       </div>
 
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {capacityByDiscipline.map((item) => (
-          <article key={item.discipline} className="rounded-xl border border-border bg-card p-4">
+          <article
+            key={item.discipline}
+            className="rounded-xl border border-border bg-card p-4"
+          >
             <div className="flex items-center justify-between gap-3">
-              <p className="text-sm font-bold text-primary">{item.discipline}</p>
-              <span className="text-xs text-muted-foreground">{item.members} people</span>
+              <p className="text-sm font-bold text-primary">
+                {item.discipline}
+              </p>
+              <span className="text-xs text-muted-foreground">
+                {item.members} people
+              </span>
             </div>
             <div className="mt-4 flex items-end justify-between">
-              <p className="text-2xl font-bold text-primary">{item.utilization}%</p>
-              <p className="text-[11px] font-medium text-emerald-700">{item.availableHours}h free</p>
+              <p className="text-2xl font-bold text-primary">
+                {item.utilization}%
+              </p>
+              <p className="text-[11px] font-medium text-emerald-700">
+                {item.availableHours}h free
+              </p>
             </div>
             <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-muted">
-              <div className="h-full rounded-full bg-primary" style={{ width: `${item.utilization}%` }} />
+              <div
+                className="h-full rounded-full bg-primary"
+                style={{ width: `${item.utilization}%` }}
+              />
             </div>
           </article>
         ))}
@@ -98,29 +119,52 @@ export function AgencyTeam() {
                 <tr key={member.id} className="hover:bg-muted/20">
                   <td className="px-5 py-4">
                     <div className="flex items-center gap-3">
-                      <Image src={member.avatar} alt="" width={40} height={40} className="size-10 rounded-full object-cover" />
+                      <Image
+                        src={member.avatar}
+                        alt=""
+                        width={40}
+                        height={40}
+                        className="size-10 rounded-full object-cover"
+                      />
                       <div>
-                        <p className="text-sm font-bold text-primary">{member.name}</p>
-                        <p className="text-muted-foreground">{member.role} · {member.discipline}</p>
+                        <p className="text-sm font-bold text-primary">
+                          {member.name}
+                        </p>
+                        <p className="text-muted-foreground">
+                          {member.role} · {member.discipline}
+                        </p>
                       </div>
                     </div>
                   </td>
                   <td className="px-5 py-4">
-                    <span className={`rounded-md px-2.5 py-1 text-[10px] font-bold ${member.employment === "EMPLOYEE" ? "bg-blue-50 text-blue-700" : "bg-violet-50 text-violet-700"}`}>
+                    <span
+                      className={`rounded-md px-2.5 py-1 text-[10px] font-bold ${member.employment === "EMPLOYEE" ? "bg-blue-50 text-blue-700" : "bg-violet-50 text-violet-700"}`}
+                    >
                       {member.employment}
                     </span>
                   </td>
-                  <td className="px-5 py-4 text-muted-foreground">{member.assignments} active</td>
+                  <td className="px-5 py-4 text-muted-foreground">
+                    {member.assignments} active
+                  </td>
                   <td className="px-5 py-4">
                     <div className="flex w-36 items-center gap-2">
                       <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-muted">
-                        <div className="h-full rounded-full bg-primary" style={{ width: `${member.utilization}%` }} />
+                        <div
+                          className="h-full rounded-full bg-primary"
+                          style={{ width: `${member.utilization}%` }}
+                        />
                       </div>
-                      <span className="font-bold text-primary">{member.utilization}%</span>
+                      <span className="font-bold text-primary">
+                        {member.utilization}%
+                      </span>
                     </div>
                   </td>
-                  <td className="px-5 py-4 font-medium text-emerald-700">{member.availability}</td>
-                  <td className="px-5 py-4 font-bold text-primary">{member.billableRate}</td>
+                  <td className="px-5 py-4 font-medium text-emerald-700">
+                    {member.availability}
+                  </td>
+                  <td className="px-5 py-4 font-bold text-primary">
+                    {member.billableRate}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -129,7 +173,9 @@ export function AgencyTeam() {
         {members.length === 0 && (
           <div className="py-14 text-center">
             <Users className="mx-auto size-6 text-muted-foreground" />
-            <p className="mt-2 text-sm text-muted-foreground">No team members match these filters.</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              No team members match these filters.
+            </p>
           </div>
         )}
       </div>

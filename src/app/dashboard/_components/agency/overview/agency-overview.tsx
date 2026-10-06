@@ -26,16 +26,9 @@ export function AgencyOverview() {
   const activeProjects = agencyProjects.filter(
     (project) => project.health !== "COMPLETED",
   );
-  const activeProposals = agencyProposals.filter(
-    (proposal) => proposal.status !== "LOST" && proposal.status !== "WON",
-  );
-  const averageUtilization = Math.round(
-    agencyMembers.reduce((total, member) => total + member.utilization, 0) /
-      agencyMembers.length,
-  );
 
   return (
-    <section className="min-w-0 space-y-8">
+    <section className="min-w-0">
       <section aria-labelledby="active-delivery-title">
         <div className="mb-4 flex items-center justify-between gap-3">
           <div>
@@ -118,7 +111,21 @@ export function AgencyOverview() {
           ))}
         </div>
       </section>
+    </section>
+  );
+}
 
+export function AgencyOverviewDetails() {
+  const activeProposals = agencyProposals.filter(
+    (proposal) => proposal.status !== "LOST" && proposal.status !== "WON",
+  );
+  const averageUtilization = Math.round(
+    agencyMembers.reduce((total, member) => total + member.utilization, 0) /
+      agencyMembers.length,
+  );
+
+  return (
+    <section className="min-w-0 space-y-8">
       <div className="grid min-w-0 grid-cols-1 gap-5 xl:grid-cols-2">
         <section className="min-w-0 rounded-2xl border border-border bg-card p-4 sm:p-6">
           <div className="flex items-center justify-between gap-3">

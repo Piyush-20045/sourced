@@ -1,16 +1,15 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import {
-  BadgeCheck,
-  Bookmark,
-  Clock3,
-  Search,
-  Users,
-} from "lucide-react";
+import { BadgeCheck, Bookmark, Clock3, Search, Users } from "lucide-react";
 import { agencyBriefs } from "@/data/dashboard/agency-dashboard";
 
-const services = ["All services", "Product Design", "Brand Systems", "Engineering"];
+const services = [
+  "All services",
+  "Product Design",
+  "Brand Systems",
+  "Engineering",
+];
 
 export function AgencyFindWork() {
   const [query, setQuery] = useState("");
@@ -26,7 +25,8 @@ export function AgencyFindWork() {
         `${brief.title} ${brief.client} ${brief.skills.join(" ")}`
           .toLowerCase()
           .includes(normalizedQuery);
-      const matchesService = service === "All services" || brief.service === service;
+      const matchesService =
+        service === "All services" || brief.service === service;
       const startingBudget = Number(brief.budget.match(/\d+/)?.[0] ?? 0);
       const matchesBudget =
         budget === "Any budget" ||
@@ -46,9 +46,12 @@ export function AgencyFindWork() {
   return (
     <section className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-primary sm:text-3xl">Find work</h1>
+        <h1 className="text-2xl font-bold text-primary sm:text-3xl">
+          Find work
+        </h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Browse larger briefs matched to your agency services and available team.
+          Browse larger briefs matched to your agency services and available
+          team.
         </p>
       </div>
 
@@ -71,7 +74,9 @@ export function AgencyFindWork() {
             onChange={(event) => setService(event.target.value)}
             className="h-11 rounded-xl border border-border bg-background px-3 text-sm font-medium outline-none focus:ring-2 focus:ring-ring"
           >
-            {services.map((item) => <option key={item}>{item}</option>)}
+            {services.map((item) => (
+              <option key={item}>{item}</option>
+            ))}
           </select>
           <select
             aria-label="Filter by budget"
@@ -79,7 +84,9 @@ export function AgencyFindWork() {
             onChange={(event) => setBudget(event.target.value)}
             className="h-11 rounded-xl border border-border bg-background px-3 text-sm font-medium outline-none focus:ring-2 focus:ring-ring"
           >
-            {['Any budget', 'Under ₹6L', '₹6L+'].map((item) => <option key={item}>{item}</option>)}
+            {["Any budget", "Under ₹6L", "₹6L+"].map((item) => (
+              <option key={item}>{item}</option>
+            ))}
           </select>
         </div>
       </div>
@@ -93,16 +100,23 @@ export function AgencyFindWork() {
         {briefs.map((brief) => {
           const isSaved = savedIds.includes(brief.id);
           return (
-            <article key={brief.id} className="rounded-2xl border border-border bg-card p-5 transition-shadow hover:shadow-sm sm:p-6">
+            <article
+              key={brief.id}
+              className="rounded-2xl border border-border bg-card p-5 transition-shadow hover:shadow-sm sm:p-6"
+            >
               <div className="flex flex-col gap-5 lg:flex-row lg:justify-between">
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="rounded-md bg-primary/8 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-primary">
                       {brief.service}
                     </span>
-                    <span className="text-xs text-muted-foreground">Posted {brief.posted}</span>
+                    <span className="text-xs text-muted-foreground">
+                      Posted {brief.posted}
+                    </span>
                   </div>
-                  <h2 className="mt-3 text-lg font-bold text-primary">{brief.title}</h2>
+                  <h2 className="mt-3 text-lg font-bold text-primary">
+                    {brief.title}
+                  </h2>
                   <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
                     {brief.client}
                     {brief.clientVerified && (
@@ -113,32 +127,54 @@ export function AgencyFindWork() {
                   </p>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {brief.skills.map((skill) => (
-                      <span key={skill} className="rounded-lg border border-border px-2.5 py-1 text-xs text-muted-foreground">
+                      <span
+                        key={skill}
+                        className="rounded-lg border border-border px-2.5 py-1 text-xs text-muted-foreground"
+                      >
                         {skill}
                       </span>
                     ))}
                   </div>
                   <dl className="mt-5 flex flex-wrap gap-x-8 gap-y-3 border-t border-border pt-4">
                     <div>
-                      <dt className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Budget</dt>
-                      <dd className="mt-0.5 text-sm font-bold text-primary">{brief.budget}</dd>
+                      <dt className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                        Budget
+                      </dt>
+                      <dd className="mt-0.5 text-sm font-bold text-primary">
+                        {brief.budget}
+                      </dd>
                     </div>
                     <div>
-                      <dt className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Duration</dt>
-                      <dd className="mt-0.5 flex items-center gap-1 text-sm font-semibold"><Clock3 className="size-3.5" /> {brief.duration}</dd>
+                      <dt className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                        Duration
+                      </dt>
+                      <dd className="mt-0.5 flex items-center gap-1 text-sm font-semibold">
+                        <Clock3 className="size-3.5" /> {brief.duration}
+                      </dd>
                     </div>
                     <div>
-                      <dt className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Suggested team</dt>
-                      <dd className="mt-0.5 flex items-center gap-1 text-sm font-semibold"><Users className="size-3.5" /> {brief.teamSize}</dd>
+                      <dt className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                        Suggested team
+                      </dt>
+                      <dd className="mt-0.5 flex items-center gap-1 text-sm font-semibold">
+                        <Users className="size-3.5" /> {brief.teamSize}
+                      </dd>
                     </div>
                     <div>
-                      <dt className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Competition</dt>
-                      <dd className="mt-0.5 text-sm font-semibold">{brief.proposals} proposals</dd>
+                      <dt className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                        Competition
+                      </dt>
+                      <dd className="mt-0.5 text-sm font-semibold">
+                        {brief.proposals} proposals
+                      </dd>
                     </div>
                   </dl>
                 </div>
                 <div className="flex shrink-0 gap-2 lg:flex-col lg:items-stretch">
-                  <button type="button" className="rounded-xl bg-primary px-5 py-2.5 text-xs font-bold text-primary-foreground hover:bg-primary/90">
+                  <button
+                    type="button"
+                    className="rounded-xl bg-primary px-5 py-2.5 text-xs font-bold text-primary-foreground hover:bg-primary/90"
+                  >
                     Build proposal
                   </button>
                   <button
@@ -147,7 +183,9 @@ export function AgencyFindWork() {
                     aria-pressed={isSaved}
                     className="inline-flex items-center justify-center gap-2 rounded-xl border border-border px-5 py-2.5 text-xs font-semibold hover:bg-muted"
                   >
-                    <Bookmark className={`size-3.5 ${isSaved ? "fill-primary text-primary" : ""}`} />
+                    <Bookmark
+                      className={`size-3.5 ${isSaved ? "fill-primary text-primary" : ""}`}
+                    />
                     {isSaved ? "Saved" : "Save"}
                   </button>
                 </div>
@@ -160,7 +198,9 @@ export function AgencyFindWork() {
       {briefs.length === 0 && (
         <div className="rounded-2xl border border-dashed border-border py-14 text-center">
           <p className="font-semibold text-primary">No matching briefs</p>
-          <p className="mt-1 text-sm text-muted-foreground">Try a broader search or different filters.</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Try a broader search or different filters.
+          </p>
         </div>
       )}
     </section>

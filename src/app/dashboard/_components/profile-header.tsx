@@ -89,7 +89,7 @@ export function ProfileHeader({
             </div>
 
             <div className="mb-1 min-w-0 max-w-full">
-              <h1 className="break-words text-xl font-bold sm:text-2xl">{profile.name}</h1>
+              <h1 className="wrap-break-word text-xl font-bold sm:text-2xl">{profile.name}</h1>
               <p className="flex flex-wrap items-center gap-1 text-xs md:text-sm text-muted-foreground">
                 <MapPin className="h-3.5 w-3.5 shrink-0" />
                 {profile.location} <span className="mx-1">|</span> {profile.title}
@@ -99,9 +99,9 @@ export function ProfileHeader({
 
           {/* actions */}
           <div className="mb-1 flex w-full flex-col gap-2 min-[400px]:flex-row sm:ml-auto sm:w-auto">
-            <button className="min-w-0 flex-1 rounded-md border border-border px-4 py-2 text-sm font-medium hover:bg-muted sm:flex-none">
+            <Link href={'/settings'} className="min-w-0 flex-1 rounded-md border border-border px-4 py-2 text-sm font-medium hover:bg-muted sm:flex-none">
               {editLabel}
-            </button>
+            </Link>
             <Link
               href={actionHref}
               className="flex min-w-0 flex-1 items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 sm:flex-none"

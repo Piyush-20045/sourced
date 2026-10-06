@@ -7,12 +7,17 @@ import Footer from "@/components/layout/footer";
 import { agencyIdentity } from "@/data/dashboard/agency-dashboard";
 import { AgencySideNav } from "../_components/agency/shared/agency-side-nav";
 import { AgencyStatsGrid } from "../_components/agency/shared/agency-stats-grid";
-import { AgencyOverview } from "../_components/agency/overview/agency-overview";
+import {
+  AgencyOverview,
+  AgencyOverviewDetails,
+} from "../_components/agency/overview/agency-overview";
 import { AgencyFindWork } from "../_components/agency/find-work/agency-find-work";
 import { AgencyProposals } from "../_components/agency/proposals/agency-proposals";
 import { AgencyProjects } from "../_components/agency/projects/agency-projects";
 import { AgencyTeam } from "../_components/agency/team/agency-team";
 import { AgencyHiring } from "../_components/agency/hiring/agency-hiring";
+import { AgencyFinance } from "../_components/agency/finance/agency-finance";
+import { AgencyAnalytics } from "../_components/agency/analytics/agency-analytics";
 
 export default function AgencyDashboardPage() {
   const [activeTab, setActiveTab] = useState("Overview");
@@ -39,8 +44,16 @@ export default function AgencyDashboardPage() {
           {activeTab === "Projects" && <AgencyProjects />}
           {activeTab === "Team & Capacity" && <AgencyTeam />}
           {activeTab === "Hiring" && <AgencyHiring />}
+          {activeTab === "Finance" && <AgencyFinance />}
+          {activeTab === "Analytics" && <AgencyAnalytics />}
         </div>
       </div>
+
+      {activeTab === "Overview" && (
+        <div className="mx-auto max-w-6xl px-4 pb-14 sm:px-6">
+          <AgencyOverviewDetails />
+        </div>
+      )}
 
       <Footer />
     </div>
