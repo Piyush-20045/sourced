@@ -11,6 +11,8 @@ import { AgencyOverview } from "../_components/agency/overview/agency-overview";
 import { AgencyFindWork } from "../_components/agency/find-work/agency-find-work";
 import { AgencyProposals } from "../_components/agency/proposals/agency-proposals";
 import { AgencyProjects } from "../_components/agency/projects/agency-projects";
+import { AgencyTeam } from "../_components/agency/team/agency-team";
+import { AgencyHiring } from "../_components/agency/hiring/agency-hiring";
 
 export default function AgencyDashboardPage() {
   const [activeTab, setActiveTab] = useState("Overview");
@@ -35,6 +37,8 @@ export default function AgencyDashboardPage() {
           {activeTab === "Find Work" && <AgencyFindWork />}
           {activeTab === "Proposals" && <AgencyProposals />}
           {activeTab === "Projects" && <AgencyProjects />}
+          {activeTab === "Team & Capacity" && <AgencyTeam />}
+          {activeTab === "Hiring" && <AgencyHiring />}
         </div>
       </div>
 
