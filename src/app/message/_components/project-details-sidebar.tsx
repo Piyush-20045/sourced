@@ -1,20 +1,38 @@
 "use client";
 
 import Link from "next/link";
-import { FileCode, FileText, Image as ImageIcon, Table } from "lucide-react";
+import {
+  ArrowLeft,
+  FileCode,
+  FileText,
+  Image as ImageIcon,
+  Table,
+  X,
+} from "lucide-react";
 import { Conversation } from "@/data/message-data";
 
 interface ProjectDetailsSidebarProps {
   conversation: Conversation;
+  onClose: () => void;
 }
 
 export function ProjectDetailsSidebar({
   conversation,
+  onClose,
 }: ProjectDetailsSidebarProps) {
   const { name, role, avatar, initials, contract, sharedFiles } = conversation;
 
   return (
-    <div className="flex h-full flex-col overflow-y-auto border-l border-neutral-200/80 bg-white p-6 space-y-8 scrollbar-thin">
+    <aside className="relative flex h-full flex-col overflow-y-auto bg-white p-5 pt-16 space-y-8 scrollbar-thin md:border-l md:border-neutral-200/80 md:p-6 md:pt-16">
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="Close contact details"
+        className="absolute left-4 top-4 grid size-9 place-items-center rounded-xl text-neutral-600 transition-colors hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 md:left-auto md:right-4"
+      >
+        <ArrowLeft className="size-5 md:hidden" />
+        <X className="hidden size-5 md:block" />
+      </button>
       {/* Contact Profile Overview */}
       <div className="text-center space-y-3">
         <div className="relative mx-auto h-20 w-20">
@@ -148,6 +166,6 @@ export function ProjectDetailsSidebar({
           View All Files
         </button>
       </div>
-    </div>
+    </aside>
   );
 }

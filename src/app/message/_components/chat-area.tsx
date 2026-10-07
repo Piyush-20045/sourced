@@ -21,12 +21,16 @@ interface ChatAreaProps {
   conversation: Conversation;
   onSendMessage: (conversationId: string, text: string) => void;
   onMobileBack?: () => void;
+  onToggleDetails: () => void;
+  detailsOpen: boolean;
 }
 
 export function ChatArea({
   conversation,
   onSendMessage,
   onMobileBack,
+  onToggleDetails,
+  detailsOpen,
 }: ChatAreaProps) {
   const [inputText, setInputText] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
@@ -99,7 +103,7 @@ export function ChatArea({
     <div className="flex h-full flex-col bg-[#f4f6f8] relative overflow-hidden">
       {/* Header Bar */}
       <div className="flex items-center justify-between border-b border-neutral-200/80 bg-white px-4 sm:px-6 py-3 shadow-2xs z-10">
-        <div className="flex items-center gap-3">
+        <div className="flex min-w-0 items-center gap-1 sm:gap-3">
           {/* Mobile Back Arrow Button */}
           {onMobileBack && (
             <button
@@ -112,30 +116,40 @@ export function ChatArea({
             </button>
           )}
 
-          <div className="relative shrink-0">
-            {avatar ? (
-              <img
-                src={avatar}
-                alt={name}
-                className="h-10 w-10 rounded-full object-cover border border-neutral-200 shadow-2xs"
-              />
-            ) : (
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-900 font-bold text-sm shadow-2xs">
-                {initials || name.slice(0, 2).toUpperCase()}
-              </div>
-            )}
-            <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-emerald-500 ring-2 ring-white" />
-          </div>
-
-          <div>
-            <div className="flex items-center gap-1.5">
-              <h2 className="font-extrabold text-neutral-900 text-base">
-                {name}
-              </h2>
-              <BadgeCheck className="h-4 w-4 text-emerald-600 fill-emerald-100" />
+          <button
+            type="button"
+            onClick={onToggleDetails}
+            aria-label={`View details for ${name}`}
+            aria-expanded={detailsOpen}
+            className="flex min-w-0 items-center gap-3 rounded-xl p-1 text-left transition-colors hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900"
+          >
+            <div className="relative shrink-0">
+              {avatar ? (
+                <img
+                  src={avatar}
+                  alt=""
+                  className="h-10 w-10 rounded-full object-cover border border-neutral-200 shadow-2xs"
+                />
+              ) : (
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-900 font-bold text-sm shadow-2xs">
+                  {initials || name.slice(0, 2).toUpperCase()}
+                </div>
+              )}
+              <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-emerald-500 ring-2 ring-white" />
             </div>
-            <p className="text-xs text-neutral-500 font-medium">{statusText}</p>
-          </div>
+
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5">
+                <h2 className="truncate font-extrabold text-neutral-900 text-base">
+                  {name}
+                </h2>
+                <BadgeCheck className="h-4 w-4 shrink-0 text-emerald-600 fill-emerald-100" />
+              </div>
+              <p className="truncate text-xs text-neutral-500 font-medium">
+                {statusText}
+              </p>
+            </div>
+          </button>
         </div>
 
         {/* Call & Action Icons */}

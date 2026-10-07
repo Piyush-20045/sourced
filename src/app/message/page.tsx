@@ -10,13 +10,33 @@ import { ProjectDetailsSidebar } from "./_components/project-details-sidebar";
 export default function MessagePage() {
   const [conversations, setConversations] = useState(initialConversations);
   const [selectedId, setSelectedId] = useState("conv-1");
-  const [mobileView, setMobileView] = useState<"list" | "chat">("list");
+  const [mobileView, setMobileView] = useState<
+    "list" | "chat" | "details"
+  >("list");
+  const [showDetails, setShowDetails] = useState(false);
 
   const activeConversation =
     conversations.find((c) => c.id === selectedId) || conversations[0]!;
 
   const handleSelectConversation = (id: string) => {
     setSelectedId(id);
+    setShowDetails(false);
+    setMobileView("chat");
+  };
+
+  const handleToggleDetails = () => {
+    if (showDetails) {
+      setShowDetails(false);
+      setMobileView("chat");
+      return;
+    }
+
+    setShowDetails(true);
+    setMobileView("details");
+  };
+
+  const handleCloseDetails = () => {
+    setShowDetails(false);
     setMobileView("chat");
   };
 
@@ -57,7 +77,13 @@ export default function MessagePage() {
 
       {/* Full-Height Messaging Application Area (Fixes height space issue) */}
       <div className="flex-1 w-full overflow-hidden">
-        <div className="h-[calc(100vh-65px)] w-full grid grid-cols-1 md:grid-cols-[300px_1fr] lg:grid-cols-[320px_1fr_320px] overflow-hidden bg-white">
+        <div
+          className={`relative grid h-[calc(100vh-65px)] w-full grid-cols-1 overflow-hidden bg-white md:grid-cols-[300px_minmax(0,1fr)] ${
+            showDetails
+              ? "lg:grid-cols-[320px_minmax(0,1fr)_320px]"
+              : "lg:grid-cols-[320px_minmax(0,1fr)]"
+          }`}
+        >
           {/* Column 1: Conversations List */}
           <div
             className={`min-h-0 h-full ${
@@ -81,13 +107,24 @@ export default function MessagePage() {
               conversation={activeConversation}
               onSendMessage={handleSendMessage}
               onMobileBack={() => setMobileView("list")}
+              onToggleDetails={handleToggleDetails}
+              detailsOpen={showDetails}
             />
           </div>
 
-          {/* Column 3: Contact & Project Details (Desktop only) */}
-          <div className="hidden lg:block min-h-0 h-full">
-            <ProjectDetailsSidebar conversation={activeConversation} />
-          </div>
+          {/* Contact details: mobile pane, tablet drawer, desktop column */}
+          {showDetails && (
+            <div
+              className={`min-h-0 h-full bg-white ${
+                mobileView === "details" ? "block" : "hidden"
+              } md:absolute md:inset-y-0 md:right-0 md:z-30 md:block md:w-80 md:shadow-2xl lg:relative lg:inset-auto lg:z-auto lg:w-auto lg:shadow-none`}
+            >
+              <ProjectDetailsSidebar
+                conversation={activeConversation}
+                onClose={handleCloseDetails}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

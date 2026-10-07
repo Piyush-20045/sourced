@@ -183,14 +183,13 @@ export function AgencyProposals() {
         </div>
 
         <div className="hidden max-w-full overflow-x-auto overscroll-x-contain md:block">
-          <table className="w-full min-w-215 text-left text-xs">
+          <table className="w-full min-w-185 text-left text-xs">
             <thead className="border-b border-border bg-muted/30 text-[10px] uppercase tracking-wider text-muted-foreground">
               <tr>
                 <th className="px-5 py-3.5 font-bold">Project</th>
                 <th className="px-5 py-3.5 font-bold">Value</th>
                 <th className="px-5 py-3.5 font-bold">Lead</th>
                 <th className="px-5 py-3.5 font-bold">Submitted</th>
-                <th className="px-5 py-3.5 font-bold">Status</th>
                 <th className="px-5 py-3.5 font-bold">Next action</th>
                 <th className="px-5 py-3.5">
                   <span className="sr-only">Open</span>
@@ -214,13 +213,6 @@ export function AgencyProposals() {
                   </td>
                   <td className="px-5 py-4 text-muted-foreground">
                     {proposal.submitted}
-                  </td>
-                  <td className="px-5 py-4">
-                    <span
-                      className={`rounded-md px-2.5 py-1 text-[10px] font-bold ${statusStyles[proposal.status]}`}
-                    >
-                      {proposal.status}
-                    </span>
                   </td>
                   <td className="px-5 py-4 text-muted-foreground">
                     {proposal.nextAction}
