@@ -4,6 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { BadgeCheck, MapPin, Search } from "lucide-react";
 import { user, Mode } from "@/data/dashboard/freelancer-dashboard";
 import Link from "next/link";
+import { ProfileCover } from "@/components/profile/profile-cover";
 
 export interface DashboardHeaderIdentity {
   name: string;
@@ -53,17 +54,12 @@ export function ProfileHeader({
 
   return (
     <section>
-      {/* cover image */}
-      <div className="relative h-28 w-full overflow-hidden sm:h-40 md:h-48">
-        <Image
-          src={profile.cover}
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-      </div>
+      <ProfileCover
+        src={profile.cover}
+        sizes="(max-width: 640px) calc(100vw - 2rem), (max-width: 1152px) calc(100vw - 3rem), 1104px"
+        containerClassName="max-w-6xl px-4 pt-3 sm:px-6 sm:pt-4"
+        coverClassName="rounded-2xl"
+      />
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         {/* avatar + name row */}

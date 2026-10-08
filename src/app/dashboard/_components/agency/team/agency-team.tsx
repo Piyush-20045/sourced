@@ -103,14 +103,12 @@ export function AgencyTeam() {
 
       <div className="overflow-hidden rounded-2xl border border-border bg-card">
         <div className="overflow-x-auto">
-          <table className="w-full min-w-225 text-left text-xs">
+          <table className="w-full min-w-160 text-left text-xs">
             <thead className="border-b border-border bg-muted/30 text-[10px] uppercase tracking-wider text-muted-foreground">
               <tr>
                 <th className="px-5 py-3.5 font-bold">Member</th>
                 <th className="px-5 py-3.5 font-bold">Type</th>
                 <th className="px-5 py-3.5 font-bold">Assignments</th>
-                <th className="px-5 py-3.5 font-bold">Utilization</th>
-                <th className="px-5 py-3.5 font-bold">Availability</th>
                 <th className="px-5 py-3.5 font-bold">Billable rate</th>
               </tr>
             </thead>
@@ -145,22 +143,6 @@ export function AgencyTeam() {
                   </td>
                   <td className="px-5 py-4 text-muted-foreground">
                     {member.assignments} active
-                  </td>
-                  <td className="px-5 py-4">
-                    <div className="flex w-36 items-center gap-2">
-                      <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-muted">
-                        <div
-                          className="h-full rounded-full bg-primary"
-                          style={{ width: `${member.utilization}%` }}
-                        />
-                      </div>
-                      <span className="font-bold text-primary">
-                        {member.utilization}%
-                      </span>
-                    </div>
-                  </td>
-                  <td className="px-5 py-4 font-medium text-emerald-700">
-                    {member.availability}
                   </td>
                   <td className="px-5 py-4 font-bold text-primary">
                     {member.billableRate}

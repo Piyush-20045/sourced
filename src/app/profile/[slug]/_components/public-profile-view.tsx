@@ -22,6 +22,7 @@ import type {
   PublicProfile,
   PublicReview,
 } from "@/data/public-profiles";
+import { ProfileCover } from "@/components/profile/profile-cover";
 import { ProfileActions } from "./profile-actions";
 
 function getProfilePresentation(profile: PublicProfile) {
@@ -103,20 +104,17 @@ function ProfileHero({ profile }: { profile: PublicProfile }) {
 
   return (
     <section className="border-b border-border bg-muted/30">
-      <div className="relative h-44 overflow-hidden sm:h-56 lg:h-64">
-        <Image
-          src={profile.coverImage}
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
+      <ProfileCover
+        src={profile.coverImage}
+        sizes="(max-width: 640px) calc(100vw - 2rem), (max-width: 1024px) calc(100vw - 3rem), (max-width: 1440px) calc(100vw - 5rem), 1360px"
+        containerClassName="max-w-360 px-4 pt-3 sm:px-6 sm:pt-4 lg:px-8 xl:px-10"
+        coverClassName="rounded-2xl"
+      >
         <div className="absolute inset-0 bg-linear-to-t from-primary/70 via-primary/10 to-transparent" />
-      </div>
+      </ProfileCover>
 
       <div className="mx-auto max-w-360 px-4 pb-7 sm:px-6 lg:px-8 xl:px-10">
-        <div className="relative -mt-16 rounded-3xl border border-border/80 bg-background p-5 shadow-lg shadow-primary/5 sm:p-7">
+        <div className="relative -mt-6 rounded-3xl border border-border/80 bg-background p-5 shadow-lg shadow-primary/5 sm:-mt-16 sm:p-7">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end">
             <div className="flex min-w-0 flex-1 flex-col gap-4 sm:flex-row sm:items-end">
               <IdentityMark profile={profile} />
