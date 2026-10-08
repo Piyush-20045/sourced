@@ -58,7 +58,7 @@ export function ProfileHeader({
         src={profile.cover}
         sizes="(max-width: 640px) calc(100vw - 2rem), (max-width: 1152px) calc(100vw - 3rem), 1104px"
         containerClassName="max-w-6xl px-4 pt-3 sm:px-6 sm:pt-4"
-        coverClassName="rounded-2xl"
+        coverClassName="rounded-lg"
       />
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -72,10 +72,10 @@ export function ProfileHeader({
                   alt={profile.name}
                   width={96}
                   height={96}
-                  className="size-24 rounded-full border-2 border-background object-cover"
+                  className="size-20 md:size-24 rounded-full border-2 border-background object-cover"
                 />
               ) : (
-                <div className="grid size-24 place-items-center rounded-full border-2 border-background bg-primary text-xl font-bold text-primary-foreground">
+                <div className="grid size-20 md:size-24 place-items-center rounded-full border-2 border-background bg-primary text-xl font-bold text-primary-foreground">
                   {profile.initials ?? profile.name.slice(0, 2).toUpperCase()}
                 </div>
               )}

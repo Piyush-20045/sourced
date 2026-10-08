@@ -81,6 +81,23 @@ export function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsMobileMenuOpen(false);
+    };
+
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isMobileMenuOpen]);
+
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -104,6 +121,7 @@ export function Navbar() {
       user: { ...prev.user, activeMode: mode },
     }));
     setIsProfileMenuOpen(false);
+    setIsMobileMenuOpen(false);
     if (mode === "Freelancer") router.push("/dashboard/freelancer");
     else if (mode === "Client") router.push("/dashboard/client");
     else router.push("/dashboard/agency");
@@ -111,8 +129,8 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full backdrop-blur-md border-b border-border/70 bg-background/95 text-foreground shadow-2xs">
-      {/* Full width container with clean x-axis padding */}
-      <div className="flex h-16 w-full items-center justify-between gap-4 px-4 sm:px-6 md:px-8">
+      {/* Full-width header with a contained navigation row on large screens */}
+      <div className="relative z-50 mx-auto flex h-16 w-full max-w-375 items-center justify-between gap-4 bg-background/95 px-4 sm:px-6 md:px-8">
         {/* Left Section: Brand Logo & Navigation */}
         <div className="flex items-center gap-6 md:gap-8">
           {/* Brand Logo */}
@@ -152,7 +170,7 @@ export function Navbar() {
           {isLoggedIn && (
             <form
               onSubmit={handleSearchSubmit}
-              className="relative hidden items-center md:flex w-56 lg:w-72"
+              className="relative hidden items-center lg:flex w-56 lg:w-64 xl:w-72"
             >
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-3.5 text-muted-foreground pointer-events-none" />
               <Input
@@ -421,9 +439,15 @@ export function Navbar() {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={() => {
+              setIsMobileMenuOpen(!isMobileMenuOpen);
+              setIsNotificationsOpen(false);
+              setIsProfileMenuOpen(false);
+            }}
             className="size-9 md:hidden"
             aria-label="Toggle Navigation Menu"
+            aria-controls="mobile-navigation"
+            aria-expanded={isMobileMenuOpen}
           >
             {isMobileMenuOpen ? (
               <X className="size-5" />
@@ -434,76 +458,101 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer Panel */}
-      {isMobileMenuOpen && (
-        <div className="border-t border-border bg-background px-4 pb-6 pt-3 md:hidden animate-in fade-in slide-in-from-top-2 duration-200">
-          <div className="space-y-4">
-            {/* Mobile Search Input */}
+      <button
+        type="button"
+        aria-label="Close navigation menu"
+        onClick={() => setIsMobileMenuOpen(false)}
+        className={cn(
+          "fixed inset-x-0 bottom-0 top-16 z-40 bg-black/25 backdrop-blur-[1px] transition-opacity duration-300 md:hidden",
+          isMobileMenuOpen
+            ? "visible opacity-100"
+            : "invisible pointer-events-none opacity-0",
+        )}
+      />
+
+      {/* Mobile navigation overlays page content below the sticky header. */}
+      <div
+        id="mobile-navigation"
+        aria-hidden={!isMobileMenuOpen}
+        className={cn(
+          "absolute inset-x-0 top-full z-50 max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain border-t border-border bg-background shadow-2xl transition-all duration-300 ease-out md:hidden",
+          isMobileMenuOpen
+            ? "visible translate-y-0 opacity-100"
+            : "invisible pointer-events-none -translate-y-3 opacity-0",
+        )}
+      >
+        <div className="mx-auto w-full max-w-375 px-4 pb-6 pt-4 sm:px-6">
+          <div className="space-y-5">
             {isLoggedIn && (
               <form onSubmit={handleSearchSubmit} className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
+                <Search className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   type="search"
                   placeholder="Search projects, services..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-9 text-xs h-9"
+                  className="h-11 rounded-xl pl-10 pr-4 text-sm"
                 />
               </form>
             )}
 
-            {/* Mobile Nav Links */}
-            <div className="space-y-1">
+            <nav aria-label="Mobile navigation" className="space-y-1">
               {navLinks.map((item) => (
                 <Link
                   key={item.label}
                   href={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block rounded-lg px-3 py-2 text-xs font-semibold text-foreground hover:bg-accent"
+                  className={cn(
+                    "block rounded-xl px-3 py-2.5 text-sm font-semibold transition-colors",
+                    pathname === item.href
+                      ? "bg-primary text-primary-foreground"
+                      : "text-foreground hover:bg-muted",
+                  )}
                 >
                   {item.label}
                 </Link>
               ))}
-            </div>
+            </nav>
 
-            {/* Mobile Logged-in Info & Actions */}
             {isLoggedIn ? (
-              <div className="pt-3 border-t border-border space-y-3">
-                <div className="flex items-center justify-between p-2.5 bg-muted/50 rounded-lg border border-border">
-                  <div className="flex items-center gap-2.5">
+              <div className="space-y-3 border-t border-border pt-4">
+                <div className="rounded-xl border border-border bg-muted/40 p-3">
+                  <div className="flex min-w-0 items-center gap-2.5">
                     <Image
                       src={user.avatar}
                       alt={user.name}
-                      width={32}
-                      height={32}
-                      className="size-8 rounded-md object-cover border border-border"
+                      width={36}
+                      height={36}
+                      className="size-9 shrink-0 rounded-lg border border-border object-cover"
                     />
-                    <div>
-                      <p className="text-xs font-bold text-foreground">
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-bold text-foreground">
                         {user.name}
                       </p>
-                      <p className="text-[10px] text-muted-foreground uppercase">
-                        {currentMode} Mode
+                      <p className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+                        {currentMode} mode
                       </p>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-3 gap-1">
-                    {(["Freelancer", "Client", "Agency"] as const).map((mode) => (
-                      <button
-                        key={mode}
-                        type="button"
-                        onClick={() => handleModeChange(mode)}
-                        className={cn(
-                          "rounded px-2 py-1 text-[10px] font-bold transition-colors",
-                          currentMode === mode
-                            ? "bg-primary text-primary-foreground"
-                            : "bg-muted text-muted-foreground",
-                        )}
-                      >
-                        {mode}
-                      </button>
-                    ))}
+                  <div className="mt-3 grid grid-cols-3 gap-1 rounded-lg bg-muted p-1">
+                    {(["Freelancer", "Client", "Agency"] as const).map(
+                      (mode) => (
+                        <button
+                          key={mode}
+                          type="button"
+                          onClick={() => handleModeChange(mode)}
+                          className={cn(
+                            "min-w-0 rounded-md px-1.5 py-2 text-[10px] font-bold transition-colors min-[390px]:text-xs",
+                            currentMode === mode
+                              ? "bg-primary text-primary-foreground shadow-sm"
+                              : "text-muted-foreground hover:bg-background hover:text-foreground",
+                          )}
+                        >
+                          {mode}
+                        </button>
+                      ),
+                    )}
                   </div>
                 </div>
 
@@ -514,28 +563,44 @@ export function Navbar() {
                     className={buttonVariants({
                       variant: "outline",
                       size: "sm",
+                      className: "h-10 gap-2 rounded-xl",
                     })}
                   >
+                    <SettingsIcon className="size-3.5" />
                     Settings
                   </Link>
-                  <Button variant="destructive" size="sm" onClick={toggleAuth}>
+                  <Button
+                    variant="destructive"
+                    size="sm"
+                    onClick={toggleAuth}
+                    className="h-10 gap-2 rounded-xl"
+                  >
+                    <LogOut className="size-3.5" />
                     Sign Out
                   </Button>
                 </div>
               </div>
             ) : (
-              <div className="grid grid-cols-2 gap-2 pt-2 border-t border-border">
+              <div className="grid grid-cols-2 gap-2 border-t border-border pt-4">
                 <Link
                   href="/login"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={buttonVariants({ variant: "outline", size: "sm" })}
+                  className={buttonVariants({
+                    variant: "outline",
+                    size: "sm",
+                    className: "h-10 rounded-xl",
+                  })}
                 >
                   Log In
                 </Link>
                 <Link
                   href="/signup"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={buttonVariants({ variant: "default", size: "sm" })}
+                  className={buttonVariants({
+                    variant: "default",
+                    size: "sm",
+                    className: "h-10 rounded-xl",
+                  })}
                 >
                   Sign Up
                 </Link>
@@ -543,7 +608,7 @@ export function Navbar() {
             )}
           </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }

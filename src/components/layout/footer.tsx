@@ -31,7 +31,7 @@ const footerSections = [
 function Footer() {
   return (
     <footer className="w-full bg-[#e3e3e3] text-[#44464d]">
-      <div className="mx-auto flex w-full flex-col gap-10 px-6 pb-9 pt-11 sm:px-10">
+      <div className="mx-auto flex w-full max-w-375 flex-col gap-10 px-6 pb-9 pt-11 sm:px-10">
         <div className="grid gap-10 lg:grid-cols-[minmax(260px,1fr)_auto] lg:items-start">
           <div className="max-w-90">
             <Link href="/" className="text-base font-medium text-black">
@@ -96,11 +96,13 @@ function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-[#d3d3d3] px-6 py-4 text-center text-xs leading-4 text-[#3f4148]">
-        <p>© 2026 Sourced. All rights reserved.</p>
-        <p className="mt-0.5 inline-flex items-center justify-center gap-1">
-          <Languages className="size-3.5" /> English (US)
-        </p>
+      <div className="border-t border-[#d3d3d3]">
+        <div className="mx-auto w-full max-w-7xl px-6 py-4 text-center text-xs leading-4 text-[#3f4148] sm:px-10">
+          <p>© 2026 Sourced. All rights reserved.</p>
+          <p className="mt-0.5 inline-flex items-center justify-center gap-1">
+            <Languages className="size-3.5" /> English (US)
+          </p>
+        </div>
       </div>
     </footer>
   );

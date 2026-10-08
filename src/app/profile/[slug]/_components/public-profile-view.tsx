@@ -83,14 +83,14 @@ function IdentityMark({ profile }: { profile: PublicProfile }) {
         width={112}
         height={112}
         priority
-        className="size-24 rounded-2xl object-cover ring-4 ring-background sm:size-28"
+        className="size-24 rounded-full object-cover ring-4 ring-background sm:size-28"
       />
     );
   }
 
   return (
     <div
-      className="grid size-24 place-items-center rounded-2xl bg-primary text-2xl font-bold tracking-tight text-primary-foreground ring-4 ring-background sm:size-28"
+      className="grid size-24 place-items-center rounded-full bg-primary text-2xl font-bold tracking-tight text-primary-foreground ring-4 ring-background sm:size-28"
       aria-label={`${profile.name} logo`}
     >
       {profile.initials}
@@ -108,20 +108,20 @@ function ProfileHero({ profile }: { profile: PublicProfile }) {
         src={profile.coverImage}
         sizes="(max-width: 640px) calc(100vw - 2rem), (max-width: 1024px) calc(100vw - 3rem), (max-width: 1440px) calc(100vw - 5rem), 1360px"
         containerClassName="max-w-360 px-4 pt-3 sm:px-6 sm:pt-4 lg:px-8 xl:px-10"
-        coverClassName="rounded-2xl"
+        coverClassName="rounded-lg"
       >
         <div className="absolute inset-0 bg-linear-to-t from-primary/70 via-primary/10 to-transparent" />
       </ProfileCover>
 
       <div className="mx-auto max-w-360 px-4 pb-7 sm:px-6 lg:px-8 xl:px-10">
-        <div className="relative -mt-6 rounded-3xl border border-border/80 bg-background p-5 shadow-lg shadow-primary/5 sm:-mt-16 sm:p-7">
+        <div className="relative -mt-6 rounded-lg border border-border/80 bg-background p-5 shadow-sm sm:-mt-16 sm:p-7">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end">
             <div className="flex min-w-0 flex-1 flex-col gap-4 sm:flex-row sm:items-end">
               <IdentityMark profile={profile} />
 
               <div className="min-w-0 pb-1">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-primary px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground">
+                  <span className="inline-flex items-center gap-1.5 rounded-md bg-primary px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground">
                     <KindIcon className="size-3" />
                     {presentation.label}
                   </span>
@@ -173,7 +173,7 @@ function ProfileHero({ profile }: { profile: PublicProfile }) {
             />
           </div>
 
-          <dl className="mt-7 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-4">
+          <dl className="mt-7 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-4">
             {profile.stats.map((stat) => (
               <div key={stat.label} className="bg-background px-4 py-4 sm:px-5">
                 <dt className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">
@@ -201,7 +201,7 @@ function SectionCard({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-2xl border border-border bg-card p-5 sm:p-7">
+    <section className="rounded-lg border border-border bg-card p-5 sm:p-7">
       {eyebrow && (
         <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-accent">
           {eyebrow}
@@ -227,7 +227,7 @@ function TagList({ items }: { items: string[] }) {
       {items.map((item) => (
         <span
           key={item}
-          className="rounded-lg border border-border bg-muted/60 px-3 py-1.5 text-xs font-medium text-foreground/80"
+          className="rounded-md border border-border bg-muted/60 px-3 py-1.5 text-xs font-medium text-foreground/80"
         >
           {item}
         </span>
@@ -311,7 +311,7 @@ function FreelancerContent({ profile }: { profile: FreelancerPublicProfile }) {
                   className={index === 0 ? "sm:col-span-2" : ""}
                 >
                   <div
-                    className={`group relative overflow-hidden rounded-xl bg-muted ${
+                    className={`group relative overflow-hidden rounded-lg bg-muted ${
                       index === 0 ? "aspect-16/7" : "aspect-4/3"
                     }`}
                   >
@@ -380,7 +380,7 @@ function FreelancerContent({ profile }: { profile: FreelancerPublicProfile }) {
       </div>
 
       <aside className="space-y-5 lg:sticky lg:top-24 lg:self-start">
-        <section className="rounded-2xl bg-primary p-5 text-primary-foreground sm:p-6">
+        <section className="rounded-lg bg-primary p-5 text-primary-foreground sm:p-6">
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-primary-foreground/60">
             Work with Salman
           </p>
@@ -395,7 +395,7 @@ function FreelancerContent({ profile }: { profile: FreelancerPublicProfile }) {
           </p>
           <Link
             href="/dashboard/client"
-            className="mt-5 inline-flex h-10 w-full items-center justify-center rounded-xl bg-background px-4 text-sm font-bold text-primary transition-opacity hover:opacity-90"
+            className="mt-5 inline-flex h-10 w-full items-center justify-center rounded-md bg-background px-4 text-sm font-bold text-primary transition-opacity hover:opacity-90"
           >
             Invite to a project
           </Link>
@@ -490,11 +490,11 @@ function ClientContent({ profile }: { profile: ClientPublicProfile }) {
               {profile.openProjects.map((project) => (
                 <article
                   key={project.id}
-                  className="rounded-xl border border-border p-4 transition-colors hover:border-primary/30 sm:p-5"
+                  className="rounded-lg border border-border p-4 transition-colors hover:border-primary/30 sm:p-5"
                 >
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
-                      <span className="rounded-full bg-emerald-50 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-emerald-700">
+                      <span className="rounded-md bg-emerald-50 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-emerald-700">
                         {project.status}
                       </span>
                       <h3 className="mt-2 font-bold text-primary">
@@ -580,7 +580,7 @@ function ClientContent({ profile }: { profile: ClientPublicProfile }) {
           <TagList items={profile.preferredSkills} />
         </SectionCard>
 
-        <section className="rounded-2xl border border-emerald-200 bg-emerald-50/60 p-5 sm:p-6">
+        <section className="rounded-lg border border-emerald-200 bg-emerald-50/60 p-5 sm:p-6">
           <h2 className="flex items-center gap-2 font-bold text-emerald-950">
             <ShieldCheck className="size-5" /> Trust & safety
           </h2>
@@ -622,7 +622,7 @@ function AgencyContent({ profile }: { profile: AgencyPublicProfile }) {
               {profile.services.map((service, index) => (
                 <article
                   key={service.name}
-                  className="rounded-xl bg-muted/55 p-4"
+                  className="rounded-lg bg-muted/55 p-4"
                 >
                   <span className="text-xs font-bold text-accent">
                     0{index + 1}
@@ -645,7 +645,7 @@ function AgencyContent({ profile }: { profile: AgencyPublicProfile }) {
               {profile.caseStudies.map((study) => (
                 <article
                   key={study.id}
-                  className="overflow-hidden rounded-xl border border-border sm:grid sm:grid-cols-[220px_1fr]"
+                  className="overflow-hidden rounded-lg border border-border sm:grid sm:grid-cols-[220px_1fr]"
                 >
                   <div className="relative min-h-44 bg-muted">
                     <Image
@@ -682,7 +682,7 @@ function AgencyContent({ profile }: { profile: AgencyPublicProfile }) {
               {profile.team.map((member) => (
                 <article
                   key={member.id}
-                  className="rounded-xl bg-muted/50 p-4 text-center"
+                  className="rounded-lg bg-muted/50 p-4 text-center"
                 >
                   <Image
                     src={member.avatar}
@@ -709,7 +709,7 @@ function AgencyContent({ profile }: { profile: AgencyPublicProfile }) {
               {profile.opportunities.map((opportunity) => (
                 <article
                   key={opportunity.id}
-                  className="rounded-xl border border-border p-4 sm:p-5"
+                  className="rounded-lg border border-border p-4 sm:p-5"
                 >
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
@@ -740,7 +740,7 @@ function AgencyContent({ profile }: { profile: AgencyPublicProfile }) {
       </div>
 
       <aside className="space-y-5 lg:sticky lg:top-24 lg:self-start">
-        <section className="rounded-2xl bg-primary p-5 text-primary-foreground sm:p-6">
+        <section className="rounded-lg bg-primary p-5 text-primary-foreground sm:p-6">
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-primary-foreground/60">
             Start a conversation
           </p>
@@ -753,7 +753,7 @@ function AgencyContent({ profile }: { profile: AgencyPublicProfile }) {
           </p>
           <Link
             href="/message"
-            className="mt-5 inline-flex h-10 w-full items-center justify-center rounded-xl bg-background px-4 text-sm font-bold text-primary transition-opacity hover:opacity-90"
+            className="mt-5 inline-flex h-10 w-full items-center justify-center rounded-md bg-background px-4 text-sm font-bold text-primary transition-opacity hover:opacity-90"
           >
             Request a proposal
           </Link>
@@ -784,7 +784,7 @@ function AgencyContent({ profile }: { profile: AgencyPublicProfile }) {
           <TagList items={profile.industries} />
         </SectionCard>
 
-        <section className="rounded-2xl border border-border bg-card p-5 sm:p-6">
+        <section className="rounded-lg border border-border bg-card p-5 sm:p-6">
           <h2 className="flex items-center gap-2 font-bold text-primary">
             <ShieldCheck className="size-5" /> Verified agency
           </h2>
