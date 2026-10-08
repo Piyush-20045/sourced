@@ -1,209 +1,319 @@
 "use client";
-import { useState } from "react";
+
+import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import {
+  BadgeCheck,
+  BriefcaseBusiness,
+  Building2,
+  Check,
+  ChevronRight,
+  Download,
   ExternalLink,
   Eye,
-  Link2,
-  Check,
-  Globe,
-  StarCheck,
+  FileWarning,
+  Settings2,
+  UsersRound,
 } from "lucide-react";
+import { initialAuthState } from "@/data/auth";
+
+const identityProfiles = [
+  {
+    label: "Freelancer",
+    description: "Your independent professional profile",
+    slug: initialAuthState.user.profileSlugs.Freelancer,
+    icon: BriefcaseBusiness,
+  },
+  {
+    label: "Client",
+    description: "Your hiring company profile",
+    slug: initialAuthState.user.profileSlugs.Client,
+    icon: Building2,
+  },
+  {
+    label: "Agency",
+    description: "Your agency and team profile",
+    slug: initialAuthState.user.profileSlugs.Agency,
+    icon: UsersRound,
+  },
+] as const;
 
 export function AccountTab() {
-  const [fullName, setFullName] = useState("Alexander Sterling");
-  const [email, setEmail] = useState("alexander.s@nexusmarket.io");
-  const [headline, setHeadline] = useState(
-    "Principal Product Designer & Strategy Consultant",
-  );
   const [isPublic, setIsPublic] = useState(true);
-  const [isSaved, setIsSaved] = useState(false);
+  const [defaultIdentity, setDefaultIdentity] = useState("Freelancer");
+  const [language, setLanguage] = useState("English (US)");
+  const [timeZone, setTimeZone] = useState("Asia/Kolkata (GMT+5:30)");
+  const [preferencesSaved, setPreferencesSaved] = useState(false);
+  const [exportRequested, setExportRequested] = useState(false);
+  const [showClosureNotice, setShowClosureNotice] = useState(false);
+  const account = initialAuthState.user;
 
-  const handleSave = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSaved(true);
-    setTimeout(() => setIsSaved(false), 3000);
-  };
-
-  const handleDiscard = () => {
-    setFullName("Alexander Sterling");
-    setEmail("alexander.s@nexusmarket.io");
-    setHeadline("Principal Product Designer & Strategy Consultant");
-  };
+  const markPreferencesChanged = () => setPreferencesSaved(false);
 
   return (
     <div className="space-y-6">
-      {/* Account Details Form Card */}
-      <div className="rounded-xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-xs">
-        <div className="flex items-center justify-between border-b border-neutral-100 pb-4">
-          <h2 className="text-2xl font-bold text-neutral-900">
-            Account Details
-          </h2>
-          <button
-            type="button"
-            onClick={() => {
-              const el = document.getElementById("full-name-input");
-              el?.focus();
-            }}
-            className="text-xs font-bold text-neutral-600 hover:text-black transition-colors"
+      <section className="rounded-lg border border-neutral-200 bg-white p-5 shadow-xs sm:p-7">
+        <div className="flex flex-col gap-5 border-b border-neutral-100 pb-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex min-w-0 items-center gap-4">
+            <Image
+              src={account.avatar}
+              alt={account.name}
+              width={64}
+              height={64}
+              className="size-14 shrink-0 rounded-full object-cover sm:size-16"
+            />
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5">
+                <h2 className="truncate text-xl font-bold text-neutral-950">
+                  {account.name}
+                </h2>
+                <BadgeCheck
+                  className="size-4.5 shrink-0 fill-emerald-100 text-emerald-700"
+                  aria-label="Verified account"
+                />
+              </div>
+              <p className="mt-1 truncate text-sm text-neutral-500">
+                {account.email}
+              </p>
+              <p className="mt-1 text-xs font-medium text-emerald-700">
+                Identity verified · Account in good standing
+              </p>
+            </div>
+          </div>
+
+          <Link
+            href={`/profile/${account.profileSlugs.Freelancer}`}
+            className="inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-md bg-[#042430] px-4 text-sm font-semibold text-white transition-colors hover:bg-black"
           >
-            Edit all
-          </button>
+            Open public profile
+            <ExternalLink className="size-4" />
+          </Link>
         </div>
 
-        <form onSubmit={handleSave} className="mt-6 space-y-5">
-          <div className="grid gap-5 sm:grid-cols-2">
-            <div>
-              <label
-                htmlFor="full-name-input"
-                className="block text-[11px] font-bold uppercase tracking-wider text-neutral-500 mb-1.5"
-              >
-                FULL NAME
-              </label>
-              <input
-                id="full-name-input"
-                type="text"
-                required
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                className="w-full rounded-md border border-neutral-200 bg-neutral-50/70 px-4 py-3 text-sm font-semibold text-neutral-900 outline-none focus:border-neutral-900 focus:bg-white transition-all"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="email-input"
-                className="block text-[11px] font-bold uppercase tracking-wider text-neutral-500 mb-1.5"
-              >
-                EMAIL ADDRESS
-              </label>
-              <input
-                id="email-input"
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-md border border-neutral-200 bg-neutral-50/70 px-4 py-3 text-sm font-semibold text-neutral-900 outline-none focus:border-neutral-900 focus:bg-white transition-all"
-              />
-            </div>
-          </div>
-
+        <div className="mt-6">
           <div>
-            <label
-              htmlFor="headline-input"
-              className="block text-[11px] font-bold uppercase tracking-wider text-neutral-500 mb-1.5"
-            >
-              PROFESSIONAL HEADLINE
-            </label>
-            <input
-              id="headline-input"
-              type="text"
-              required
-              value={headline}
-              onChange={(e) => setHeadline(e.target.value)}
-              className="w-full rounded-md border border-neutral-200 bg-neutral-50/70 px-4 py-3 text-sm font-semibold text-neutral-900 outline-none focus:border-neutral-900 focus:bg-white transition-all"
-            />
+            <h3 className="text-base font-bold text-neutral-900">
+              Your public identities
+            </h3>
+            <p className="mt-1 text-xs leading-5 text-neutral-500">
+              Profile details are now edited directly from each dashboard or
+              public profile.
+            </p>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex items-center justify-end gap-3 pt-3">
-            <button
-              type="button"
-              onClick={handleDiscard}
-              className="rounded-md border border-neutral-200 px-5 py-2.5 text-xs font-bold text-neutral-700 hover:bg-neutral-100 transition-all"
-            >
-              Discard Changes
-            </button>
-            <button
-              type="submit"
-              className="rounded-md bg-[#042430] hover:bg-black px-6 py-2.5 text-xs font-extrabold text-white shadow-xs transition-all active:scale-98 flex items-center gap-1.5"
-            >
-              {isSaved ? (
-                <>
-                  <Check className="h-4 w-4 text-emerald-400" />
-                  <span>Saved!</span>
-                </>
-              ) : (
-                <span>Save Updates</span>
-              )}
-            </button>
+          <div className="mt-4 grid gap-3">
+            {identityProfiles.map((identity) => {
+              const Icon = identity.icon;
+              return (
+                <Link
+                  key={identity.label}
+                  href={`/profile/${identity.slug}`}
+                  className="group flex items-center gap-3 rounded-lg border border-neutral-200 p-3.5 transition-colors hover:border-[#042430]/30 hover:bg-neutral-50"
+                >
+                  <span className="grid size-10 shrink-0 place-items-center rounded-md bg-[#042430] text-white">
+                    <Icon className="size-4.5" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-sm font-bold text-neutral-900">
+                      {identity.label}
+                    </span>
+                    <span className="mt-0.5 block truncate text-xs text-neutral-500">
+                      {identity.description}
+                    </span>
+                  </span>
+                  <ChevronRight className="size-4 shrink-0 text-neutral-400 transition-transform group-hover:translate-x-0.5 group-hover:text-neutral-800" />
+                </Link>
+              );
+            })}
           </div>
-        </form>
-      </div>
+        </div>
+      </section>
 
-      {/* Bottom Grid: Profile Visibility & Connected Accounts */}
+      <section className="rounded-lg border border-neutral-200 bg-white p-5 shadow-xs sm:p-7">
+        <div className="flex items-start gap-3">
+          <span className="grid size-10 shrink-0 place-items-center rounded-md bg-neutral-100 text-neutral-700">
+            <Settings2 className="size-4.5" />
+          </span>
+          <div>
+            <h2 className="text-lg font-bold text-neutral-950">
+              Account preferences
+            </h2>
+            <p className="mt-1 text-xs leading-5 text-neutral-500">
+              Choose the workspace and regional settings used when you sign in.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-6 grid gap-5 sm:grid-cols-2">
+          <label className="block">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-500">
+              Default identity
+            </span>
+            <select
+              value={defaultIdentity}
+              onChange={(event) => {
+                setDefaultIdentity(event.target.value);
+                markPreferencesChanged();
+              }}
+              className="mt-2 h-10 w-full rounded-md border border-neutral-200 bg-white px-3 text-sm font-medium text-neutral-900 outline-none focus:border-neutral-500 focus:ring-2 focus:ring-neutral-200"
+            >
+              <option>Freelancer</option>
+              <option>Client</option>
+              <option>Agency</option>
+            </select>
+          </label>
+
+          <label className="block">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-500">
+              Display language
+            </span>
+            <select
+              value={language}
+              onChange={(event) => {
+                setLanguage(event.target.value);
+                markPreferencesChanged();
+              }}
+              className="mt-2 h-10 w-full rounded-md border border-neutral-200 bg-white px-3 text-sm font-medium text-neutral-900 outline-none focus:border-neutral-500 focus:ring-2 focus:ring-neutral-200"
+            >
+              <option>English (US)</option>
+              <option>English (UK)</option>
+              <option>Hindi</option>
+            </select>
+          </label>
+
+          <label className="block sm:col-span-2">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-500">
+              Time zone
+            </span>
+            <select
+              value={timeZone}
+              onChange={(event) => {
+                setTimeZone(event.target.value);
+                markPreferencesChanged();
+              }}
+              className="mt-2 h-10 w-full rounded-md border border-neutral-200 bg-white px-3 text-sm font-medium text-neutral-900 outline-none focus:border-neutral-500 focus:ring-2 focus:ring-neutral-200"
+            >
+              <option>Asia/Kolkata (GMT+5:30)</option>
+              <option>Europe/London (GMT)</option>
+              <option>America/New_York (GMT-5)</option>
+            </select>
+          </label>
+        </div>
+
+        <div className="mt-5 flex justify-end">
+          <button
+            type="button"
+            onClick={() => setPreferencesSaved(true)}
+            className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-[#042430] px-4 text-sm font-semibold text-white transition-colors hover:bg-black"
+          >
+            {preferencesSaved && <Check className="size-4 text-emerald-300" />}
+            {preferencesSaved ? "Preferences saved" : "Save preferences"}
+          </button>
+        </div>
+      </section>
+
       <div className="grid gap-6 sm:grid-cols-2">
-        {/* Profile Visibility Card */}
-        <div className="rounded-xl bg-[#042430] p-6 text-white shadow-md flex flex-col justify-between space-y-6 relative overflow-hidden">
+        <section className="flex flex-col justify-between rounded-lg bg-[#042430] p-6 text-white shadow-sm">
           <div>
-            <div className="flex items-center justify-between">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-950/80 text-emerald-400">
-                <Eye className="h-5 w-5 stroke-2" />
-              </div>
-
-              {/* On/Off Toggle Pill */}
+            <div className="flex items-center justify-between gap-4">
+              <span className="grid size-10 place-items-center rounded-md bg-white/10 text-emerald-300">
+                <Eye className="size-5" />
+              </span>
               <button
                 type="button"
-                onClick={() => setIsPublic(!isPublic)}
-                className={`relative inline-flex h-7 w-13 items-center rounded-full p-1 transition-colors ${
-                  isPublic ? "bg-emerald-500" : "bg-neutral-700"
+                onClick={() => setIsPublic((current) => !current)}
+                className={`relative inline-flex h-7 w-12 items-center rounded-full p-1 transition-colors ${
+                  isPublic ? "bg-emerald-500" : "bg-neutral-600"
                 }`}
+                aria-pressed={isPublic}
+                aria-label="Toggle public profile visibility"
               >
                 <span
-                  className={`text-[10px] font-black uppercase text-white px-0.5 transition-transform ${
-                    isPublic ? "translate-x-0" : "translate-x-5"
-                  }`}
-                >
-                  {isPublic ? "On" : "Off"}
-                </span>
-                <span
-                  className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${
-                    isPublic ? "translate-x-1" : "-translate-x-6"
+                  className={`size-5 rounded-full bg-white shadow-sm transition-transform ${
+                    isPublic ? "translate-x-5" : "translate-x-0"
                   }`}
                 />
               </button>
             </div>
-
-            <h3 className="mt-5 text-2xl font-bold text-white">
-              Profile Visibility
-            </h3>
-            <p className="mt-2 text-xs text-teal-100/80 leading-relaxed">
-              Your profile is currently public and discoverable by all premium
-              clients.
+            <h2 className="mt-5 text-xl font-bold">Profile visibility</h2>
+            <p className="mt-2 text-xs leading-5 text-teal-100/75">
+              Your profiles are {isPublic ? "public and discoverable" : "hidden from marketplace search"}.
+              Direct profile links remain available to you.
             </p>
           </div>
-
           <Link
-            href="/dashboard/freelancer"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-teal-300 hover:text-white transition-colors"
+            href={`/profile/${account.profileSlugs.Freelancer}`}
+            className="mt-6 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-300 hover:text-white"
           >
-            <span>PREVIEW PUBLIC PROFILE</span>
-            <ExternalLink className="h-3.5 w-3.5" />
+            Preview public profile <ExternalLink className="size-3.5" />
           </Link>
-        </div>
+        </section>
 
-        {/* Connected Accounts Card */}
-        <div className="rounded-xl bg-[#eaeced] border border-neutral-200/90 p-6 shadow-xs flex flex-col justify-between space-y-6 relative overflow-hidden">
-          <Link2 className="absolute -right-4 -bottom-4 h-32 w-32 text-neutral-300/40 pointer-events-none stroke-1" />
+        <section className="rounded-lg border border-neutral-200 bg-white p-6 shadow-xs">
+          <h2 className="text-xl font-bold text-neutral-950">Data & account</h2>
+          <p className="mt-1 text-xs leading-5 text-neutral-500">
+            Download your information or review account closure options.
+          </p>
 
-          <div>
-            <h3 className="text-xl font-bold text-neutral-900">
-              Connected Accounts
-            </h3>
-            <p className="mt-1 text-xs text-neutral-600 leading-relaxed">
-              Manage your third-party integrations.
-            </p>
+          <div className="mt-5 divide-y divide-neutral-100">
+            <button
+              type="button"
+              onClick={() => setExportRequested(true)}
+              className="flex w-full items-center gap-3 py-3 text-left first:pt-0"
+            >
+              <span className="grid size-9 place-items-center rounded-md bg-neutral-100 text-neutral-700">
+                {exportRequested ? (
+                  <Check className="size-4 text-emerald-700" />
+                ) : (
+                  <Download className="size-4" />
+                )}
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block text-sm font-semibold text-neutral-900">
+                  {exportRequested ? "Export requested" : "Export your data"}
+                </span>
+                <span className="mt-0.5 block text-xs text-neutral-500">
+                  {exportRequested
+                    ? "We’ll notify you when the archive is ready."
+                    : "Projects, messages, profiles, and transactions"}
+                </span>
+              </span>
+              <ChevronRight className="size-4 text-neutral-400" />
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setShowClosureNotice((current) => !current)}
+              className="flex w-full items-center gap-3 py-3 text-left last:pb-0"
+            >
+              <span className="grid size-9 place-items-center rounded-md bg-rose-50 text-rose-700">
+                <FileWarning className="size-4" />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block text-sm font-semibold text-neutral-900">
+                  Account closure
+                </span>
+                <span className="mt-0.5 block text-xs text-neutral-500">
+                  Review what happens before closing your account
+                </span>
+              </span>
+              <ChevronRight
+                className={`size-4 text-neutral-400 transition-transform ${
+                  showClosureNotice ? "rotate-90" : ""
+                }`}
+              />
+            </button>
           </div>
 
-          <div className="flex items-center gap-3 pt-4">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white border border-neutral-300 shadow-2xs text-xs font-black text-neutral-800">
-              <Globe />
+          {showClosureNotice && (
+            <div className="mt-4 rounded-md border border-rose-200 bg-rose-50 p-3 text-xs leading-5 text-rose-900">
+              Active contracts and outstanding balances must be resolved before
+              an account can be closed. Contact support when you are ready to
+              begin the process.
             </div>
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white border border-neutral-300 shadow-2xs text-xs font-black text-neutral-800">
-              <StarCheck />
-            </div>
-          </div>
-        </div>
+          )}
+        </section>
       </div>
     </div>
   );

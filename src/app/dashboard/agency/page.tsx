@@ -43,7 +43,7 @@ export default function AgencyDashboardPage() {
           {activeTab === "Proposals" && <AgencyProposals />}
           {activeTab === "Projects" && <AgencyProjects />}
           {activeTab === "Team & Capacity" && <AgencyTeam />}
-          {activeTab === "Hiring" && <AgencyHiring />}
+          {activeTab === "Hiring" && <AgencyHiring view="summary" />}
           {activeTab === "Finance" && <AgencyFinance />}
           {activeTab === "Analytics" && <AgencyAnalytics />}
         </div>
@@ -52,6 +52,12 @@ export default function AgencyDashboardPage() {
       {activeTab === "Overview" && (
         <div className="mx-auto max-w-6xl px-4 pb-14 sm:px-6">
           <AgencyOverviewDetails />
+        </div>
+      )}
+
+      {activeTab === "Hiring" && (
+        <div className="mx-auto w-full max-w-6xl px-4 pb-14 sm:px-6">
+          <AgencyHiring view="pipeline" />
         </div>
       )}
 

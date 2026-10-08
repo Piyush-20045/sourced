@@ -80,16 +80,26 @@ export type AgencyProposal = {
   status: ProposalStatus;
 };
 
-export type HiringStage = "APPLIED" | "SCREENING" | "INTERVIEW" | "OFFER";
+export type HiringStage =
+  | "APPLIED"
+  | "SCREENING"
+  | "INTERVIEW"
+  | "OFFER"
+  | "HIRED"
+  | "REJECTED";
 
 export type Candidate = {
   id: string;
   name: string;
   avatar: string;
   role: string;
+  location: string;
   skills: string[];
   rating: number;
+  matchScore: number;
   source: string;
+  appliedAt: string;
+  activity: string;
   nextStep: string;
   stage: HiringStage;
 };
@@ -352,12 +362,12 @@ export const openRoles: OpenRole[] = [
 ];
 
 export const candidates: Candidate[] = [
-  { id: "ca1", name: "Priya Nair", avatar: "/home/top-rated/person1.png", role: "Senior Product Designer", skills: ["Figma", "SaaS"], rating: 4.9, source: "Sourced", nextStep: "Review portfolio", stage: "APPLIED" },
-  { id: "ca2", name: "Kabir Shah", avatar: "/home/top-rated/person3.png", role: "Frontend Engineer", skills: ["React", "TypeScript"], rating: 4.7, source: "Referral", nextStep: "Review application", stage: "APPLIED" },
-  { id: "ca3", name: "Tara Menon", avatar: "/home/top-rated/person2.png", role: "UX Researcher", skills: ["Interviews", "B2B"], rating: 4.8, source: "Sourced", nextStep: "Send exercise", stage: "SCREENING" },
-  { id: "ca4", name: "Dev Malhotra", avatar: "/dashboard/salman.jpeg", role: "Frontend Engineer", skills: ["Next.js", "A11y"], rating: 4.9, source: "Sourced", nextStep: "Technical interview", stage: "INTERVIEW" },
-  { id: "ca5", name: "Ira Kapoor", avatar: "/dashboard/freelancer/samiya.jpg", role: "Senior Product Designer", skills: ["Systems", "Fintech"], rating: 5, source: "Referral", nextStep: "Final conversation", stage: "INTERVIEW" },
-  { id: "ca6", name: "Neil Dsouza", avatar: "/home/top-rated/person4.png", role: "Frontend Engineer", skills: ["React", "Testing"], rating: 4.8, source: "Sourced", nextStep: "Offer approval", stage: "OFFER" },
+  { id: "ca1", name: "Priya Nair", avatar: "/home/top-rated/person1.png", role: "Senior Product Designer", location: "Bengaluru, India", skills: ["Figma", "SaaS"], rating: 4.9, matchScore: 94, source: "Sourced", appliedAt: "Today", activity: "Portfolio added 2h ago", nextStep: "Review portfolio", stage: "APPLIED" },
+  { id: "ca2", name: "Kabir Shah", avatar: "/home/top-rated/person3.png", role: "Frontend Engineer", location: "Pune, India", skills: ["React", "TypeScript"], rating: 4.7, matchScore: 88, source: "Referral", appliedAt: "Yesterday", activity: "Application updated yesterday", nextStep: "Review application", stage: "APPLIED" },
+  { id: "ca3", name: "Tara Menon", avatar: "/home/top-rated/person2.png", role: "UX Researcher", location: "Delhi, India", skills: ["Interviews", "B2B"], rating: 4.8, matchScore: 91, source: "Sourced", appliedAt: "3 days ago", activity: "Screening note added today", nextStep: "Send exercise", stage: "SCREENING" },
+  { id: "ca4", name: "Dev Malhotra", avatar: "/dashboard/salman.jpeg", role: "Frontend Engineer", location: "Mumbai, India", skills: ["Next.js", "A11y"], rating: 4.9, matchScore: 96, source: "Sourced", appliedAt: "5 days ago", activity: "Interview confirmed for 11 Oct", nextStep: "Technical interview", stage: "INTERVIEW" },
+  { id: "ca5", name: "Ira Kapoor", avatar: "/dashboard/freelancer/samiya.jpg", role: "Senior Product Designer", location: "Hyderabad, India", skills: ["Systems", "Fintech"], rating: 5, matchScore: 97, source: "Referral", appliedAt: "1 week ago", activity: "Case study reviewed yesterday", nextStep: "Final conversation", stage: "INTERVIEW" },
+  { id: "ca6", name: "Neil Dsouza", avatar: "/home/top-rated/person4.png", role: "Frontend Engineer", location: "Goa, India", skills: ["React", "Testing"], rating: 4.8, matchScore: 93, source: "Sourced", appliedAt: "9 days ago", activity: "References completed today", nextStep: "Offer approval", stage: "OFFER" },
 ];
 
 export const financeSummary = [
