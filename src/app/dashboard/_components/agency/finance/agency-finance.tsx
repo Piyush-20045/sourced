@@ -2,7 +2,15 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { ArrowDownLeft, ArrowUpRight, Download, Plus } from "lucide-react";
+import Link from "next/link";
+import {
+  ArrowDownLeft,
+  ArrowUpRight,
+  Download,
+  Headphones,
+  MessageCircle,
+  Plus,
+} from "lucide-react";
 import {
   agencyInvoices,
   agencyTransactions,
@@ -226,6 +234,34 @@ export function AgencyFinance() {
           </button>
         </section>
       </div>
+
+      <section className="flex flex-col gap-5 rounded-2xl border border-border bg-muted/35 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+        <div className="flex min-w-0 items-start gap-4">
+          <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground">
+            <Headphones className="size-5" />
+          </span>
+          <div>
+            <h2 className="text-base font-bold text-primary">
+              Need help with your finances?
+            </h2>
+            <p className="mt-1 max-w-2xl text-sm leading-6 text-muted-foreground">
+              Get assistance with invoices, client payments, team payouts, or
+              account balances from our finance support team.
+            </p>
+            <p className="mt-2 text-xs font-medium text-muted-foreground">
+              Typical response time: within one business day
+            </p>
+          </div>
+        </div>
+
+        <Link
+          href="/message"
+          className="inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-xl bg-primary px-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        >
+          <MessageCircle className="size-4" />
+          Contact support
+        </Link>
+      </section>
     </section>
   );
 }

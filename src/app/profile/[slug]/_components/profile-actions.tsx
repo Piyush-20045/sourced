@@ -2,18 +2,20 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Check, Copy, Mail } from "lucide-react";
+import { Check, Copy, Mail, Pencil } from "lucide-react";
 
 interface ProfileActionsProps {
   profileName: string;
   primaryLabel: string;
   primaryHref: string;
+  onEdit?: () => void;
 }
 
 export function ProfileActions({
   profileName,
   primaryLabel,
   primaryHref,
+  onEdit,
 }: ProfileActionsProps) {
   const [copied, setCopied] = useState(false);
 
@@ -34,7 +36,18 @@ export function ProfileActions({
   };
 
   return (
-    <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
+    <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap lg:justify-end">
+      {onEdit && (
+        <button
+          type="button"
+          onClick={onEdit}
+          className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-border bg-background px-4 text-sm font-medium text-primary transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          <Pencil className="size-4" />
+          Edit profile
+        </button>
+      )}
+
       <button
         type="button"
         onClick={copyProfileLink}

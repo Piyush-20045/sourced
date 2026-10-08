@@ -33,6 +33,7 @@ export function ProfileCover({
           alt=""
           fill
           priority
+          unoptimized={src.startsWith("data:")}
           sizes={sizes}
           className={cn("object-cover object-center", imageClassName)}
         />

@@ -1,10 +1,12 @@
 "use client";
 import Image from "next/image";
+import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { BadgeCheck, MapPin, Search } from "lucide-react";
+import { BadgeCheck, MapPin, Pencil, Search } from "lucide-react";
 import { user, Mode } from "@/data/dashboard/freelancer-dashboard";
 import Link from "next/link";
 import { ProfileCover } from "@/components/profile/profile-cover";
+import { ProfileEditorDialog } from "@/components/profile/edit/profile-editor-dialog";
 
 export interface DashboardHeaderIdentity {
   name: string;
@@ -33,7 +35,10 @@ export function ProfileHeader({
 }: ProfileHeaderProps = {}) {
   const pathname = usePathname();
   const router = useRouter();
-  const profile: DashboardHeaderIdentity = identity ?? user;
+  const sourceProfile: DashboardHeaderIdentity = identity ?? user;
+  const [profile, setProfile] =
+    useState<DashboardHeaderIdentity>(sourceProfile);
+  const [isEditorOpen, setIsEditorOpen] = useState(false);
 
   // Determine current active mode from URL route
   const currentMode: Mode = pathname.includes("/dashboard/client")
@@ -72,6 +77,7 @@ export function ProfileHeader({
                   alt={profile.name}
                   width={96}
                   height={96}
+                  unoptimized={profile.avatar.startsWith("data:")}
                   className="size-20 md:size-24 rounded-full border-2 border-background object-cover"
                 />
               ) : (
@@ -95,9 +101,14 @@ export function ProfileHeader({
 
           {/* actions */}
           <div className="mb-1 flex w-full flex-col gap-2 min-[400px]:flex-row sm:ml-auto sm:w-auto">
-            <Link href={'/settings'} className="min-w-0 flex-1 rounded-md border border-border px-4 py-2 text-sm font-medium hover:bg-muted sm:flex-none">
+            <button
+              type="button"
+              onClick={() => setIsEditorOpen(true)}
+              className="inline-flex min-w-0 flex-1 items-center justify-center gap-2 rounded-md border border-border px-4 py-2 text-sm font-medium hover:bg-muted sm:flex-none"
+            >
+              <Pencil className="size-3.5" />
               {editLabel}
-            </Link>
+            </button>
             <Link
               href={actionHref}
               className="flex min-w-0 flex-1 items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 sm:flex-none"
@@ -148,6 +159,30 @@ export function ProfileHeader({
           </div>
         </div>
       </div>
+
+      <ProfileEditorDialog
+        open={isEditorOpen}
+        onOpenChange={setIsEditorOpen}
+        value={{
+          name: profile.name,
+          headline: profile.title,
+          location: profile.location,
+          avatar: profile.avatar,
+          coverImage: profile.cover,
+        }}
+        onSave={(nextProfile) =>
+          setProfile((current) => ({
+            ...current,
+            name: nextProfile.name,
+            title: nextProfile.headline,
+            location: nextProfile.location,
+            avatar: nextProfile.avatar,
+            cover: nextProfile.coverImage,
+          }))
+        }
+        enabledSections={["basic"]}
+        identityLabel={`${currentMode} profile`}
+      />
     </section>
   );
 }

@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import {
   ArrowUpRight,
   BadgeCheck,
@@ -11,10 +14,12 @@ import {
   GraduationCap,
   Languages,
   MapPin,
+  Pencil,
   ShieldCheck,
   Star,
   UsersRound,
 } from "lucide-react";
+import { initialAuthState } from "@/data/auth";
 import type {
   AgencyPublicProfile,
   ClientPublicProfile,
@@ -23,7 +28,20 @@ import type {
   PublicReview,
 } from "@/data/public-profiles";
 import { ProfileCover } from "@/components/profile/profile-cover";
+import {
+  ProfileEditorDialog,
+  type ProfileEditorSection,
+  type ProfileEditorValue,
+} from "@/components/profile/edit/profile-editor-dialog";
 import { ProfileActions } from "./profile-actions";
+
+const freelancerEditorSections: ProfileEditorSection[] = [
+  "basic",
+  "about",
+  "skills",
+  "education",
+];
+const standardEditorSections: ProfileEditorSection[] = ["basic", "about"];
 
 function getProfilePresentation(profile: PublicProfile) {
   switch (profile.kind) {
@@ -83,6 +101,7 @@ function IdentityMark({ profile }: { profile: PublicProfile }) {
         width={112}
         height={112}
         priority
+        unoptimized={profile.avatar.startsWith("data:")}
         className="size-24 rounded-full object-cover ring-4 ring-background sm:size-28"
       />
     );
@@ -98,7 +117,13 @@ function IdentityMark({ profile }: { profile: PublicProfile }) {
   );
 }
 
-function ProfileHero({ profile }: { profile: PublicProfile }) {
+function ProfileHero({
+  profile,
+  onEdit,
+}: {
+  profile: PublicProfile;
+  onEdit?: () => void;
+}) {
   const presentation = getProfilePresentation(profile);
   const KindIcon = presentation.icon;
 
@@ -170,6 +195,7 @@ function ProfileHero({ profile }: { profile: PublicProfile }) {
               profileName={profile.name}
               primaryLabel={presentation.primaryLabel}
               primaryHref={presentation.primaryHref}
+              onEdit={onEdit}
             />
           </div>
 
@@ -195,27 +221,45 @@ function SectionCard({
   title,
   eyebrow,
   children,
+  onEdit,
+  editLabel,
 }: {
   title: string;
   eyebrow?: string;
   children: React.ReactNode;
+  onEdit?: () => void;
+  editLabel?: string;
 }) {
   return (
     <section className="rounded-lg border border-border bg-card p-5 sm:p-7">
-      {eyebrow && (
-        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-accent">
-          {eyebrow}
-        </p>
-      )}
-      <h2
-        className={
-          eyebrow
-            ? "mt-1 text-xl font-bold text-primary"
-            : "text-xl font-bold text-primary"
-        }
-      >
-        {title}
-      </h2>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          {eyebrow && (
+            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-accent">
+              {eyebrow}
+            </p>
+          )}
+          <h2
+            className={
+              eyebrow
+                ? "mt-1 text-xl font-bold text-primary"
+                : "text-xl font-bold text-primary"
+            }
+          >
+            {title}
+          </h2>
+        </div>
+        {onEdit && (
+          <button
+            type="button"
+            onClick={onEdit}
+            className="grid size-9 shrink-0 place-items-center rounded-md border border-border text-muted-foreground transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            aria-label={editLabel ?? `Edit ${title.toLowerCase()}`}
+          >
+            <Pencil className="size-4" />
+          </button>
+        )}
+      </div>
       <div className="mt-4">{children}</div>
     </section>
   );
@@ -292,11 +336,21 @@ function ReviewSection({ reviews }: { reviews: PublicReview[] }) {
   );
 }
 
-function FreelancerContent({ profile }: { profile: FreelancerPublicProfile }) {
+function FreelancerContent({
+  profile,
+  onEditSection,
+}: {
+  profile: FreelancerPublicProfile;
+  onEditSection?: (section: ProfileEditorSection) => void;
+}) {
   return (
     <>
       <div className="space-y-5">
-        <SectionCard title="About" eyebrow="Professional overview">
+        <SectionCard
+          title="About"
+          eyebrow="Professional overview"
+          onEdit={onEditSection ? () => onEditSection("about") : undefined}
+        >
           <p className="text-sm leading-7 text-foreground/75">
             {profile.about}
           </p>
@@ -401,11 +455,20 @@ function FreelancerContent({ profile }: { profile: FreelancerPublicProfile }) {
           </Link>
         </section>
 
-        <SectionCard title="Skills">
+        <SectionCard
+          title="Skills"
+          onEdit={onEditSection ? () => onEditSection("skills") : undefined}
+        >
           <TagList items={profile.skills} />
         </SectionCard>
 
-        <SectionCard title="Background">
+        <SectionCard
+          title="Background"
+          onEdit={
+            onEditSection ? () => onEditSection("education") : undefined
+          }
+          editLabel="Edit education"
+        >
           <div className="space-y-5 text-sm">
             {profile.languages.length > 0 && (
               <div>
@@ -474,11 +537,21 @@ function FreelancerContent({ profile }: { profile: FreelancerPublicProfile }) {
   );
 }
 
-function ClientContent({ profile }: { profile: ClientPublicProfile }) {
+function ClientContent({
+  profile,
+  onEditSection,
+}: {
+  profile: ClientPublicProfile;
+  onEditSection?: (section: ProfileEditorSection) => void;
+}) {
   return (
     <>
       <div className="space-y-5">
-        <SectionCard title="Company overview" eyebrow="About the client">
+        <SectionCard
+          title="Company overview"
+          eyebrow="About the client"
+          onEdit={onEditSection ? () => onEditSection("about") : undefined}
+        >
           <p className="text-sm leading-7 text-foreground/75">
             {profile.about}
           </p>
@@ -606,11 +679,21 @@ function ClientContent({ profile }: { profile: ClientPublicProfile }) {
   );
 }
 
-function AgencyContent({ profile }: { profile: AgencyPublicProfile }) {
+function AgencyContent({
+  profile,
+  onEditSection,
+}: {
+  profile: AgencyPublicProfile;
+  onEditSection?: (section: ProfileEditorSection) => void;
+}) {
   return (
     <>
       <div className="space-y-5">
-        <SectionCard title="Agency overview" eyebrow="About the team">
+        <SectionCard
+          title="Agency overview"
+          eyebrow="About the team"
+          onEdit={onEditSection ? () => onEditSection("about") : undefined}
+        >
           <p className="text-sm leading-7 text-foreground/75">
             {profile.about}
           </p>
@@ -802,16 +885,104 @@ function AgencyContent({ profile }: { profile: AgencyPublicProfile }) {
 }
 
 export function PublicProfileView({ profile }: { profile: PublicProfile }) {
+  const [currentProfile, setCurrentProfile] = useState(profile);
+  const [isEditorOpen, setIsEditorOpen] = useState(false);
+  const [editorSection, setEditorSection] =
+    useState<ProfileEditorSection>("basic");
+  const canEdit =
+    initialAuthState.isLoggedIn &&
+    Object.values(initialAuthState.user.profileSlugs).includes(profile.slug);
+
+  const openEditor = (section: ProfileEditorSection) => {
+    setEditorSection(section);
+    setIsEditorOpen(true);
+  };
+
+  const editorValue: ProfileEditorValue = {
+    name: currentProfile.name,
+    headline: currentProfile.headline,
+    location: currentProfile.location,
+    avatar: currentProfile.avatar,
+    coverImage: currentProfile.coverImage,
+    about: currentProfile.about,
+    skills:
+      currentProfile.kind === "freelancer"
+        ? currentProfile.skills
+        : undefined,
+    education:
+      currentProfile.kind === "freelancer"
+        ? currentProfile.education
+        : undefined,
+  };
+
+  const saveProfile = (nextProfile: ProfileEditorValue) => {
+    setCurrentProfile((current) => {
+      const shared = {
+        name: nextProfile.name,
+        headline: nextProfile.headline,
+        location: nextProfile.location,
+        avatar: nextProfile.avatar,
+        coverImage: nextProfile.coverImage,
+        about: nextProfile.about ?? current.about,
+      };
+
+      if (current.kind === "freelancer") {
+        return {
+          ...current,
+          ...shared,
+          skills: nextProfile.skills ?? current.skills,
+          education: nextProfile.education ?? current.education,
+        };
+      }
+
+      return { ...current, ...shared };
+    });
+  };
+
+  const editSection = canEdit ? openEditor : undefined;
+
   return (
     <>
-      <ProfileHero profile={profile} />
+      <ProfileHero
+        profile={currentProfile}
+        onEdit={canEdit ? () => openEditor("basic") : undefined}
+      />
       <main className="mx-auto grid w-full max-w-360 flex-1 gap-5 px-4 py-8 sm:px-6 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-7 lg:px-8 lg:py-10 xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-8 xl:px-10">
-        {profile.kind === "freelancer" && (
-          <FreelancerContent profile={profile} />
+        {currentProfile.kind === "freelancer" && (
+          <FreelancerContent
+            profile={currentProfile}
+            onEditSection={editSection}
+          />
         )}
-        {profile.kind === "client" && <ClientContent profile={profile} />}
-        {profile.kind === "agency" && <AgencyContent profile={profile} />}
+        {currentProfile.kind === "client" && (
+          <ClientContent
+            profile={currentProfile}
+            onEditSection={editSection}
+          />
+        )}
+        {currentProfile.kind === "agency" && (
+          <AgencyContent
+            profile={currentProfile}
+            onEditSection={editSection}
+          />
+        )}
       </main>
+
+      {canEdit && (
+        <ProfileEditorDialog
+          open={isEditorOpen}
+          onOpenChange={setIsEditorOpen}
+          value={editorValue}
+          onSave={saveProfile}
+          initialSection={editorSection}
+          enabledSections={
+            currentProfile.kind === "freelancer"
+              ? freelancerEditorSections
+              : standardEditorSections
+          }
+          identityLabel={`${getProfilePresentation(currentProfile).label} profile`}
+        />
+      )}
     </>
   );
 }
