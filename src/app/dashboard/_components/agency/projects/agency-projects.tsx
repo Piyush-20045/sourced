@@ -2,11 +2,17 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { CalendarDays, MessageSquare, Milestone } from "lucide-react";
 import {
   agencyProjects,
+  type AgencyProject,
   type AgencyProjectHealth,
 } from "@/data/dashboard/agency-dashboard";
+import {
+  ProjectWorkspace,
+  type ProjectWorkspaceTab,
+} from "./project-workspace";
 
 const healthStyles: Record<AgencyProjectHealth, string> = {
   "ON TRACK": "bg-emerald-50 text-emerald-700 border-emerald-200",
@@ -25,9 +31,24 @@ const filters = [
 
 export function AgencyProjects() {
   const [filter, setFilter] = useState<(typeof filters)[number]>("ALL");
+  const [workspace, setWorkspace] = useState<{
+    project: AgencyProject;
+    tab: ProjectWorkspaceTab;
+  } | null>(null);
   const projects = agencyProjects.filter(
     (project) => filter === "ALL" || project.health === filter,
   );
+
+  if (workspace) {
+    return (
+      <ProjectWorkspace
+        key={`${workspace.project.id}-${workspace.tab}`}
+        project={workspace.project}
+        initialTab={workspace.tab}
+        onBack={() => setWorkspace(null)}
+      />
+    );
+  }
 
   return (
     <section className="space-y-6">
@@ -140,20 +161,24 @@ export function AgencyProjects() {
                 </span>
               </div>
               <div className="flex flex-wrap gap-2">
-                <button
-                  type="button"
+                <Link
+                  href="/message"
                   className="inline-flex items-center gap-2 rounded-xl border border-border px-4 py-2 text-xs font-semibold hover:bg-muted"
                 >
                   <MessageSquare className="size-3.5" /> Message client
-                </button>
+                </Link>
                 <button
                   type="button"
+                  onClick={() =>
+                    setWorkspace({ project, tab: "milestones" })
+                  }
                   className="rounded-xl border border-border px-4 py-2 text-xs font-semibold hover:bg-muted"
                 >
                   Review milestones
                 </button>
                 <button
                   type="button"
+                  onClick={() => setWorkspace({ project, tab: "overview" })}
                   className="rounded-xl bg-primary px-4 py-2 text-xs font-bold text-primary-foreground"
                 >
                   Open workspace
